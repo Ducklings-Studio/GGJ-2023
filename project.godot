@@ -10,8 +10,8 @@ config_version=4
 
 [application]
 
-config/name="Ggj- 2023"
-run/main_scene="res://Scenes/Game.tscn"
+config/name="GGJ-2023"
+run/main_scene="res://Scenes/Menu.tscn"
 config/icon="res://Assets/icon.png"
 
 [autoload]
