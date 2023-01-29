@@ -14,7 +14,7 @@ func _ready():
 	music = AudioStreamPlayer.new()
 	add_child(music)
 	music.bus = bus
-	#set_music("res://Assets/Audio/MainBg.ogg")
+	set_music("res://Assets/Audio/MainBg.ogg")
 	for i in num_players:
 		var p = AudioStreamPlayer.new()
 		add_child(p)
@@ -22,16 +22,20 @@ func _ready():
 		p.connect("finished", self, "_on_stream_finished", [p])
 		p.bus = bus
 
+
 func set_music(path):
 	music.stream = load(path)
 	music.set_volume_db(music_vol)
 	music.play()
 
+
 func _on_stream_finished(stream):
 	available.append(stream)
 
+
 func play(sound_path):
 	queue.append(sound_path)
+
 
 func set_volume():
 	music.set_volume_db(music_vol)
