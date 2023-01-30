@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/hip-hop-rock-beats-118000.mp3-0e5458097ea77da26b176ed4d373758a.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/hip-hop-rock-beats-118000.mp3"
+dest_files=[ "res://.import/hip-hop-rock-beats-118000.mp3-0e5458097ea77da26b176ed4d373758a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

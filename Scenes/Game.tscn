@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/isotiles.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Environment/TileSet.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Minimap.gd" type="Script" id=4]
 
 [sub_resource type="TileSet" id=3]
 0/name = "TileSet.png 0"
@@ -298,3 +299,35 @@ tile_data = PoolIntArray( -262140, 0, 0, -262139, 0, 0, -262138, 0, 0, -262137, 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 script = ExtResource( 3 )
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="PanelContainer" parent="HUD"]
+self_modulate = Color( 0, 0, 0, 0.501961 )
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -250.0
+margin_right = 250.0
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/Panel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 243.0
+margin_bottom = 243.0
+
+[node name="Control" type="Control" parent="HUD/Panel/MarginContainer"]
+margin_right = 236.0
+margin_bottom = 236.0
+script = ExtResource( 4 )
+camera_node = NodePath("../../../../Camera2D")
+tilemap_nodes = [ NodePath("../../../../floor") ]
+cell_colors = {
+1: Color( 0.686275, 0.85098, 0.501961, 1 ),
+4: Color( 0.682353, 0.811765, 0.807843, 1 ),
+5: Color( 0.360784, 0.843137, 0.831373, 1 ),
+6: Color( 0.8, 0.321569, 0.321569, 1 ),
+7: Color( 0.686275, 0.85098, 0.501961, 1 ),
+8: Color( 0.329412, 0.215686, 0.215686, 1 ),
+10: Color( 0.223529, 0.160784, 0.235294, 1 ),
+11: Color( 0.741176, 0.486275, 0.215686, 1 )
+}
