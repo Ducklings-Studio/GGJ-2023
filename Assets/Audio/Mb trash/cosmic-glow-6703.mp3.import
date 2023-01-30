@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/cosmic-glow-6703.mp3-a4dd25070f9181488130b5b9a3742669.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Mb trash/cosmic-glow-6703.mp3"
+dest_files=[ "res://.import/cosmic-glow-6703.mp3-a4dd25070f9181488130b5b9a3742669.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
