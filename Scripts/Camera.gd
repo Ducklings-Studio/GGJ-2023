@@ -15,6 +15,8 @@ var not_zooming = true
 
 
 func _process(delta):
+	if $"..".is_blocking:
+		return
 	var inpx = (int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left")))
 	var inpy = (int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up")))
 	position.x = lerp(position.x, position.x + inpx * speed * zoom.x, speed * delta)
@@ -41,6 +43,8 @@ func _process(delta):
 
 
 func _input(event):
+	if $"..".is_blocking:
+		return
 	if event is InputEventMouseButton:
 		not_zooming = true
 		
