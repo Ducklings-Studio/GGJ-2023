@@ -9,7 +9,7 @@ var music_vol
 var audio_vol
 
 func _ready():
-	music_vol = 0
+	music_vol = -50
 	audio_vol = 0
 	music = AudioStreamPlayer.new()
 	add_child(music)
