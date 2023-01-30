@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/isotiles.png-afdd09fdebb0cf5dca44f892cbe7da32.stex"
+path="res://.import/indicators.png-c8e0d589dd4e97b98562db2add693160.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/isotiles.png"
-dest_files=[ "res://.import/isotiles.png-afdd09fdebb0cf5dca44f892cbe7da32.stex" ]
+source_file="res://Assets/Icons/indicators.png"
+dest_files=[ "res://.import/indicators.png-c8e0d589dd4e97b98562db2add693160.stex" ]
 
 [params]
 

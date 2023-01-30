@@ -12,15 +12,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="MenuBg" type="Sprite" parent="."]
-position = Vector2( 516, 332.094 )
-scale = Vector2( 0.668078, 0.593072 )
 texture = ExtResource( 6 )
+expand = true
+stretch_mode = 7
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_left = 0.5

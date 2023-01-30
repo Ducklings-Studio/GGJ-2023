@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/CountSimple.wav-a1a4c4cd56ce0e29cbb39fb7dd0e92e6.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Effects/CountSimple.wav"
+dest_files=[ "res://.import/CountSimple.wav-a1a4c4cd56ce0e29cbb39fb7dd0e92e6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
