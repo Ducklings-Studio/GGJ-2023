@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/this-minimal-technology-pure-12327.mp3-eb9370309adc91af2c3e726a29352e1e.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Mb trash/this-minimal-technology-pure-12327.mp3"
+dest_files=[ "res://.import/this-minimal-technology-pure-12327.mp3-eb9370309adc91af2c3e726a29352e1e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

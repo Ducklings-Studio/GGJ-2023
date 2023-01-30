@@ -12,12 +12,14 @@ anchor_bottom = 1.0
 script = ExtResource( 3 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 351.0
-margin_top = -473.0
-margin_right = 672.0
-margin_bottom = -127.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -160.5
+margin_top = -173.0
+margin_right = 160.5
+margin_bottom = 173.0
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
