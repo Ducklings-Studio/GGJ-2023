@@ -8,7 +8,6 @@ const audios = [
 	"res://Assets/Audio/Effects/CountSimple.wav",
 	"res://Assets/Audio/Effects/CountSimple.wav",
 	"res://Assets/Audio/Effects/CountSimple.wav",
-	"res://Assets/Audio/Effects/CountSimple.wav",
 	"res://Assets/Audio/Effects/CountFinal.wav"
 ]
 
