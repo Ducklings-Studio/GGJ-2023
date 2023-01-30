@@ -2,25 +2,28 @@ extends CanvasLayer
 
 var start_timer = Timer.new()
 var iterator = 0
+
 const audios = [
-	"res://Assets/Audio/Effects/5.ogg",
-	"res://Assets/Audio/Effects/4.ogg",
-	"res://Assets/Audio/Effects/3.ogg",
-	"res://Assets/Audio/Effects/2.ogg",
-	"res://Assets/Audio/Effects/1.ogg",
-	"res://Assets/Audio/Effects/begin.ogg",
+	"res://Assets/Audio/Effects/CountSimple.wav",
+	"res://Assets/Audio/Effects/CountSimple.wav",
+	"res://Assets/Audio/Effects/CountSimple.wav",
+	"res://Assets/Audio/Effects/CountSimple.wav",
+	"res://Assets/Audio/Effects/CountSimple.wav",
+	"res://Assets/Audio/Effects/CountFinal.wav"
 ]
+
 const labels = [
 	"5",
 	"4",
 	"3",
 	"2",
 	"1",
-	"Begin!",
+	"Start!",
 ]
 
 
 func _ready():
+	AudioManager.play("res://Assets/Audio/Effects/prepare_yourself.ogg")
 	start_timer.connect("timeout", self, "count")
 	start_timer.wait_time = 1
 	add_child(start_timer)

@@ -1,9 +1,5 @@
 extends Control
 
-func _ready():
-	AudioManager.play("res://Assets/Audio/Effects/prepare_yourself.ogg")
-
-
 func _on_Easy_pressed():
 	get_tree().change_scene("res://Scenes/Game.tscn")
 
