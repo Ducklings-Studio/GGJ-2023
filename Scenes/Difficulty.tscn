@@ -75,6 +75,31 @@ custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 text = "Suuuuuper Easy"
 
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -100.0
+margin_right = 188.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="Back" type="Button" parent="MarginContainer2"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 168.0
+margin_bottom = 80.0
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+text = "Back"
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Easy" to="." method="_on_Easy_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Very_Easy" to="." method="_on_Very_Easy_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Suuuuuper_Easy" to="." method="_on_Suuuuuper_Easy_pressed"]
+[connection signal="pressed" from="MarginContainer2/Back" to="." method="_on_Back_pressed"]
