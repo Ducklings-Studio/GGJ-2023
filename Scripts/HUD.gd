@@ -60,3 +60,7 @@ func clean_label(timer: Timer):
 	timer.stop()
 	remove_child(timer)
 	$Label.set_visible(false)
+
+
+func set_gems(amount):
+	$Resources/MarginContainer/HBoxContainer/Amount.set_text(str(amount))

@@ -8,6 +8,22 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "BasicMushroom",
+"language": "GDScript",
+"path": "res://Scripts/Mushroom.gd"
+}, {
+"base": "BasicMushroom",
+"class": "Standart",
+"language": "GDScript",
+"path": "res://Scripts/Standart.gd"
+} ]
+_global_script_class_icons={
+"BasicMushroom": "",
+"Standart": ""
+}
+
 [application]
 
 config/name="Mushroots"
