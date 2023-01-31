@@ -22,7 +22,7 @@ func _process(delta):
 	position.x = lerp(position.x, position.x + inpx * speed * zoom.x, speed * delta)
 	position.y = lerp(position.y, position.y + inpy * speed * zoom.y, speed * delta)
 
-	if Input.is_key_pressed(KEY_CONTROL):
+	if Input.is_key_pressed(KEY_SPACE):
 		if mousepos.x < marginX:
 			position.x = lerp(position.x, position.x - abs(mousepos.x - marginX)/marginX * panSpeed * zoom.x, panSpeed * delta)
 		elif mousepos.x > OS.window_size.x - marginX:
