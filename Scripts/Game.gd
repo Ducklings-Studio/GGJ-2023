@@ -14,3 +14,4 @@ func _input(event):
 			var evpos = get_global_mouse_position() + delta
 			var coords = $floor.world_to_map(evpos)
 			$floor.set_cellv(coords, 4)
+			$figures.set_cellv(coords, 1)
