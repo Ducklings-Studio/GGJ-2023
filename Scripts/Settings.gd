@@ -6,34 +6,34 @@ const MUSIC_VOLUME_BASIC = 5;
 const INTERFACE_VOLUME_STEP = 1; # dB by one value on slider
 const INTERFACE_VOLUME_BASIC = 5;
 
-var musicValueTemp = MUSIC_VOLUME_BASIC / MUSIC_VOLUME_STEP ;
-var interfaceValueTemp = INTERFACE_VOLUME_BASIC / INTERFACE_VOLUME_STEP;
-
-onready var audio = $MarginContainer/Control/VBoxContainer/Control/AudiSlider
-onready var music = $MarginContainer/Control/VBoxContainer/Control2/MusicSlider
+onready var MusicSlider = $MarginContainer/Control/VBoxContainer/Control2/MusicSlider
+onready var AudiSlider = $MarginContainer/Control/VBoxContainer/Control/AudiSlider
+onready var musicValueTemp = MusicSlider.value;
+onready var interfaceValueTemp = AudiSlider.value;
 
 func _ready():
-	audio.set_value(AudioManager.audio_vol/(-3))
-	music.set_value(AudioManager.music_vol/(-3))
-
+	var MusicTemp = AudioManager.music_vol;
+	var AudioTemp = AudioManager.audio_vol;
+	MusicSlider.value = MusicSlider.max_value - (AudioManager.music_vol / MUSIC_VOLUME_STEP + MUSIC_VOLUME_BASIC);
+	AudiSlider.value = AudiSlider.max_value - (AudioManager.audio_vol / INTERFACE_VOLUME_STEP + INTERFACE_VOLUME_BASIC);
+	AudioManager.music_vol = MusicTemp;
+	AudioManager.audio_vol = AudioTemp;
+	AudioManager.set_volume()
 
 func _on_Back_pressed():
 	self.set_visible(false)
 
-
 func _on_AudiSlider_value_changed(value):
-	#var diff = interfaceValueTemp - value;
-	#AudioManager.audio_vol += INTERFACE_VOLUME_STEP * diff;
-	#interfaceValueTemp = value;
-	AudioManager.audio_vol = -3*value
+	var diff =  interfaceValueTemp - value;
+	AudioManager.audio_vol += INTERFACE_VOLUME_STEP * diff;
+	interfaceValueTemp = value;
 	AudioManager.set_volume()
-	print(AudioManager.audio_vol, AudioManager.audio_vol / INTERFACE_VOLUME_STEP)
-
-
+	print(AudioManager.audio_vol)
 
 func _on_MusicSlider_value_changed(value):
-	#var diff = musicValueTemp - value;
-	#AudioManager.music_vol += MUSIC_VOLUME_STEP * diff;
-	AudioManager.music_vol = -3*value
+	var diff =  musicValueTemp - value;
+	AudioManager.music_vol += MUSIC_VOLUME_STEP * diff;
 	musicValueTemp = value;
 	AudioManager.set_volume()
+
+	
