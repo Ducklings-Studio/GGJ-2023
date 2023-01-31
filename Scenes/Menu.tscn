@@ -101,7 +101,7 @@ visible = false
 [node name="Difficulty" parent="." instance=ExtResource( 7 )]
 visible = false
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_Play_pressed" flags=6]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Help" to="." method="_on_Help_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_Settings_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]

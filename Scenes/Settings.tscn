@@ -19,7 +19,7 @@ region_rect = Rect2( 0, 0, 400, 50 )
 bg_color = Color( 0, 0, 0, 0.392157 )
 
 [sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0, 0, 0, 0.588235 )
+bg_color = Color( 0, 0, 0, 0.392157 )
 
 [node name="Settings" type="Control"]
 anchor_right = 1.0
@@ -83,7 +83,7 @@ theme = ExtResource( 2 )
 text = "Audio"
 uppercase = true
 
-[node name="AudiSlider" type="HSlider" parent="MarginContainer/Control/VBoxContainer/Control" groups=["ui_button"]]
+[node name="AudiSlider" type="HSlider" parent="MarginContainer/Control/VBoxContainer/Control" groups=["ui_button", "ui_sliders"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -123,7 +123,7 @@ theme = ExtResource( 2 )
 text = "Music"
 uppercase = true
 
-[node name="MusicSlider" type="HSlider" parent="MarginContainer/Control/VBoxContainer/Control2" groups=["ui_button"]]
+[node name="MusicSlider" type="HSlider" parent="MarginContainer/Control/VBoxContainer/Control2" groups=["ui_button", "ui_sliders"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
