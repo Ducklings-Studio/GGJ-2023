@@ -4,31 +4,28 @@ var start_timer = Timer.new()
 var iterator = 0
 
 const audios = [
-	"res://Assets/Audio/Effects/prepare_yourself.ogg",
-	"res://Assets/Audio/Effects/CountSimple.wav",
 	"res://Assets/Audio/Effects/CountSimple.wav",
 	"res://Assets/Audio/Effects/CountSimple.wav",
 	"res://Assets/Audio/Effects/CountSimple.wav",
 	"res://Assets/Audio/Effects/CountSimple.wav",
 	"res://Assets/Audio/Effects/CountFinal.wav",
-	"res://Assets/Audio/Effects/fight.ogg",
+	"res://Assets/Audio/Effects/Fight.wav"
 ]
 
 const labels = [
-	"",
 	"5",
 	"4",
 	"3",
 	"2",
 	"1",
 	"Start!",
-	"",
 ]
 
 
 func _ready():
 	assert (len(labels) == len(audios))
-	
+
+	AudioManager.play("res://Assets/Audio/Effects/PrepareYourself.wav")
 	start_timer.connect("timeout", self, "count")
 	start_timer.wait_time = 1
 	add_child(start_timer)
@@ -44,7 +41,6 @@ func count():
 		start_timer.stop()
 		remove_child(start_timer)
 		$"..".is_blocking = false
-
 
 func show_label(text, duration):
 	$Label.set_text(text)

@@ -1,5 +1,7 @@
 extends Node2D
 
+var WaitingTimer = Timer.new();
+
 var is_blocking = true
 
 var XError = 1
@@ -11,8 +13,17 @@ var height = 16
 
 var greenMushroom = preload("res://Scenes/Mushrooms/Green.tscn")
 
+#func StartAudio():
+#	 AudioManager.set_music("res://Assets/Audio/MatchSound.ogg")
+
 func _ready():
-	AudioManager.set_music("res://Assets/Audio/MatchSound1.ogg")
+	#AudioManager.audio_vol = 0;
+	#WaitingTimer.connect("timeout", self, "StartAudio")
+	#WaitingTimer.wait_time = 2;
+	#WaitingTimer.start()
+	
+	AudioManager.set_music("res://Assets/Audio/MatchSound.ogg")
+
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -24,7 +35,5 @@ func spawn_mushroom(x, y):
 	var positionX = floor(x/width+0.5)
 	var positionY = floor(y/height+0.5)
 	mushroom.position = Vector2(XError+positionX*width/2, YError+positionY*height/2)
-	print(floor(x/width+0.5), " ", floor(y/height+0.5))
-	print(floor(x/width+0.5)*width, " ", floor(y/height+0.5)*height)
 	add_child(mushroom)
 	

@@ -2,7 +2,7 @@ extends Control
 
 
 func _ready():
-	AudioManager.set_music("res://Assets/Audio/MenuSound1.ogg")
+	AudioManager.set_music("res://Assets/Audio/MenuSound.ogg")
 
 
 func _on_Play_pressed():

@@ -5,7 +5,7 @@ export var delta = Vector2(2.5, 2.5)
 var is_blocking = true
 
 func _ready():
-	AudioManager.set_music("res://Assets/Audio/MatchSound1.ogg")
+	AudioManager.set_music("res://Assets/Audio/MatchSound.ogg")
 
 
 func _input(event):

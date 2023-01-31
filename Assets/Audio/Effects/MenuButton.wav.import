@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/5.wav-a42df33f4bfe0cbe2a82401b74e6457a.sample"
+path="res://.import/MenuButton.wav-05b716687252d274e52191cb6bbdd411.sample"
 
 [deps]
 
-source_file="res://Assets/Audio/Effects/5.wav"
-dest_files=[ "res://.import/5.wav-a42df33f4bfe0cbe2a82401b74e6457a.sample" ]
+source_file="res://Assets/Audio/Effects/MenuButton.wav"
+dest_files=[ "res://.import/MenuButton.wav-05b716687252d274e52191cb6bbdd411.sample" ]
 
 [params]
 
