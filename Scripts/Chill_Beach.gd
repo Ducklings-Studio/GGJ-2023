@@ -18,7 +18,9 @@ func _input(event):
 
 func spawn_mushroom(x, y):
 	var mushroom = greenMushroom.instance()
-	mushroom.position = Vector2(XError+floor(x/width+0.5)*width, YError+floor(y/height+0.5)*height)
+	var positionX = floor(x/width+0.5)
+	var positionY = floor(y/height+0.5)
+	mushroom.position = Vector2(XError+positionX*width/2, YError+positionY*height/2)
 	print(floor(x/width+0.5), " ", floor(y/height+0.5))
 	print(floor(x/width+0.5)*width, " ", floor(y/height+0.5)*height)
 	add_child(mushroom)
