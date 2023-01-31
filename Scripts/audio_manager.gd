@@ -14,7 +14,6 @@ func _ready():
 	music = AudioStreamPlayer.new()
 	add_child(music)
 	music.bus = bus
-	set_music("res://Assets/Audio/MenuSound.ogg")
 	for i in num_players:
 		var p = AudioStreamPlayer.new()
 		add_child(p)

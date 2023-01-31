@@ -1,6 +1,10 @@
 extends Control
 
 
+func _ready():
+	AudioManager.set_music("res://Assets/Audio/MenuSound1.ogg")
+
+
 func _on_Play_pressed():
 	get_tree().change_scene("res://Scenes/Difficulty.tscn")
 

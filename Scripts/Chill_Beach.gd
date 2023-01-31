@@ -11,6 +11,9 @@ var height = 16
 
 var greenMushroom = preload("res://Scenes/Mushrooms/Green.tscn")
 
+func _ready():
+	AudioManager.set_music("res://Assets/Audio/MatchSound1.ogg")
+
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
