@@ -13,15 +13,12 @@ func _ready():
 
 
 func play_button_click():
-	print("1")
 	AudioManager.play("res://Assets/Audio/Effects/MenuButton.wav")
 
 
 func play_button():
-	print("2")
 	AudioManager.play("res://Assets/Audio/Effects/MenuButton.wav")
 
 
 func play_slider(_tmp):
-	print("3")
 	AudioManager.play("res://Assets/Audio/Effects/MenuButton.wav")
