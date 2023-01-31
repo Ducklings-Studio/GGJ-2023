@@ -13,15 +13,7 @@ var height = 16
 
 var greenMushroom = preload("res://Scenes/Mushrooms/Green.tscn")
 
-#func StartAudio():
-#	 AudioManager.set_music("res://Assets/Audio/MatchSound.ogg")
-
 func _ready():
-	#AudioManager.audio_vol = 0;
-	#WaitingTimer.connect("timeout", self, "StartAudio")
-	#WaitingTimer.wait_time = 2;
-	#WaitingTimer.start()
-	
 	AudioManager.set_music("res://Assets/Audio/MatchSound.ogg")
 
 
