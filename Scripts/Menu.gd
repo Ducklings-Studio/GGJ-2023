@@ -6,7 +6,7 @@ func _ready():
 
 
 func _on_Play_pressed():
-	get_tree().change_scene("res://Scenes/Difficulty.tscn")
+	$Difficulty.set_visible(true)
 
 
 func _on_Settings_pressed():
