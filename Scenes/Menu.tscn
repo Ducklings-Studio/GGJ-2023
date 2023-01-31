@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Style/Pixellari_style.tres" type="Theme" id=1]
 [ext_resource path="res://Assets/Style/button_styleboxflat.tres" type="StyleBox" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scenes/Settings.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Style/button_styleboxflat_hover.tres" type="StyleBox" id=5]
 [ext_resource path="res://Assets/MenuBg.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/Difficulty.tscn" type="PackedScene" id=7]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -95,6 +96,9 @@ custom_styles/normal = ExtResource( 2 )
 text = "Exit"
 
 [node name="Settings" parent="." instance=ExtResource( 4 )]
+visible = false
+
+[node name="Difficulty" parent="." instance=ExtResource( 7 )]
 visible = false
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_Play_pressed" flags=6]
