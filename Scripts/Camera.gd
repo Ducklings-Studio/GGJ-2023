@@ -42,7 +42,7 @@ func _process(delta):
 		zoomfactor = 1.0
 
 
-func _input(event):
+func _unhandled_input(event):
 	if $"..".is_blocking:
 		return
 	if event is InputEventMouseButton:

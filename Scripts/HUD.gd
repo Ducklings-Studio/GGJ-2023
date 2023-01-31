@@ -3,6 +3,8 @@ extends CanvasLayer
 var start_timer = Timer.new()
 var iterator = 0
 
+signal game_started
+
 const audios = [
 	"res://Assets/Audio/Effects/CountSimple.wav",
 	"res://Assets/Audio/Effects/CountSimple.wav",
@@ -11,7 +13,6 @@ const audios = [
 	"res://Assets/Audio/Effects/CountFinal.wav",
 	"res://Assets/Audio/Effects/Fight.wav"
 ]
-
 const labels = [
 	"5",
 	"4",
@@ -30,7 +31,6 @@ func _ready():
 	start_timer.wait_time = 1
 	add_child(start_timer)
 	start_timer.start()
-	$"..".is_blocking = true
 
 
 func count():
@@ -40,7 +40,8 @@ func count():
 	if iterator >= len(audios):
 		start_timer.stop()
 		remove_child(start_timer)
-		$"..".is_blocking = false
+		emit_signal("game_started")
+
 
 func show_label(text, duration):
 	$Label.set_text(text)
