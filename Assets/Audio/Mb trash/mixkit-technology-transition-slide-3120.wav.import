@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/mixkit-technology-transition-slide-3120.wav-3e269433057c61f9b8d98e723220aca2.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Mb trash/mixkit-technology-transition-slide-3120.wav"
+dest_files=[ "res://.import/mixkit-technology-transition-slide-3120.wav-3e269433057c61f9b8d98e723220aca2.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -8,7 +8,8 @@ var queue = []  # sounds to play.
 var music_vol
 var audio_vol
 
-const MIN_AUIDO = -5;
+const MIN_MUSIC = -5;
+const MIN_SFX = -5;
 
 func _ready():
 	music_vol = 0
@@ -40,15 +41,15 @@ func play(sound_path):
 
 func set_volume():
 	music.set_volume_db(music_vol)
-	music.stream_paused = music_vol == MIN_AUIDO
-	if audio_vol == MIN_AUIDO:
+	music.stream_paused = music_vol == MIN_MUSIC
+	if audio_vol == MIN_MUSIC:
 		queue.clear()
 	for i in available.size():
 		available[i].set_volume_db(audio_vol)
 
 
 func _process(_delta):
-	if not queue.empty() and not available.empty() && audio_vol > -30:
+	if not queue.empty() and not available.empty() && audio_vol > MIN_SFX:
 		available[0].stream = load(queue.pop_front())
 		available[0].set_volume_db(audio_vol)
 		available[0].play()

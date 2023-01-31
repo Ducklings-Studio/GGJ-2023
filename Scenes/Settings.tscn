@@ -80,8 +80,7 @@ margin_top = -62.0
 margin_right = 200.0
 margin_bottom = -2.0
 theme = ExtResource( 2 )
-text = "Audio"
-uppercase = true
+text = "Sound FX"
 
 [node name="AudiSlider" type="HSlider" parent="MarginContainer/Control/VBoxContainer/Control" groups=["ui_sliders"]]
 anchor_left = 0.5
@@ -121,7 +120,6 @@ margin_right = 200.0
 margin_bottom = -2.0
 theme = ExtResource( 2 )
 text = "Music"
-uppercase = true
 
 [node name="MusicSlider" type="HSlider" parent="MarginContainer/Control/VBoxContainer/Control2" groups=["ui_sliders"]]
 anchor_left = 0.5
