@@ -39,6 +39,8 @@ func count():
 		start_timer.stop()
 		remove_child(start_timer)
 		$"..".is_blocking = false
+	if iterator == len(audios):
+		AudioManager.play("res://Assets/Audio/Effects/fight.ogg")
 
 
 func show_label(text, duration):
