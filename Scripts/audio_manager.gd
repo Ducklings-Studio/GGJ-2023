@@ -8,12 +8,15 @@ var queue = []  # sounds to play.
 var music_vol
 var audio_vol
 
+const MIN_AUIDO = -5;
+
 func _ready():
 	music_vol = 0
 	audio_vol = 0
 	music = AudioStreamPlayer.new()
 	add_child(music)
 	music.bus = bus
+	set_music("res://Assets/Audio/MenuSound.ogg")
 	for i in num_players:
 		var p = AudioStreamPlayer.new()
 		add_child(p)
@@ -38,8 +41,8 @@ func play(sound_path):
 
 func set_volume():
 	music.set_volume_db(music_vol)
-	music.stream_paused = music_vol == -30
-	if audio_vol == -30:
+	music.stream_paused = music_vol == MIN_AUIDO
+	if audio_vol == MIN_AUIDO:
 		queue.clear()
 	for i in available.size():
 		available[i].set_volume_db(audio_vol)
