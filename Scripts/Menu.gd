@@ -2,6 +2,7 @@ extends Control
 
 
 func _ready():
+	Global.upload_buttons()
 	AudioManager.set_music("res://Assets/Audio/MenuSound.ogg")
 
 

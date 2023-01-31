@@ -1,7 +1,7 @@
 extends Node
 
 
-func _ready():
+func upload_buttons():
 	var buttons: Array = get_tree().get_nodes_in_group("ui_buttons")
 	for i in buttons:
 		i.connect("mouse_entered", self, "play_button")

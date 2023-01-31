@@ -26,6 +26,8 @@ const labels = [
 func _ready():
 	assert (len(labels) == len(audios))
 
+	Global.upload_buttons()
+
 	AudioManager.play("res://Assets/Audio/Effects/PrepareYourself.wav")
 	start_timer.connect("timeout", self, "count")
 	start_timer.wait_time = 1
