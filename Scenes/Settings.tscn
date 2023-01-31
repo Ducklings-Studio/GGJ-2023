@@ -19,7 +19,7 @@ region_rect = Rect2( 0, 0, 400, 50 )
 bg_color = Color( 0, 0, 0, 0.392157 )
 
 [sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0, 0, 0, 0.588235 )
+bg_color = Color( 0, 0, 0, 0.392157 )
 
 [node name="Settings" type="Control"]
 anchor_right = 1.0
@@ -83,7 +83,7 @@ theme = ExtResource( 2 )
 text = "Audio"
 uppercase = true
 
-[node name="AudiSlider" type="HSlider" parent="MarginContainer/Control/VBoxContainer/Control" groups=["ui_button", "ui_sliders"]]
+[node name="AudiSlider" type="HSlider" parent="MarginContainer/Control/VBoxContainer/Control" groups=["ui_sliders"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -123,7 +123,7 @@ theme = ExtResource( 2 )
 text = "Music"
 uppercase = true
 
-[node name="MusicSlider" type="HSlider" parent="MarginContainer/Control/VBoxContainer/Control2" groups=["ui_button", "ui_sliders"]]
+[node name="MusicSlider" type="HSlider" parent="MarginContainer/Control/VBoxContainer/Control2" groups=["ui_sliders"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -153,7 +153,7 @@ custom_constants/margin_top = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
 
-[node name="Back" type="Button" parent="MarginContainer2" groups=["ui_button"]]
+[node name="Back" type="Button" parent="MarginContainer2" groups=["ui_buttons"]]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 168.0

@@ -40,7 +40,7 @@ margin_bottom = 326.0
 custom_constants/separation = 22
 alignment = 1
 
-[node name="Easy" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Easy" type="Button" parent="MarginContainer/VBoxContainer" groups=["ui_buttons"]]
 margin_top = 41.0
 margin_right = 421.0
 margin_bottom = 101.0
@@ -53,7 +53,7 @@ custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 text = "Easy"
 
-[node name="Very_Easy" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Very_Easy" type="Button" parent="MarginContainer/VBoxContainer" groups=["ui_buttons"]]
 margin_top = 123.0
 margin_right = 421.0
 margin_bottom = 183.0
@@ -66,7 +66,7 @@ custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 text = "Very Easy"
 
-[node name="Suuuuuper_Easy" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Suuuuuper_Easy" type="Button" parent="MarginContainer/VBoxContainer" groups=["ui_buttons"]]
 margin_top = 205.0
 margin_right = 421.0
 margin_bottom = 265.0
@@ -89,7 +89,7 @@ custom_constants/margin_top = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
 
-[node name="Back" type="Button" parent="MarginContainer2"]
+[node name="Back" type="Button" parent="MarginContainer2" groups=["ui_buttons"]]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 168.0
