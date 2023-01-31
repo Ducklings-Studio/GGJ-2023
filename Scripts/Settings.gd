@@ -28,7 +28,6 @@ func _on_AudiSlider_value_changed(value):
 	AudioManager.audio_vol += INTERFACE_VOLUME_STEP * diff;
 	interfaceValueTemp = value;
 	AudioManager.set_volume()
-	print(AudioManager.audio_vol)
 
 func _on_MusicSlider_value_changed(value):
 	var diff =  musicValueTemp - value;
