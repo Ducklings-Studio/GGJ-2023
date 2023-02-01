@@ -26,6 +26,7 @@ var gems = 0
 func _ready():
 	add_gems(0)
 	build(Vector2.RIGHT * 5, 0)
+	clean_action()
 	AudioManager.set_music("res://Assets/Audio/MatchSound.ogg")
 
 
@@ -36,6 +37,12 @@ func _on_HUD_game_started():
 func add_gems(amount):
 	gems += amount
 	$HUD.set_gems(gems)
+
+
+func built(coords):
+	var cell = $figures.get_cellv(coords)
+	if cell in range(7, 11):
+		$figures.set_cellv(coords, cell - 6)
 
 
 var selected
@@ -128,10 +135,15 @@ func build(coords: Vector2, class_id: int):
 	var mushroom = classes[class_id].instance()
 	if mushroom.has_method("_on_Miner_timeout"):
 		mushroom.connect("res_mined", self, "add_gems")
+	mushroom.connect("built", self, "built", [coords])
 
 	objs[coords] = mushroom
 	$floor.set_cellv(coords, 4)
-	$figures.set_cellv(coords, class_id)
+	
+	if class_id in range(1,5):
+		$figures.set_cellv(coords, class_id + 6)
+	else:
+		$figures.set_cellv(coords, class_id)
 
 	if class_id == 0:
 		for i in range(-1, 2):

@@ -2,9 +2,10 @@ extends Node2D
 class_name BasicMushroom
 
 signal res_mined(amount)
+signal built()
 
 export var abilities: Array = []
-export var radius: int = 1 # Manhattan norm
+export var radius: int = 1
 export var cost: int = 500
 export var time_to_build: int = 10
 export var res_per_sec: int = 10
@@ -29,6 +30,7 @@ func _ready():
 func _on_Built():
 	build_timer.stop()
 	remove_child(build_timer)
+	emit_signal("built")
 	miner_timer.start()
 
 
