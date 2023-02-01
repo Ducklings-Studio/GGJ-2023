@@ -8,13 +8,22 @@ var objs = {}
 var classes = [
 	preload("res://Scenes/Mushrooms/Base.tscn"),
 	preload("res://Scenes/Mushrooms/Standart.tscn"),
+	preload("res://Scenes/Mushrooms/Bomber.tscn"),
+	preload("res://Scenes/Mushrooms/Defender.tscn"),
+	preload("res://Scenes/Mushrooms/Attacker.tscn"),
 ]
+enum {
+	BUILD, 
+	E_ATTACK, 
+	E_BOMB, 
+	E_DEFENDER, 
+	ATTACK, 
+	EXPLOSE,
+}
 var gems = 0
 
 
 func _ready():
-	assert (len(classes) > 0)
-	
 	add_gems(0)
 	build(Vector2.RIGHT * 5, 0)
 	AudioManager.set_music("res://Assets/Audio/MatchSound.ogg")
@@ -30,6 +39,7 @@ func add_gems(amount):
 
 
 var selected
+var action
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
@@ -47,17 +57,34 @@ func _unhandled_input(event):
 				$HUD.show_options(objs[coords].abilities)
 				return
 
-			if selected != null and can_be_built(selected, coords):
+			if selected != null and action == BUILD and can_be_built(selected, coords):
 				build(coords, 1)
 
 		elif InputMap.event_is_action(event, "ui_right_mouse_button"):
 			selected = null
+			action = null
+			$HUD.show_options([])
 			$tips.clear()
 
-	if event is InputEventMouseMotion and selected != null:
+	if event is InputEventMouseMotion and selected != null and action == BUILD:
 		var evpos = get_global_mouse_position() + delta
 		var coords = $floor.world_to_map(evpos) - Vector2.ONE
 		show_build_options(selected, coords)
+
+
+func process_action(action_id):
+	action = action_id
+
+	if action == E_ATTACK:
+		print_debug("transform to attacker")
+	elif action == E_BOMB:
+		print_debug("transform to bomb")
+	elif action == E_DEFENDER:
+		print_debug("transform to defender")
+	elif action == ATTACK:
+		print_debug("attack")
+	elif action == EXPLOSE:
+		print_debug("boom")
 
 
 func show_build_options(origin: Vector2, coords: Vector2):
@@ -83,7 +110,6 @@ func can_be_built(origin: Vector2, coords: Vector2):
 
 func build(coords: Vector2, class_id: int):
 	var mushroom = classes[class_id].instance()
-	#mushroom.position = evpos #mb redundant
 	if mushroom.has_method("_on_Miner_timeout"):
 		mushroom.connect("res_mined", self, "add_gems")
 

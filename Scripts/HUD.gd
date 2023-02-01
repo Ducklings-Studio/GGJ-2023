@@ -22,6 +22,8 @@ const labels = [
 	"Start!",
 ]
 
+onready var game = get_parent()
+
 
 func _ready():
 	assert (len(labels) == len(audios))
@@ -72,3 +74,7 @@ func show_options(arr):
 		i.set_visible(false)
 	for i in arr:
 		kar[i].set_visible(true)
+
+
+func _on_Action_pressed(action_id):
+	game.process_action(action_id)
