@@ -97,15 +97,20 @@ func show_build_options(origin: Vector2, coords: Vector2):
 
 
 func can_be_built(origin: Vector2, coords: Vector2):
-	if origin == null:
-		return false
-	var mushroom = objs[origin]
-	
-	var min_d = mushroom.min_build_radius
-	var max_d = mushroom.max_build_radius
-	var dsq = (origin - coords).abs()
-	
-	return (min_d <= dsq.x or min_d <= dsq.y) and dsq.x <= max_d and dsq.y <= max_d
+	var origins = objs.keys()
+	for o in origins:
+		var mushroom = objs[o]
+		
+		var min_d = mushroom.min_build_radius
+		var max_d = mushroom.max_build_radius
+		var dsq = (o - coords).abs()
+		var value = max(dsq.x, dsq.y)
+		
+		if min_d > value:
+			return false
+		if o == origin and value > max_d:
+			return false
+	return true
 
 
 func build(coords: Vector2, class_id: int):
