@@ -130,7 +130,7 @@ func can_be_built(origin: Vector2, coords: Vector2):
 		var max_d = mushroom.max_build_radius
 		var dsq = (o - coords).abs()
 		var value = max(dsq.x, dsq.y)
-		print($fog.get_cellv(coords))
+
 		if min_d > value:
 			return false
 		if o == origin and value > max_d:
