@@ -59,12 +59,10 @@ func _unhandled_input(event):
 
 			if selected != null and action == BUILD and can_be_built(selected, coords):
 				build(coords, 1)
+				clean_action()
 
 		elif InputMap.event_is_action(event, "ui_right_mouse_button"):
-			selected = null
-			action = null
-			$HUD.show_options([])
-			$tips.clear()
+			clean_action()
 
 	if event is InputEventMouseMotion and selected != null and action == BUILD:
 		var evpos = get_global_mouse_position() + delta
@@ -76,15 +74,25 @@ func process_action(action_id):
 	action = action_id
 
 	if action == E_ATTACK:
-		print_debug("transform to attacker")
+		evolve(selected, 4)
 	elif action == E_BOMB:
-		print_debug("transform to bomb")
+		evolve(selected, 2)
 	elif action == E_DEFENDER:
-		print_debug("transform to defender")
+		evolve(selected, 3)
 	elif action == ATTACK:
 		print_debug("attack")
 	elif action == EXPLOSE:
 		print_debug("boom")
+	else:
+		return
+	clean_action()
+
+
+func clean_action():
+	selected = null
+	action = null
+	$HUD.show_options([])
+	$tips.clear()
 
 
 func show_build_options(origin: Vector2, coords: Vector2):
@@ -99,8 +107,11 @@ func show_build_options(origin: Vector2, coords: Vector2):
 func can_be_built(origin: Vector2, coords: Vector2):
 	var origins = objs.keys()
 	for o in origins:
-		var mushroom = objs[o]
+		var mushroom: BasicMushroom = objs[o]
 		
+		#TODO: rewrite via groups
+		if not "min_build_radius" in mushroom:
+			continue
 		var min_d = mushroom.min_build_radius
 		var max_d = mushroom.max_build_radius
 		var dsq = (o - coords).abs()
@@ -128,3 +139,23 @@ func build(coords: Vector2, class_id: int):
 				objs[coords + Vector2(i,j)] = mushroom
 
 	$figures.add_child(mushroom)
+
+
+func ruin(coords: Vector2):
+	var mushroom = objs[coords]
+	if mushroom == null:
+		return
+
+	for i in range(-1, 2):
+		for j in range(-1, 2):
+			objs.erase(coords + Vector2(i,j))
+
+	$figures.set_cellv(coords, -1)
+	$figures.remove_child(mushroom)
+
+
+func evolve(coords: Vector2, class_id: int):
+	ruin(coords)
+	build(coords, class_id)
+
+
