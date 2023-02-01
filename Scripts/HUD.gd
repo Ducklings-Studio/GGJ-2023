@@ -64,3 +64,11 @@ func clean_label(timer: Timer):
 
 func set_gems(amount):
 	$Resources/MarginContainer/HBoxContainer/Amount.set_text(str(amount))
+
+
+func show_options(arr):
+	var kar = $Options/MarginContainer/GridContainer.get_children()
+	for i in kar:
+		i.set_visible(false)
+	for i in arr:
+		kar[i].set_visible(true)
