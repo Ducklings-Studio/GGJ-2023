@@ -29,31 +29,45 @@ func add_gems(amount):
 	$HUD.set_gems(gems)
 
 
+var selected
+
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
-		if event.is_pressed() and InputMap.event_is_action(event, "ui_left_mouse_button"):
+		if !event.is_pressed():
+			return
+		if InputMap.event_is_action(event, "ui_left_mouse_button"):
 			var evpos = get_global_mouse_position() + delta
 			var coords = $floor.world_to_map(evpos)
 
 			if objs.has(coords):
 				print_debug("already here", objs[coords])
-				show_build_options(coords, objs[coords])
+				selected = coords
+				#show_build_options(coords, objs[coords])
 				$HUD.show_options([1,2,3,4])
 				return
 
 			build(coords, 1)
 
+		elif InputMap.event_is_action(event, "ui_right_mouse_button"):
+			selected = null
 
-func show_build_options(coords: Vector2, mushroom: BasicMushroom):
-	#check if radius exists and optimise loop
+	if event is InputEventMouseMotion and selected != null:
+		var evpos = get_global_mouse_position() + delta
+		var coords = $floor.world_to_map(evpos)
+		show_build_options(selected, coords, objs[selected])
+
+
+func show_build_options(origin: Vector2, coords: Vector2, mushroom: BasicMushroom):
+	$tips.clear()
+	
 	var max_sq = mushroom.max_build_radius*mushroom.max_build_radius
 	var min_sq = mushroom.min_build_radius*mushroom.min_build_radius
-	print_debug(max_sq, min_sq)
-	for i in range(-mushroom.max_build_radius, mushroom.max_build_radius):
-		for j in range(-mushroom.max_build_radius, mushroom.max_build_radius):
-			print_debug(i*i + j*j)
-			if i*i + j*j <= max_sq and i*i + j*j >= min_sq: 
-				$figures.set_cellv(coords+Vector2(i,j), 5)
+	var dsq = origin.distance_squared_to(coords)
+	
+	if min_sq <= dsq and dsq <= max_sq: 
+		$tips.set_cellv(coords, 0)
+	else:
+		$tips.set_cellv(coords, 1)
 
 
 func build(coords: Vector2, class_id: int):
