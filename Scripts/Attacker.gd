@@ -1,0 +1,2 @@
+extends BasicMushroom
+class_name Attacker

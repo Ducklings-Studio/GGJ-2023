@@ -523,6 +523,7 @@ custom_constants/hseparation = 5
 columns = 3
 
 [node name="TextureButton" type="TextureButton" parent="HUD/Options/MarginContainer/GridContainer"]
+visible = false
 margin_right = 94.0
 margin_bottom = 93.0
 mouse_filter = 1
@@ -534,8 +535,8 @@ expand = true
 stretch_mode = 3
 
 [node name="TextureButton2" type="TextureButton" parent="HUD/Options/MarginContainer/GridContainer"]
-margin_left = 99.0
-margin_right = 192.0
+visible = false
+margin_right = 94.0
 margin_bottom = 93.0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
@@ -546,8 +547,8 @@ expand = true
 stretch_mode = 3
 
 [node name="TextureButton3" type="TextureButton" parent="HUD/Options/MarginContainer/GridContainer"]
-margin_left = 197.0
-margin_right = 290.0
+visible = false
+margin_right = 94.0
 margin_bottom = 93.0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
@@ -558,9 +559,9 @@ expand = true
 stretch_mode = 3
 
 [node name="TextureButton4" type="TextureButton" parent="HUD/Options/MarginContainer/GridContainer"]
-margin_top = 98.0
+visible = false
 margin_right = 94.0
-margin_bottom = 190.0
+margin_bottom = 185.0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -570,10 +571,9 @@ expand = true
 stretch_mode = 3
 
 [node name="TextureButton5" type="TextureButton" parent="HUD/Options/MarginContainer/GridContainer"]
-margin_left = 99.0
-margin_top = 98.0
-margin_right = 192.0
-margin_bottom = 190.0
+visible = false
+margin_right = 94.0
+margin_bottom = 185.0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -583,10 +583,9 @@ expand = true
 stretch_mode = 3
 
 [node name="TextureButton6" type="TextureButton" parent="HUD/Options/MarginContainer/GridContainer"]
-margin_left = 197.0
-margin_top = 98.0
-margin_right = 290.0
-margin_bottom = 190.0
+visible = false
+margin_right = 94.0
+margin_bottom = 185.0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3

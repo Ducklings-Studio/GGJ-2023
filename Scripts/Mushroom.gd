@@ -3,7 +3,8 @@ class_name BasicMushroom
 
 signal res_mined(amount)
 
-export var texture: Texture = null
+export var abilities: Array = []
+export var radius: int = 1 # Manhattan norm
 export var cost: int = 500
 export var time_to_build: int = 10
 export var res_per_sec: int = 10
@@ -13,8 +14,6 @@ var miner_timer = Timer.new()
 
 
 func _ready():
-	#$Sprite.set_texture(texture)
-
 	build_timer.connect("timeout", self, "_on_Built")
 	miner_timer.connect("timeout", self, "_on_Miner_timeout")
 

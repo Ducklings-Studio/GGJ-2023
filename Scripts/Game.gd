@@ -35,15 +35,16 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if !event.is_pressed():
 			return
+
 		if InputMap.event_is_action(event, "ui_left_mouse_button"):
 			var evpos = get_global_mouse_position() + delta
-			var coords = $floor.world_to_map(evpos) - Vector2.ONE
+			var coords = $floor.world_to_map(evpos)
 
 			if objs.has(coords):
 				#TOOD: get cental coords
 				print_debug("already here", objs[coords])
 				selected = coords
-				$HUD.show_options([1,2,3,4])
+				$HUD.show_options(objs[coords].abilities)
 				return
 
 			if selected != null and can_be_built(selected, coords):
@@ -72,12 +73,12 @@ func can_be_built(origin: Vector2, coords: Vector2):
 	if origin == null:
 		return false
 	var mushroom = objs[origin]
-
-	var max_sq = mushroom.max_build_radius*mushroom.max_build_radius
-	var min_sq = mushroom.min_build_radius*mushroom.min_build_radius
-	var dsq = origin.distance_squared_to(coords)
-
-	return min_sq <= dsq and dsq <= max_sq
+	
+	var min_d = mushroom.min_build_radius
+	var max_d = mushroom.max_build_radius
+	var dsq = (origin - coords).abs()
+	
+	return (min_d <= dsq.x or min_d <= dsq.y) and dsq.x <= max_d and dsq.y <= max_d
 
 
 func build(coords: Vector2, class_id: int):

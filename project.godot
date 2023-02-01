@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "BasicMushroom",
+"class": "Attacker",
+"language": "GDScript",
+"path": "res://Scripts/Attacker.gd"
+}, {
+"base": "BasicMushroom",
 "class": "Base",
 "language": "GDScript",
 "path": "res://Scripts/Base.gd"
@@ -20,13 +25,26 @@ _global_script_classes=[ {
 "path": "res://Scripts/Mushroom.gd"
 }, {
 "base": "BasicMushroom",
+"class": "Bomber",
+"language": "GDScript",
+"path": "res://Scripts/Bomber.gd"
+}, {
+"base": "BasicMushroom",
+"class": "Defender",
+"language": "GDScript",
+"path": "res://Scripts/Defender.gd"
+}, {
+"base": "BasicMushroom",
 "class": "Standart",
 "language": "GDScript",
 "path": "res://Scripts/Standart.gd"
 } ]
 _global_script_class_icons={
+"Attacker": "",
 "Base": "",
 "BasicMushroom": "",
+"Bomber": "",
+"Defender": "",
 "Standart": ""
 }
 
