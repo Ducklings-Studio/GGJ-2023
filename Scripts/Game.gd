@@ -24,6 +24,7 @@ var gems = 0
 
 
 func _ready():
+	set_fogs()
 	add_gems(0)
 	build(Vector2.RIGHT * 5, 0)
 	clean_action()
@@ -38,6 +39,11 @@ func add_gems(amount):
 	gems += amount
 	$HUD.set_gems(gems)
 
+func set_fogs():
+	for i in range(0, 137):
+			for j in range(-64, 74):
+				if abs(j) <= i && i + abs(j) < 146 && i - j <= 127:
+					$fog.set_cellv(Vector2(i, j), 0)
 
 func built(coords):
 	var cell = $figures.get_cellv(coords)
@@ -123,10 +129,12 @@ func can_be_built(origin: Vector2, coords: Vector2):
 		var max_d = mushroom.max_build_radius
 		var dsq = (o - coords).abs()
 		var value = max(dsq.x, dsq.y)
-		
+		print($fog.get_cellv(coords))
 		if min_d > value:
 			return false
 		if o == origin and value > max_d:
+			return false
+		if !$fog.get_cellv(coords):
 			return false
 	return true
 
@@ -144,11 +152,19 @@ func build(coords: Vector2, class_id: int):
 		$figures.set_cellv(coords, class_id + 6)
 	else:
 		$figures.set_cellv(coords, class_id)
-
+	for i in range(-6, 7):
+			for j in range(-6, 7):
+				if abs(i) + abs(j) < 9:
+					$fog.set_cellv(coords + Vector2(i,j), -1)
+	
 	if class_id == 0:
 		for i in range(-1, 2):
 			for j in range(-1, 2):
 				objs[coords + Vector2(i,j)] = mushroom
+		for i in range(-8, 9):
+			for j in range(-8, 9):
+				if abs(i) + abs(j) < 15:
+					$fog.set_cellv(coords + Vector2(i,j), -1)
 
 	$figures.add_child(mushroom)
 
