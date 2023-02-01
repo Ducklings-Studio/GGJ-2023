@@ -37,15 +37,16 @@ func _unhandled_input(event):
 			return
 		if InputMap.event_is_action(event, "ui_left_mouse_button"):
 			var evpos = get_global_mouse_position() + delta
-			var coords = $floor.world_to_map(evpos)
+			var coords = $floor.world_to_map(evpos) - Vector2.ONE
 
 			if objs.has(coords):
+				#TOOD: get cental coords
 				print_debug("already here", objs[coords])
 				selected = coords
 				$HUD.show_options([1,2,3,4])
 				return
 
-			if selected != null and can_be_built(selected, coords - Vector2.ONE):
+			if selected != null and can_be_built(selected, coords):
 				build(coords, 1)
 
 		elif InputMap.event_is_action(event, "ui_right_mouse_button"):
@@ -87,11 +88,11 @@ func build(coords: Vector2, class_id: int):
 
 	objs[coords] = mushroom
 	$floor.set_cellv(coords, 4)
+	$figures.set_cellv(coords, class_id)
+
 	if class_id == 0:
-		$figures.set_cellv(coords, 2)
 		for i in range(-1, 2):
 			for j in range(-1, 2):
 				objs[coords + Vector2(i,j)] = mushroom
-	else:
-		$figures.set_cellv(coords, class_id)
+
 	$figures.add_child(mushroom)
