@@ -42,11 +42,11 @@ func _unhandled_input(event):
 			if objs.has(coords):
 				print_debug("already here", objs[coords])
 				selected = coords
-				#show_build_options(coords, objs[coords])
 				$HUD.show_options([1,2,3,4])
 				return
 
-			build(coords, 1)
+			if selected != null and can_be_built(selected, coords - Vector2.ONE):
+				build(coords, 1)
 
 		elif InputMap.event_is_action(event, "ui_right_mouse_button"):
 			selected = null
@@ -54,21 +54,29 @@ func _unhandled_input(event):
 
 	if event is InputEventMouseMotion and selected != null:
 		var evpos = get_global_mouse_position() + delta
-		var coords = $floor.world_to_map(evpos)
-		show_build_options(selected, coords, objs[selected])
+		var coords = $floor.world_to_map(evpos) - Vector2.ONE
+		show_build_options(selected, coords)
 
 
-func show_build_options(origin: Vector2, coords: Vector2, mushroom: BasicMushroom):
+func show_build_options(origin: Vector2, coords: Vector2):
 	$tips.clear()
 	
-	var max_sq = mushroom.max_build_radius*mushroom.max_build_radius
-	var min_sq = mushroom.min_build_radius*mushroom.min_build_radius
-	var dsq = origin.distance_squared_to(coords)
-	
-	if min_sq <= dsq and dsq <= max_sq: 
+	if can_be_built(origin, coords): 
 		$tips.set_cellv(coords, 0)
 	else:
 		$tips.set_cellv(coords, 1)
+
+
+func can_be_built(origin: Vector2, coords: Vector2):
+	if origin == null:
+		return false
+	var mushroom = objs[origin]
+
+	var max_sq = mushroom.max_build_radius*mushroom.max_build_radius
+	var min_sq = mushroom.min_build_radius*mushroom.min_build_radius
+	var dsq = origin.distance_squared_to(coords)
+
+	return min_sq <= dsq and dsq <= max_sq
 
 
 func build(coords: Vector2, class_id: int):
