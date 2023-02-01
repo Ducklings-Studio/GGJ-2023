@@ -731,10 +731,12 @@ margin_top = 2.0
 margin_right = 160.0
 margin_bottom = 70.0
 custom_constants/separation = 3
+alignment = 1
 
 [node name="Amount" type="Label" parent="HUD/Resources/MarginContainer/HBoxContainer"]
+margin_left = 21.0
 margin_top = 18.0
-margin_right = 85.0
+margin_right = 106.0
 margin_bottom = 49.0
 rect_min_size = Vector2( 76, 0 )
 theme = ExtResource( 8 )
@@ -743,9 +745,12 @@ align = 1
 valign = 1
 
 [node name="TextureRect" type="TextureRect" parent="HUD/Resources/MarginContainer/HBoxContainer"]
-margin_left = 88.0
-margin_right = 110.0
-margin_bottom = 68.0
+margin_left = 109.0
+margin_top = 20.0
+margin_right = 131.0
+margin_bottom = 47.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = ExtResource( 17 )
 
 [node name="MenuBtn" type="Button" parent="HUD" groups=["ui_buttons"]]
