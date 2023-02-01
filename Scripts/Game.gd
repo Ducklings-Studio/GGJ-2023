@@ -50,6 +50,7 @@ func _unhandled_input(event):
 
 		elif InputMap.event_is_action(event, "ui_right_mouse_button"):
 			selected = null
+			$tips.clear()
 
 	if event is InputEventMouseMotion and selected != null:
 		var evpos = get_global_mouse_position() + delta
