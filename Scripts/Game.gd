@@ -66,6 +66,7 @@ func _unhandled_input(event):
 
 			if selected != null and action == BUILD and can_be_built(selected, coords):
 				build(coords, 1)
+				build_roots(selected, coords, 4)
 				clean_action()
 
 		elif InputMap.event_is_action(event, "ui_right_mouse_button"):
@@ -171,3 +172,24 @@ func evolve(coords: Vector2, class_id: int):
 	build(coords, class_id)
 
 
+func build_roots(s: Vector2, f: Vector2, type_id: int):
+	var delta = (f - s).abs()
+	delta.y *= -1
+	var sx = -1
+	var sy = -1
+	if s.x < f.x: sx = 1
+	if s.y < f.y: sy = 1
+	var error = delta.x + delta.y
+	
+	while true:
+		$floor.set_cellv(s, 2)
+		if s == f: break
+		var e2 = 2*error
+		if e2 >= delta.y:
+			if s.x == f.x: break
+			error += delta.y
+			s.x += sx
+		if e2 <= delta.x:
+			if s.y == f.y: break
+			error += delta.x
+			s.y += sy
