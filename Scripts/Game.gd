@@ -12,6 +12,9 @@ var classes = [
 	preload("res://Scenes/Mushrooms/Defender.tscn"),
 	preload("res://Scenes/Mushrooms/Attacker.tscn"),
 ]
+var effects = [
+	preload("res://Scenes/Explosion.tscn"),
+]
 enum {
 	BUILD, 
 	E_ATTACK, 
@@ -96,7 +99,7 @@ func process_action(action_id):
 	elif action == ATTACK:
 		print_debug("attack")
 	elif action == EXPLOSE:
-		print_debug("boom")
+		explose(selected)
 	else:
 		return
 	clean_action()
@@ -209,3 +212,30 @@ func build_roots(s: Vector2, f: Vector2, type_id: int):
 			if s.y == f.y: break
 			error += delta.x
 			s.y += sy
+
+
+func explose(coords: Vector2):
+	var effect = effects[0].instance()
+	effect.position = $figures.map_to_world(coords)
+	$figures.add_child(effect)
+	
+	var timer = Timer.new()
+	timer.wait_time = 1
+	timer.connect("timeout", self, "explosion_ended", [timer, effect])
+	add_child(timer)
+	timer.start()
+	
+	for i in range(-2, 3):
+		for j in range(-2, 3):
+			var tmp_coords = coords + Vector2(i,j)
+			if objs.has(tmp_coords):
+				objs.erase(tmp_coords)
+			$figures.set_cellv(tmp_coords, -1)
+			$floor.set_cellv(tmp_coords, 0)
+
+
+func explosion_ended(timer: Timer, effect):
+	timer.stop()
+	remove_child(timer)
+	$figures.remove_child(effect)
+	
