@@ -40,10 +40,42 @@ margin_bottom = 326.0
 custom_constants/separation = 22
 alignment = 1
 
-[node name="Easy" type="Button" parent="MarginContainer/VBoxContainer" groups=["ui_buttons"]]
+[node name="Hard" type="Button" parent="MarginContainer/VBoxContainer" groups=["ui_buttons"]]
 margin_top = 41.0
 margin_right = 421.0
 margin_bottom = 101.0
+hint_tooltip = "Choose this mode on your own risk"
+mouse_default_cursor_shape = 2
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+text = "Hard"
+
+[node name="Normal" type="Button" parent="MarginContainer/VBoxContainer" groups=["ui_buttons"]]
+margin_top = 123.0
+margin_right = 421.0
+margin_bottom = 183.0
+hint_tooltip = "Choose this mode if you ever played RTS"
+mouse_default_cursor_shape = 2
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+text = "Normal"
+
+[node name="Easy" type="Button" parent="MarginContainer/VBoxContainer" groups=["ui_buttons"]]
+margin_top = 205.0
+margin_right = 421.0
+margin_bottom = 265.0
+hint_tooltip = "Choose this mode if you never played RTS before"
+mouse_default_cursor_shape = 2
 theme = ExtResource( 1 )
 custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
 custom_styles/hover = ExtResource( 2 )
@@ -52,32 +84,6 @@ custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 text = "Easy"
-
-[node name="Very_Easy" type="Button" parent="MarginContainer/VBoxContainer" groups=["ui_buttons"]]
-margin_top = 123.0
-margin_right = 421.0
-margin_bottom = 183.0
-theme = ExtResource( 1 )
-custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 3 )
-custom_styles/disabled = ExtResource( 3 )
-custom_styles/normal = ExtResource( 3 )
-text = "Very Easy"
-
-[node name="Suuuuuper_Easy" type="Button" parent="MarginContainer/VBoxContainer" groups=["ui_buttons"]]
-margin_top = 205.0
-margin_right = 421.0
-margin_bottom = 265.0
-theme = ExtResource( 1 )
-custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 3 )
-custom_styles/disabled = ExtResource( 3 )
-custom_styles/normal = ExtResource( 3 )
-text = "Suuuuuper Easy"
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 anchor_top = 1.0
@@ -94,6 +100,7 @@ margin_left = 20.0
 margin_top = 20.0
 margin_right = 168.0
 margin_bottom = 80.0
+mouse_default_cursor_shape = 2
 theme = ExtResource( 1 )
 custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
 custom_styles/hover = ExtResource( 2 )
@@ -103,7 +110,7 @@ custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 text = "Back"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Easy" to="." method="_on_Easy_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Very_Easy" to="." method="_on_Very_Easy_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Suuuuuper_Easy" to="." method="_on_Suuuuuper_Easy_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Hard" to="." method="_on_Easy_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Normal" to="." method="_on_Very_Easy_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Easy" to="." method="_on_Suuuuuper_Easy_pressed"]
 [connection signal="pressed" from="MarginContainer2/Back" to="." method="_on_Back_pressed"]
