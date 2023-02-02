@@ -15,7 +15,7 @@ func _on_Settings_pressed():
 
 
 func _on_Help_pressed():
-	get_tree().change_scene("res://Scenes/Difficulty.tscn")
+	$Help.set_visible(true)
 
 
 func _on_Exit_pressed():
