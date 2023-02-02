@@ -85,7 +85,7 @@ func _unhandled_input(event):
 					graph[selected] = [coords]
 				reversed_graph[coords] = selected
 				clean_action()
-			elif selected != null and action == ATTACK:
+			elif selected != null and action == ATTACK and is_not_enough_gems(5):
 				build_roots(selected, coords, 13)
 				clean_action()
 
@@ -138,6 +138,9 @@ func show_build_options(origin: Vector2, coords: Vector2, is_attack = false):
 
 
 func can_be_built(origin: Vector2, coords: Vector2):
+	if is_not_enough_gems(1):
+		return false
+
 	var origins = objs.keys()
 	for o in origins:
 		var mushroom = objs[o]
@@ -159,12 +162,22 @@ func can_be_built(origin: Vector2, coords: Vector2):
 	return true
 
 
+func is_not_enough_gems(class_id: int):
+	if action == BUILD:
+		return classes[class_id].instance().cost > gems
+	if action == ATTACK:
+		return classes[4].instance().attack_price > gems
+
+
 func build(coords: Vector2, class_id: int):
 	var mushroom = classes[class_id].instance()
 	if mushroom.has_method("_on_Miner_timeout"):
 		mushroom.connect("res_mined", self, "add_gems")
 	mushroom.connect("built", self, "built", [coords])
-
+	
+	if class_id != 0:
+		add_gems(-mushroom.cost)
+	
 	objs[coords] = mushroom
 	$floor.set_cellv(coords, 4)
 	
@@ -202,8 +215,12 @@ func ruin(coords: Vector2):
 
 
 func evolve(coords: Vector2, class_id: int):
+	if is_not_enough_gems(class_id):
+		return false
+
 	ruin(coords)
 	build(coords, class_id)
+
 	if class_id != 3:
 		return
 	var source = reversed_graph[coords]
