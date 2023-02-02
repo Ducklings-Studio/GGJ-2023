@@ -19,3 +19,10 @@ func _on_BasicRules_pressed():
 	
 func _on_StrikingMushroom_pressed():
 	$AttackHelp.set_visible(true);
+
+func _on_ProtectiveMushroom_pressed():
+	$DefenceHelp.set_visible(true);
+
+func _on_UnstableMushroom_pressed():
+	$ExplosionHelp.set_visible(true);
+
