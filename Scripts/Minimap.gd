@@ -43,4 +43,4 @@ func _process(delta):
 	var tmp = camera.get_camera_screen_center()
 	if camera_position != tmp:
 		camera_position = tmp
-		#update()
+		update()

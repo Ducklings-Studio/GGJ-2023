@@ -24,7 +24,8 @@ enum {
 	EXPLOSE,
 }
 var gems = 0
-var graph := []
+var graph := {}
+var reversed_graph := {}
 
 func _ready():
 	set_fogs()
@@ -42,11 +43,13 @@ func add_gems(amount):
 	gems += amount
 	$HUD.set_gems(gems)
 
+
 func set_fogs():
 	for i in range(0, 137):
 			for j in range(-64, 74):
 				if abs(j) <= i && i + abs(j) < 146 && i - j <= 127:
 					$fog.set_cellv(Vector2(i, j), 0)
+
 
 func built(coords):
 	var cell = $figures.get_cellv(coords)
@@ -76,6 +79,11 @@ func _unhandled_input(event):
 			if selected != null and action == BUILD and can_be_built(selected, coords):
 				build(coords, 1)
 				build_roots(selected, coords, 2)
+				if graph.has(selected):
+					graph[selected].push_back(coords)
+				else:
+					graph[selected] = [coords]
+				reversed_graph[coords] = selected
 				clean_action()
 			elif selected != null and action == ATTACK:
 				build_roots(selected, coords, 13)
@@ -196,6 +204,12 @@ func ruin(coords: Vector2):
 func evolve(coords: Vector2, class_id: int):
 	ruin(coords)
 	build(coords, class_id)
+	var kar = reversed_graph[coords]
+	prints(kar, coords)
+	if objs.has(kar):
+		prints("kaaaaar", objs[kar])
+		if objs[kar] is Defender:
+			build_roots(coords, kar, 10)
 
 
 func build_roots(s: Vector2, f: Vector2, type_id: int):
