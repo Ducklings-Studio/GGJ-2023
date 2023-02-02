@@ -1,16 +1,17 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Help.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Style/Pixellari_style.tres" type="Theme" id=2]
 [ext_resource path="res://Assets/Style/button_styleboxflat.tres" type="StyleBox" id=3]
-[ext_resource path="res://Assets/Buildinigs/OneMushroom/BaseMushroom_Green.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Buildinigs/OneMushroom/AttackMushroom_Green.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Style/button_styleboxflat_hover.tres" type="StyleBox" id=5]
 [ext_resource path="res://Assets/MenuBg.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Icons/AttackAction_Icon.png" type="Texture" id=7]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 0.862745 )
 
-[node name="BasicRulesHelp" type="Control"]
+[node name="AttackHelp" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
@@ -34,38 +35,45 @@ margin_bottom = 200.0
 custom_styles/bg = SubResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 781.0
-margin_bottom = 849.0
-custom_constants/separation = 36
+margin_right = 752.0
+margin_bottom = 625.0
+custom_constants/separation = 65
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_right = 781.0
-margin_bottom = 501.0
+margin_right = 752.0
+margin_bottom = 186.0
 theme = ExtResource( 2 )
-text = "Controls:  
- - LMB to select mushroom or
-use ability
- - RMB to cancel selected 
-mushroom or ability
- - SPACE and move MOUSE 
-to look around
- - SCROLL to resize map"
+text = "How attack is working?
+  Choose striking mushroom 
+(just click LMB on it) "
 
-[node name="BaseMushroomGreen" type="Sprite" parent="ScrollContainer/VBoxContainer"]
-position = Vector2( 670, 730 )
-scale = Vector2( 4, 4 )
+[node name="AttackMushroomGreen" type="Sprite" parent="ScrollContainer/VBoxContainer"]
+position = Vector2( 709, 181 )
+scale = Vector2( 5, 5 )
 texture = ExtResource( 4 )
 
 [node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_top = 537.0
-margin_right = 781.0
-margin_bottom = 849.0
+margin_top = 251.0
+margin_right = 752.0
+margin_bottom = 437.0
 theme = ExtResource( 2 )
-text = "Target:  
- - Destroy the enemy base 
-by attacking it
- - Defence you base 
-with various mushrooms"
+text = "Next step is click on abilitiy
+in right bottom corner
+or press E"
+align = 2
+
+[node name="AttackActionIcon" type="Sprite" parent="ScrollContainer/VBoxContainer"]
+position = Vector2( 77, 373 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 7 )
+
+[node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer"]
+margin_top = 502.0
+margin_right = 752.0
+margin_bottom = 625.0
+theme = ExtResource( 2 )
+text = "Click on the field
+that you want to attack"
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 anchor_top = 1.0

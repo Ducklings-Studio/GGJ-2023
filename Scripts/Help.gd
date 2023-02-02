@@ -15,4 +15,7 @@ func _on_Back_pressed():
 	self.set_visible(false)
 	
 func _on_BasicRules_pressed():
-	$Help.set_visible(true);
+	$BasicRulesHelp.set_visible(true);
+	
+func _on_StrikingMushroom_pressed():
+	$AttackHelp.set_visible(true);
