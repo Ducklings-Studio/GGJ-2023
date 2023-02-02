@@ -549,6 +549,10 @@ default_font = SubResource( 7 )
 [node name="Node2D2" type="Node2D"]
 script = ExtResource( 5 )
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.46
+autostart = true
+
 [node name="floor" type="TileMap" parent="."]
 mode = 1
 tile_set = SubResource( 3 )
@@ -933,6 +937,7 @@ uppercase = true
 [node name="Settings" parent="HUD" instance=ExtResource( 14 )]
 visible = false
 
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="game_started" from="HUD" to="." method="_on_HUD_game_started"]
 [connection signal="game_started" from="HUD" to="HUD/Time" method="_on_HUD_game_started"]
 [connection signal="pressed" from="HUD/Options/MarginContainer/GridContainer/Build" to="HUD" method="_on_Action_pressed" binds= [ 0 ]]

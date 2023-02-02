@@ -522,6 +522,10 @@ default_font = SubResource( 7 )
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 6 )
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.46
+autostart = true
+
 [node name="floor" type="TileMap" parent="."]
 mode = 1
 tile_set = SubResource( 5 )

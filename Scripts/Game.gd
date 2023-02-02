@@ -263,4 +263,49 @@ func explosion_ended(timer: Timer, effect):
 	timer.stop()
 	remove_child(timer)
 	$figures.remove_child(effect)
-	
+
+
+func put_mushroom(mushroom: Vector2, coords: Vector2):
+	build(coords, 1)
+	build_roots(mushroom, coords, 2)
+	clean_action()
+
+
+func is_field(coords: Vector2):
+	if coords.x < 0 || coords.x >= 137:
+		return false
+	if coords.y < -64 || coords.y >= 74:
+		return false
+	if abs(coords.y) <= coords.x && coords.x + abs(coords.y) < 146 && coords.x - coords.y <= 127:
+		return true
+	return false
+
+
+var base = Vector2(5, 0)
+var baseCoords := [Vector2(6, 6), Vector2(6, 3), 
+	Vector2(6, 0), Vector2(6, -3), Vector2(3, -6), 
+	Vector2(1, -6), Vector2(3, 7), Vector2(0, 6), 
+	Vector2(-3, 6), Vector2(-6, 1), Vector2(-6, -2),
+	Vector2(-2, -6), Vector2(-5, -6)]
+var mushs = [] 
+var mushDistMin = 2 
+var mushDistMax = 5
+var mushNum = 0
+var mushMush = 0
+var mushsCoords := [Vector2(1, 4), Vector2(4, 0), Vector2(3, -2),
+	Vector2(0, -3), Vector2(-3, -3), Vector2(-3, 0), Vector2(-8, -3)]
+
+func _on_Timer_timeout():
+	var nowPoint = len(mushs)
+	while nowPoint == len(mushs):
+		if mushNum < len(baseCoords) && !mushMush && is_field(base+baseCoords[mushNum]):
+			put_mushroom(base, base+baseCoords[mushNum])
+			mushs.append(base+baseCoords[mushNum])
+		elif mushMush && mushNum < len(mushsCoords) && is_field(mushs[mushMush - 1]+mushsCoords[mushNum]):
+				if can_be_built(mushs[mushMush - 1], mushs[mushMush - 1]+mushsCoords[mushNum]):
+					put_mushroom(mushs[mushMush - 1], mushs[mushMush - 1]+mushsCoords[mushNum])
+					mushs.append(mushs[mushMush - 1]+mushsCoords[mushNum])
+		else:
+			mushMush += 1
+			mushNum = -1
+		mushNum += 1
