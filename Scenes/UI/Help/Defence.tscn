@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Scripts/Help.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Style/Pixellari_style.tres" type="Theme" id=2]
-[ext_resource path="res://Assets/Style/button_styleboxflat.tres" type="StyleBox" id=3]
-[ext_resource path="res://Assets/Buildinigs/OneMushroom/DefenceMushroom_Green.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Style/button_styleboxflat_hover.tres" type="StyleBox" id=5]
-[ext_resource path="res://Assets/MenuBg.png" type="Texture" id=6]
+[ext_resource path="res://Scripts/UI/Help.gd" type="Script" id=1]
+[ext_resource path="res://Assets/MenuBg.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Buildinigs/OneMushroom/DefenceMushroom_Green.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Style/Pixellari_style.tres" type="Theme" id=4]
+[ext_resource path="res://Assets/Style/button_styleboxflat.tres" type="StyleBox" id=5]
+[ext_resource path="res://Assets/Style/button_styleboxflat_hover.tres" type="StyleBox" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 0.862745 )
@@ -18,7 +18,7 @@ script = ExtResource( 1 )
 [node name="TextureRect" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 6 )
+texture = ExtResource( 2 )
 expand = true
 stretch_mode = 7
 
@@ -41,7 +41,7 @@ custom_constants/separation = 65
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
 margin_right = 815.0
 margin_bottom = 186.0
-theme = ExtResource( 2 )
+theme = ExtResource( 4 )
 text = "How defence is working?
   Choose protective mushroom 
 (just click LMB on it) "
@@ -49,13 +49,13 @@ text = "How defence is working?
 [node name="DefenceMushroomGreen" type="Sprite" parent="ScrollContainer/VBoxContainer"]
 position = Vector2( 697, 178 )
 scale = Vector2( 5, 4 )
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 
 [node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer"]
 margin_top = 251.0
 margin_right = 815.0
 margin_bottom = 437.0
-theme = ExtResource( 2 )
+theme = ExtResource( 4 )
 text = "And root between this 
 mushroom now is impenetrable
 (for your root too)"
@@ -76,13 +76,13 @@ margin_top = 20.0
 margin_right = 168.0
 margin_bottom = 80.0
 mouse_default_cursor_shape = 2
-theme = ExtResource( 2 )
+theme = ExtResource( 4 )
 custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 3 )
-custom_styles/disabled = ExtResource( 3 )
-custom_styles/normal = ExtResource( 3 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 5 )
+custom_styles/normal = ExtResource( 5 )
 text = "Back"
 
 [connection signal="pressed" from="MarginContainer2/Back" to="." method="_on_Back_pressed"]

@@ -11,6 +11,7 @@ onready var AudiSlider = $MarginContainer/Control/VBoxContainer/Control/AudiSlid
 onready var musicValueTemp = MusicSlider.value;
 onready var interfaceValueTemp = AudiSlider.value;
 
+
 func _ready():
 	var MusicTemp = AudioManager.music_vol;
 	var AudioTemp = AudioManager.audio_vol;
@@ -20,8 +21,10 @@ func _ready():
 	AudioManager.audio_vol = AudioTemp;
 	AudioManager.set_volume()
 
+
 func _on_Back_pressed():
 	self.set_visible(false)
+
 
 func _on_AudiSlider_value_changed(value):
 	var diff =  interfaceValueTemp - value;
@@ -29,10 +32,9 @@ func _on_AudiSlider_value_changed(value):
 	interfaceValueTemp = value;
 	AudioManager.set_volume()
 
+
 func _on_MusicSlider_value_changed(value):
 	var diff =  musicValueTemp - value;
 	AudioManager.music_vol += MUSIC_VOLUME_STEP * diff;
 	musicValueTemp = value;
 	AudioManager.set_volume()
-
-	

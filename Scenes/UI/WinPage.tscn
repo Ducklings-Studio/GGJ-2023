@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scripts/Help.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/UI/Help.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Style/Pixellari_style.tres" type="Theme" id=2]
 [ext_resource path="res://Assets/Style/small_text.tres" type="Theme" id=3]
 [ext_resource path="res://Assets/WinBg.png" type="Texture" id=4]

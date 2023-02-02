@@ -140,7 +140,7 @@ func show_build_options(origin: Vector2, coords: Vector2, is_attack = false):
 func can_be_built(origin: Vector2, coords: Vector2):
 	var origins = objs.keys()
 	for o in origins:
-		var mushroom: BasicMushroom = objs[o]
+		var mushroom = objs[o]
 		
 		#TODO: rewrite via groups
 		if not "min_build_radius" in mushroom:
