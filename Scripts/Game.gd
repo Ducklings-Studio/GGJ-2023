@@ -289,13 +289,7 @@ func put_mushroom(mushroom: Vector2, coords: Vector2):
 
 
 func is_field(coords: Vector2):
-	if coords.x < 0 || coords.x >= 137:
-		return false
-	if coords.y < -64 || coords.y >= 74:
-		return false
-	if abs(coords.y) <= coords.x && coords.x + abs(coords.y) < 146 && coords.x - coords.y <= 127:
-		return true
-	return false
+	return $floor.get_cellv(coords) != 8 # todo: correct it
 
 
 var base = Vector2(5, 0)
