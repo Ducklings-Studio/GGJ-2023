@@ -204,6 +204,8 @@ func ruin(coords: Vector2):
 func evolve(coords: Vector2, class_id: int):
 	ruin(coords)
 	build(coords, class_id)
+	if class_id != 3:
+		return
 	var source = reversed_graph[coords]
 	if objs.has(source) and objs[source] is Defender:
 		build_roots(source, coords, 10)
