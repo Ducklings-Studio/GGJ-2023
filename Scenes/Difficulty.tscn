@@ -107,7 +107,7 @@ custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 text = "Back"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Hard" to="." method="_on_Easy_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Normal" to="." method="_on_Very_Easy_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Easy" to="." method="_on_Suuuuuper_Easy_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Hard" to="." method="_on_Hard_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Normal" to="." method="_on_Normal_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Easy" to="." method="_on_Easy_pressed"]
 [connection signal="pressed" from="MarginContainer2/Back" to="." method="_on_Back_pressed"]
