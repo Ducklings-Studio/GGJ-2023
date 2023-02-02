@@ -18,15 +18,19 @@ func get_cells(tilemap : TileMap, id):
 	return tilemap.get_used_cells_by_id(id)
 
 
+var camera_position
+
+
 func _draw():
+	if camera_position == null:
+		return
 	draw_set_transform(rect_size / 2, 0, Vector2.ONE)
 	var zoom = 1 / camera.zoom.x
 
-	for tilemap in tilemaps:
-		var camera_position = camera.get_camera_screen_center()
-		var camera_cell = tilemap.world_to_map(camera_position)
-		var tilemap_offset = camera_cell + (camera_position - tilemap.map_to_world(camera_cell)) / tilemap.cell_size
+	var camera_cell = tilemaps[0].world_to_map(camera_position)
+	var tilemap_offset = camera_cell + (camera_position - tilemaps[0].map_to_world(camera_cell)) / tilemaps[0].cell_size
 
+	for tilemap in tilemaps:
 		for id in cell_colors.keys():
 			var color = cell_colors[id]
 			var cells = get_cells(tilemap, id)
@@ -36,4 +40,7 @@ func _draw():
 
 
 func _process(delta):
-	update()
+	var tmp = camera.get_camera_screen_center()
+	if camera_position != tmp:
+		camera_position = tmp
+		#update()

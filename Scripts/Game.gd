@@ -5,14 +5,14 @@ export var delta = Vector2(2.5, 2.5)
 var is_blocking = true
 
 var objs = {}
-var classes = [
+var classes := [
 	preload("res://Scenes/Mushrooms/Base.tscn"),
 	preload("res://Scenes/Mushrooms/Standart.tscn"),
 	preload("res://Scenes/Mushrooms/Bomber.tscn"),
 	preload("res://Scenes/Mushrooms/Defender.tscn"),
 	preload("res://Scenes/Mushrooms/Attacker.tscn"),
 ]
-var effects = [
+var effects := [
 	preload("res://Scenes/Explosion.tscn"),
 ]
 enum {
@@ -24,11 +24,11 @@ enum {
 	EXPLOSE,
 }
 var gems = 0
-
+var graph := []
 
 func _ready():
 	set_fogs()
-	add_gems(0)
+	add_gems(450)
 	build(Vector2.RIGHT * 5, 0)
 	clean_action()
 	AudioManager.set_music("res://Assets/Audio/MatchSound.ogg")
@@ -75,16 +75,22 @@ func _unhandled_input(event):
 
 			if selected != null and action == BUILD and can_be_built(selected, coords):
 				build(coords, 1)
-				build_roots(selected, coords, 4)
+				build_roots(selected, coords, 2)
+				clean_action()
+			elif selected != null and action == ATTACK:
+				build_roots(selected, coords, 13)
 				clean_action()
 
 		elif InputMap.event_is_action(event, "ui_right_mouse_button"):
 			clean_action()
 
-	if event is InputEventMouseMotion and selected != null and action == BUILD:
+	if event is InputEventMouseMotion and selected != null:
 		var evpos = get_global_mouse_position() + delta
 		var coords = $floor.world_to_map(evpos) - Vector2.ONE
-		show_build_options(selected, coords)
+		if action == BUILD:
+			show_build_options(selected, coords)
+		elif action == ATTACK:
+			show_build_options(selected, coords, true)
 
 
 func process_action(action_id):
@@ -96,8 +102,6 @@ func process_action(action_id):
 		evolve(selected, 2)
 	elif action == E_DEFENDER:
 		evolve(selected, 3)
-	elif action == ATTACK:
-		print_debug("attack")
 	elif action == EXPLOSE:
 		explose(selected)
 	else:
@@ -112,9 +116,13 @@ func clean_action():
 	$tips.clear()
 
 
-func show_build_options(origin: Vector2, coords: Vector2):
+func show_build_options(origin: Vector2, coords: Vector2, is_attack = false):
 	$tips.clear()
 	
+	if is_attack:
+		$tips.set_cellv(coords, 6)
+		return
+
 	if can_be_built(origin, coords): 
 		$tips.set_cellv(coords, 0)
 	else:
@@ -175,8 +183,7 @@ func build(coords: Vector2, class_id: int):
 
 func ruin(coords: Vector2):
 	var mushroom = objs[coords]
-	if mushroom == null:
-		return
+	if mushroom == null: return
 
 	for i in range(-1, 2):
 		for j in range(-1, 2):
@@ -201,7 +208,7 @@ func build_roots(s: Vector2, f: Vector2, type_id: int):
 	var error = delta.x + delta.y
 	
 	while true:
-		$floor.set_cellv(s, 2)
+		$floor.set_cellv(s, type_id)
 		if s == f: break
 		var e2 = 2*error
 		if e2 >= delta.y:
