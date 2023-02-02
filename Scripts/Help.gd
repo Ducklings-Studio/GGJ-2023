@@ -16,7 +16,10 @@ func _on_Back_pressed():
 	
 func _on_BasicRules_pressed():
 	$BasicRulesHelp.set_visible(true);
-	
+
+func _on_Building_pressed():
+	$BuildingHelp.set_visible(true);
+
 func _on_StrikingMushroom_pressed():
 	$AttackHelp.set_visible(true);
 

@@ -1,0 +1,125 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Scripts/Help.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Style/Pixellari_style.tres" type="Theme" id=2]
+[ext_resource path="res://Assets/Style/button_styleboxflat.tres" type="StyleBox" id=3]
+[ext_resource path="res://Assets/Icons/CreateSimpeMushroom_Icon.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Style/button_styleboxflat_hover.tres" type="StyleBox" id=5]
+[ext_resource path="res://Assets/MenuBg.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Icons/EvolveShield_Icon.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Buildinigs/OneMushroom/SimpleMushroom_Green.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Icons/EvolveAttack_Icon.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Icons/EvolveBlack_Icon.png" type="Texture" id=10]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0.862745 )
+
+[node name="BuildingHelp" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 7
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -425.0
+margin_top = -250.0
+margin_right = 425.0
+margin_bottom = 200.0
+custom_styles/bg = SubResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 734.0
+margin_bottom = 877.0
+custom_constants/separation = 65
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
+margin_right = 734.0
+margin_bottom = 186.0
+theme = ExtResource( 2 )
+text = "How building is working?
+  Choose mushroom or base
+(just click LMB on it) "
+
+[node name="SimpleMushroomGreen" type="Sprite" parent="ScrollContainer/VBoxContainer"]
+position = Vector2( 689, 177 )
+scale = Vector2( 4, 3 )
+texture = ExtResource( 8 )
+
+[node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer"]
+margin_top = 251.0
+margin_right = 734.0
+margin_bottom = 437.0
+theme = ExtResource( 2 )
+text = "Next step is click on abilitiy
+in right bottom corner
+or press R"
+align = 2
+
+[node name="CreateSimpeMushroomIcon" type="Sprite" parent="ScrollContainer/VBoxContainer"]
+position = Vector2( 82, 373 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer"]
+margin_top = 502.0
+margin_right = 734.0
+margin_bottom = 877.0
+theme = ExtResource( 2 )
+text = "Or you can evolve 
+mushroom by clicking 
+on one of blue action
+
+
+"
+
+[node name="EvolveAttackIcon" type="Sprite" parent="ScrollContainer/VBoxContainer"]
+position = Vector2( 600, 780 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 9 )
+
+[node name="EvolveBlackIcon" type="Sprite" parent="ScrollContainer/VBoxContainer"]
+position = Vector2( 400, 780 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+
+[node name="EvolveShieldIcon" type="Sprite" parent="ScrollContainer/VBoxContainer"]
+position = Vector2( 200, 780 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 7 )
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -100.0
+margin_right = 188.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="Back" type="Button" parent="MarginContainer2" groups=["ui_buttons"]]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 168.0
+margin_bottom = 80.0
+mouse_default_cursor_shape = 2
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+text = "Back"
+
+[connection signal="pressed" from="MarginContainer2/Back" to="." method="_on_Back_pressed"]

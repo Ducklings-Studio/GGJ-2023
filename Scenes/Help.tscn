@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Help.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Style/Pixellari_style.tres" type="Theme" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Scenes/AttackHelp.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/DefenceHelp.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/ExplosionHelp.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/BuildingHelp.tscn" type="PackedScene" id=10]
 
 [node name="Help" type="Control"]
 anchor_right = 1.0
@@ -180,8 +181,19 @@ margin_top = -300.0
 margin_right = 512.0
 margin_bottom = 300.0
 
+[node name="BuildingHelp" parent="." instance=ExtResource( 10 )]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0
+
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/BasicRules" to="." method="_on_BasicRules_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/Building" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Building" to="." method="_on_Building_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/StrikingMushroom" to="." method="_on_StrikingMushroom_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/ProtectiveMushroom" to="." method="_on_ProtectiveMushroom_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/UnstableMushroom2" to="." method="_on_UnstableMushroom_pressed"]
