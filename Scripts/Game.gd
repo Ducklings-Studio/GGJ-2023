@@ -204,12 +204,14 @@ func ruin(coords: Vector2):
 func evolve(coords: Vector2, class_id: int):
 	ruin(coords)
 	build(coords, class_id)
-	var kar = reversed_graph[coords]
-	prints(kar, coords)
-	if objs.has(kar):
-		prints("kaaaaar", objs[kar])
-		if objs[kar] is Defender:
-			build_roots(coords, kar, 10)
+	var source = reversed_graph[coords]
+	if objs.has(source) and objs[source] is Defender:
+		build_roots(source, coords, 10)
+	if !graph.has(coords):
+		return
+	for i in graph[coords]:
+		if objs.has(i) and objs[i] is Defender:
+			build_roots(coords, i, 10)
 
 
 func build_roots(s: Vector2, f: Vector2, type_id: int):
