@@ -4,6 +4,15 @@ export var delta = Vector2(2.5, 2.5)
 
 var is_blocking = true
 
+var new_endgame_parameter := {
+	"EndGameText": "",
+	"MatchTimer": "",
+	"Mushrooms": 0,
+	"MushroomsLost": 0,
+	"MineralsMine": 0,
+	"MineralsSpend": 0,
+}
+
 var objs = {}
 var classes := [
 	preload("res://Scenes/Mushrooms/Base.tscn"),
@@ -35,7 +44,6 @@ const BaseY = -24;
 
 func _ready():
 	set_fogs()
-	add_gems(100500)
 	
 	build(Vector2(BaseX, BaseY), 0)
 	
@@ -441,3 +449,21 @@ func clear_root_tale(s: Vector2, f: Vector2):
 		reversed_graph.erase(f)
 	if graph.has(s) and graph[s].has(f):
 		graph[s].erase(f)
+
+
+
+
+###############
+#   ENDGAME   #
+###############
+
+func _input(event):
+	show_end_game(1);
+	
+func show_end_game(total: int):
+	get_tree().change_scene("res://Scenes/UI/EndGame.tscn");
+	if total == 1:
+		new_endgame_parameter.EndGameText = "Your mycelium was defeated";
+	else:
+		new_endgame_parameter.EndGameText = "All enemy mycelium was defeated";
+	Global.set_endgame_parameter(new_endgame_parameter)

@@ -1,5 +1,20 @@
 extends Node
 
+var endgame_parametrs := {
+	"EndGameText": "",
+	"MatchTimer": "",
+	"Mushrooms": 0,
+	"MushroomsLost": 0,
+	"MineralsMine": 0,
+	"MineralsSpend": 0
+}
+
+func set_endgame_parameter(new_endgame_parameter):
+	endgame_parametrs = new_endgame_parameter;
+
+func get_endgame_parametr():
+	return endgame_parametrs;
+
 
 func upload_buttons():
 	var buttons: Array = get_tree().get_nodes_in_group("ui_buttons")
