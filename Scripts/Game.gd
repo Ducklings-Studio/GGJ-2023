@@ -27,6 +27,7 @@ var gems = 0
 var graph := {}
 var reversed_graph := {}
 
+
 func _ready():
 	set_fogs()
 	add_gems(450)
@@ -110,7 +111,7 @@ func _unhandled_input(event):
 					graph[selected] = [coords]
 				reversed_graph[coords] = selected
 				clean_action()
-			elif action == ATTACK and not is_not_enough_gems(-1) and can_build_roots(selected, coords):
+			elif action == ATTACK and is_enough_gems(-1) and cat_attack(selected, coords):
 				build_roots(selected, coords, 13)
 				clean_action()
 
@@ -130,11 +131,14 @@ func process_action(action_id):
 	action = action_id
 
 	if action == E_ATTACK:
-		evolve(selected, 4)
+		if is_enough_gems(4):
+			evolve(selected, 4)
 	elif action == E_BOMB:
-		evolve(selected, 2)
+		if is_enough_gems(2):
+			evolve(selected, 2)
 	elif action == E_DEFENDER:
-		evolve(selected, 3)
+		if is_enough_gems(3):
+			evolve(selected, 3)
 	elif action == EXPLOSE:
 		explose(selected)
 	else:
@@ -164,7 +168,7 @@ func show_build_options(origin: Vector2, coords: Vector2, is_attack = false):
 
 
 func can_be_built(origin: Vector2, coords: Vector2):
-	if is_not_enough_gems(1) or not can_build_roots(origin, coords):
+	if not (is_enough_gems(1) and can_build_roots(origin, coords)):
 		return false
 
 	var origins = objs.keys()
@@ -188,11 +192,11 @@ func can_be_built(origin: Vector2, coords: Vector2):
 	return true
 
 
-func is_not_enough_gems(class_id: int):
-	if action == BUILD:
-		return classes[class_id].instance().cost > gems
+func is_enough_gems(class_id: int):
+	if action in [BUILD, E_ATTACK, E_BOMB, E_DEFENDER]:
+		return classes[class_id].instance().cost <= gems
 	if action == ATTACK:
-		return classes[4].instance().attack_price > gems
+		return classes[4].instance().attack_price <= gems
 
 
 #Simple mushroom fog review
@@ -206,6 +210,7 @@ const X_FOG_START_BASE = -8;
 const X_FOG_END_BASE = 9;
 const Y_FOG_START_BASE = -8
 const Y_FOG_END_BASE = 9;
+
 
 func removeFog(class_id: int, coords: Vector2, 
 				xStart: int, xEnd: int, 
@@ -261,9 +266,6 @@ func ruin(coords: Vector2):
 
 
 func evolve(coords: Vector2, class_id: int):
-	if is_not_enough_gems(class_id):
-		return false
-
 	ruin(coords)
 	build(coords, class_id)
 
@@ -303,6 +305,7 @@ func roots_trajectory(s: Vector2, f: Vector2):
 			error += delta.x
 			s.y += sy
 
+	result.pop_front()
 	return result
 
 
@@ -313,10 +316,23 @@ func build_roots(s: Vector2, f: Vector2, type_id: int):
 		$floor.set_cellv(r, type_id)
 
 
+func cat_attack(s: Vector2, f: Vector2):
+	if s == null or f == null:
+		return false
+	
+	var roots = roots_trajectory(s, f)
+	
+	for r in roots:
+		if is_not_attackable(r):
+			return false 
+	
+	return true
+
+
 func can_build_roots(s: Vector2, f: Vector2):
 	if s == null or f == null:
 		return false
-
+	
 	var roots = roots_trajectory(s, f)
 	
 	for r in roots:
@@ -354,8 +370,12 @@ func explosion_ended(timer: Timer, effect):
 	$figures.remove_child(effect)
 
 
+func is_not_attackable(coords: Vector2):
+	return $floor.get_cellv(coords) in [5,10,12]
+
+
 func is_ground(coords: Vector2):
-	return $floor.get_cellv(coords) in [0,1,2,3,4,6,7,8,9,11]
+	return $floor.get_cellv(coords) in [0,1,3,4,6,7,8,9,11]
 
 
 func is_field(coords: Vector2):
