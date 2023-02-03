@@ -195,6 +195,12 @@ func explose(coords: Vector2):
 			$"../floor".set_cellv(tmp_coords, 0)
 
 
+func explosion_ended(timer: Timer, effect):
+	timer.stop()
+	remove_child(timer)
+	$"../figures".remove_child(effect)
+
+
 func plant_bomb(mush: Vector2, base: Vector2):
 	var bestPosition = null
 	var bestDistance = null

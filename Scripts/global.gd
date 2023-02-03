@@ -1,6 +1,6 @@
 extends Node
 
-var endgame_parametrs := {
+var endgame_parameters := {
 	"ModeName": "",
 	"EndGameText": "",
 	"MatchTimer": "",
@@ -12,14 +12,17 @@ var endgame_parametrs := {
 	"BgAudio": ""
 }
 
+
 func set_endgame_parameter(new_endgame_parameter):
-	endgame_parametrs = new_endgame_parameter;
-	
+	endgame_parameters = new_endgame_parameter;
+
+
 func set_endgame_mode(new_modeName):
-	endgame_parametrs.ModeName = new_modeName;
-	
+	endgame_parameters.ModeName = new_modeName;
+
+
 func get_endgame_parameter():
-	return endgame_parametrs;
+	return endgame_parameters;
 
 
 func upload_buttons():

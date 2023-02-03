@@ -33,7 +33,7 @@ enum {
 	E_BOMB, 
 	E_DEFENDER, 
 	ATTACK, 
-	EXPLOSE,
+	EXPLODE,
 }
 var gems = 0
 var graph := {}
@@ -145,6 +145,32 @@ func _unhandled_input(event):
 		elif action == ATTACK:
 			show_build_options(selected, coords, true)
 
+	if event.is_pressed() or selected == null:
+			return
+
+	if InputMap.event_is_action(event, "build") and "min_build_radius" in objs[selected]:
+		process_action(BUILD)
+		return
+	if InputMap.event_is_action(event, "attack") and objs[selected] is Attacker:
+		process_action(ATTACK)
+		return
+	if InputMap.event_is_action(event, "explode") and objs[selected] is Bomber:
+		process_action(EXPLODE)
+		return
+	
+	if not objs[selected] is Standart:
+		return
+	
+	if InputMap.event_is_action(event, "evolve_attack"):
+		process_action(E_ATTACK)
+		return
+	if InputMap.event_is_action(event, "evolve_bomb"):
+		process_action(E_BOMB)
+		return
+	if InputMap.event_is_action(event, "evolve_defender"):
+		process_action(E_DEFENDER)
+		return
+
 
 func process_action(action_id):
 	action = action_id
@@ -158,8 +184,8 @@ func process_action(action_id):
 	elif action == E_DEFENDER:
 		if is_enough_gems(3):
 			evolve(selected, 3)
-	elif action == EXPLOSE:
-		explose(selected)
+	elif action == EXPLODE:
+		explode(selected)
 	else:
 		return
 	clean_action()
@@ -386,7 +412,7 @@ func can_build_roots(s: Vector2, f: Vector2):
 	return true
 
 
-func explose(coords: Vector2):
+func explode(coords: Vector2):
 	var effect = effects[0].instance()
 	effect.position = $figures.map_to_world(coords)
 	$figures.add_child(effect)
@@ -456,14 +482,13 @@ func clear_root_tale(s: Vector2, f: Vector2):
 		graph[s].erase(f)
 
 
-
-
 ###############
 #   ENDGAME   #
 ###############
 
 func _input(event):
-	show_end_game(1);
+	pass
+	#show_end_game(1);
 	
 func show_end_game(total: int):
 	get_tree().change_scene("res://Scenes/UI/EndGame.tscn");
