@@ -194,6 +194,26 @@ func is_not_enough_gems(class_id: int):
 		return classes[4].instance().attack_price > gems
 
 
+#Simple mushroom fog review
+const X_FOG_START = -7;
+const X_FOG_END = 8;
+const Y_FOG_START = -6;
+const Y_FOG_END = 7;
+
+#Base mushroom fog review 
+const X_FOG_START_BASE = -8;
+const X_FOG_END_BASE = 9;
+const Y_FOG_START_BASE = -8
+const Y_FOG_END_BASE = 9;
+
+func removeFog(class_id: int, coords: Vector2, 
+				xStart: int, xEnd: int, 
+				yStart: int, yEnd: int):
+	for i in range(xStart, xEnd): 
+		for j in range(yStart, yEnd):
+			$fog.set_cellv(coords + Vector2(i,j), -1);
+
+
 func build(coords: Vector2, class_id: int):
 	var mushroom = classes[class_id].instance()
 	if mushroom.has_method("_on_Miner_timeout"):
@@ -210,19 +230,19 @@ func build(coords: Vector2, class_id: int):
 		$figures.set_cellv(coords, class_id + 6)
 	else:
 		$figures.set_cellv(coords, class_id)
-	for i in range(-6, 7):
-			for j in range(-6, 7):
-				if abs(i) + abs(j) < 9:
-					$fog.set_cellv(coords + Vector2(i,j), -1)
+		
+	removeFog(class_id, coords,
+			X_FOG_START, X_FOG_END, 
+			Y_FOG_START, Y_FOG_END);
+
 	
 	if class_id == 0:
 		for i in range(-1, 2):
 			for j in range(-1, 2):
 				objs[coords + Vector2(i,j)] = mushroom
-		for i in range(-8, 9):
-			for j in range(-8, 9):
-				if abs(i) + abs(j) < 15:
-					$fog.set_cellv(coords + Vector2(i,j), -1)
+		removeFog(class_id, coords,
+				X_FOG_START_BASE, X_FOG_END_BASE, 
+				Y_FOG_START_BASE, Y_FOG_END_BASE);
 
 	$figures.add_child(mushroom)
 
