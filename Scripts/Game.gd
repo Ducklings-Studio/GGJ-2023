@@ -46,6 +46,8 @@ const BaseY = -24;
 func _ready():
 	set_fogs()
 	
+	add_gems(450)
+	
 	build(Vector2(BaseX, BaseY), 0)
 	
 	clean_action()
