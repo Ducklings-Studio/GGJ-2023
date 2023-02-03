@@ -45,11 +45,15 @@ func add_gems(amount):
 	$HUD.set_gems(gems)
 
 
+const START_X = -70;
+const END_X = 70;
+const START_Y = -70;
+const END_Y = 70;
+
 func set_fogs():
-	for i in range(0, 137):
-			for j in range(-64, 74):
-				if abs(j) <= i && i + abs(j) < 146 && i - j <= 127:
-					$fog.set_cellv(Vector2(i, j), 0)
+	for i in range(START_X, END_X):
+			for j in range(START_Y, END_Y):
+				$fog.set_cellv(Vector2(i, j), 0)
 
 
 func built(coords):
