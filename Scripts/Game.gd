@@ -27,11 +27,19 @@ var gems = 0
 var graph := {}
 var reversed_graph := {}
 
+#TestBase for duelity
+const TestBaseX = -1;
+const TestBaseY = -24;
+
 func _ready():
 	set_fogs()
 	add_gems(450)
-	build(Vector2.RIGHT * 5, 0)
-	build(Vector2(25, -5), 0)
+	
+	build(Vector2(TestBaseX, TestBaseY), 0)
+	build(Vector2(TestBaseX, -TestBaseY), 0)
+	
+	#build(Vector2.RIGHT * 5, 0)
+	#build(Vector2(25, -5), 0)
 	clean_action()
 	AudioManager.set_music("res://Assets/Audio/MatchSound.ogg")
 
@@ -49,7 +57,6 @@ const START_X = -70;
 const END_X = 70;
 const START_Y = -70;
 const END_Y = 70;
-
 
 func set_fogs():
 	for i in range(START_X, END_X):
@@ -196,16 +203,16 @@ func is_not_enough_gems(class_id: int):
 
 
 #Simple mushroom fog review
-const X_FOG_START = -7;
-const X_FOG_END = 8;
+const X_FOG_START = -6;
+const X_FOG_END = 6;
 const Y_FOG_START = -6;
-const Y_FOG_END = 7;
+const Y_FOG_END = 6;
 
 #Base mushroom fog review 
-const X_FOG_START_BASE = -8;
-const X_FOG_END_BASE = 9;
-const Y_FOG_START_BASE = -8
-const Y_FOG_END_BASE = 9;
+const X_FOG_START_BASE = -15;
+const X_FOG_END_BASE = 15;
+const Y_FOG_START_BASE = -15
+const Y_FOG_END_BASE = 15;
 
 func removeFog(class_id: int, coords: Vector2, 
 				xStart: int, xEnd: int, 
