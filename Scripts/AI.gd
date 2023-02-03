@@ -72,8 +72,8 @@ func put_mushroom(mushroom: Vector2, coords: Vector2):
 	$"../".build_roots(mushroom, coords, 2)
 
 
-func is_field(coords: Vector2):
-	return $"../floor".get_cellv(coords) != 8 # todo: correct it, change to water (not playground)
+func is_ground(coords: Vector2):
+	return $"../floor".get_cellv(coords) in [0,1,3,4,6,7,8,9,11,13]
 
 
 func distance(one: Vector2, two: Vector2):
@@ -236,8 +236,8 @@ var mushDistMin = 2
 var mushDistMax = 5
 var mushNum = 0
 var mushMush = 0
-var mushsCoords := [Vector2(1, 4), Vector2(4, 0), Vector2(3, -2),
-	Vector2(0, -3), Vector2(-3, -3), Vector2(-3, 0), Vector2(-8, -3)]
+var mushsCoords := [Vector2(1, 4), Vector2(4, 0), Vector2(-4, 0), Vector2(3, -2),
+	Vector2(0, -3),  Vector2(-3, -3), Vector2(-3, 0), Vector2(-8, -3)]
 var enemyMush = []
 var enemyBase = Vector2(ENEMY_BASE_COORD_X, ENEMY_BASE_COORD_Y)
 var spawnPoint = true
@@ -251,20 +251,35 @@ func _on_Timer_timeout():
 	active_bombs()
 	var nowPoint = len(mushs)
 	while nowPoint == len(mushs) && spawnPoint:
-		if mushNum < len(baseCoords) && !mushMush && is_field(base+baseCoords[mushNum]):
-			put_mushroom(base, base+baseCoords[mushNum])
-			mushs.append(base+baseCoords[mushNum])
-		elif mushMush && mushNum < len(mushsCoords) && is_field(mushs[mushMush - 1]+mushsCoords[mushNum]):
-				if can_be_built(mushs[mushMush - 1], mushs[mushMush - 1]+mushsCoords[mushNum]):
-					put_mushroom(mushs[mushMush - 1], mushs[mushMush - 1]+mushsCoords[mushNum])
-					mushs.append(mushs[mushMush - 1]+mushsCoords[mushNum])
-					if distance(mushs[mushMush - 1]+mushsCoords[mushNum], enemyBase) < 10:
-						afterStop -= 1
-					if afterStop == 0:
-						spawnPoint = false
-					elif afterStop < 3:
-						afterStop -= 1
-		else:
+		if mushMush && mushNum < len(mushsCoords):
+			print("Num: ", mushNum, " len: ", len(mushsCoords), " is_gr: ", is_ground(mushs[mushMush - 1]+mushsCoords[mushNum]))
+		if mushNum < len(baseCoords) && !mushMush && is_ground(base+baseCoords[mushNum]):
+			if can_be_built(base, base+baseCoords[mushNum]):
+				print(base, " ", base+baseCoords[mushNum])
+				put_mushroom(base, base+baseCoords[mushNum])
+				mushs.append(base+baseCoords[mushNum])
+		elif mushMush && mushNum < len(mushsCoords) && is_ground(mushs[mushMush - 1]+mushsCoords[mushNum]):
+			if (mushs[mushMush - 1] == Vector2(-7, 25)):
+				print(mushNum, ": ", mushs[mushMush - 1], " -> ", mushs[mushMush - 1]+mushsCoords[mushNum])
+				print(is_ground(Vector2(-11, 25)))
+			if can_be_built(mushs[mushMush - 1], mushs[mushMush - 1]+mushsCoords[mushNum]):
+				put_mushroom(mushs[mushMush - 1], mushs[mushMush - 1]+mushsCoords[mushNum])
+				mushs.append(mushs[mushMush - 1]+mushsCoords[mushNum])
+				if distance(mushs[mushMush - 1]+mushsCoords[mushNum], enemyBase) < 10:
+					afterStop -= 1
+				if afterStop == 0:
+					spawnPoint = false
+				elif afterStop < 3:
+					afterStop -= 1
+		elif !mushMush:
+			mushNum += 1
+			if mushNum >= len(baseCoords):
+				mushMush += 1
+			continue;
+		elif mushNum >= len(mushsCoords):
+			mushMush += 1
+			mushNum = -1
+		elif is_ground(mushs[mushMush - 1]+mushsCoords[mushNum]):
 			mushMush += 1
 			mushNum = -1
 		mushNum += 1
