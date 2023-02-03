@@ -58,6 +58,27 @@ func built(coords):
 		$figures.set_cellv(coords, cell - 6)
 
 
+func get_centered(coords):
+	assert (objs.has(coords))
+
+	if objs[coords] is Base:
+		if objs.has(coords + Vector2.DOWN):
+			if !objs.has(coords + Vector2.UP):
+				coords += Vector2.DOWN
+		else:
+			coords += Vector2.UP
+
+		if objs.has(coords + Vector2.RIGHT):
+			if !objs.has(coords + Vector2.LEFT):
+				coords += Vector2.RIGHT
+		else:
+			coords += Vector2.LEFT
+		
+		assert(objs.has(coords) and objs[coords] is Base)
+
+	return coords
+
+
 var selected
 var action
 
@@ -71,10 +92,8 @@ func _unhandled_input(event):
 			var coords = $floor.world_to_map(evpos)
 
 			if objs.has(coords):
-				#TOOD: get cental coords
-				print_debug("already here", objs[coords])
-				selected = coords
-				$HUD.show_options(objs[coords].abilities)
+				selected = get_centered(coords)
+				$HUD.show_options(objs[selected].abilities)
 				return
 
 			if selected != null and action == BUILD and can_be_built(selected, coords):
@@ -86,7 +105,7 @@ func _unhandled_input(event):
 					graph[selected] = [coords]
 				reversed_graph[coords] = selected
 				clean_action()
-			elif selected != null and action == ATTACK and is_not_enough_gems(5):
+			elif selected != null and action == ATTACK and not is_not_enough_gems(-1):
 				build_roots(selected, coords, 13)
 				clean_action()
 
@@ -95,7 +114,7 @@ func _unhandled_input(event):
 
 	if event is InputEventMouseMotion and selected != null:
 		var evpos = get_global_mouse_position() + delta
-		var coords = $floor.world_to_map(evpos) - Vector2.ONE
+		var coords = $floor.world_to_map(evpos)
 		if action == BUILD:
 			show_build_options(selected, coords)
 		elif action == ATTACK:
@@ -127,12 +146,13 @@ func clean_action():
 
 func show_build_options(origin: Vector2, coords: Vector2, is_attack = false):
 	$tips.clear()
+	coords -= Vector2.ONE
 	
 	if is_attack:
 		$tips.set_cellv(coords, 6)
 		return
 
-	if can_be_built(origin, coords): 
+	if can_be_built(origin, coords + Vector2.ONE): 
 		$tips.set_cellv(coords, 0)
 	else:
 		$tips.set_cellv(coords, 1)
@@ -390,6 +410,7 @@ var isAttack = false
 
 
 func _on_Timer_timeout():
+	return
 	var nowPoint = len(mushs)
 	while nowPoint == len(mushs) && spawnPoint:
 		if mushNum < len(baseCoords) && !mushMush && is_field(base+baseCoords[mushNum]):
