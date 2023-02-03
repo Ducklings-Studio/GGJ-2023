@@ -437,5 +437,7 @@ func cancellate(m_coords: Vector2):
 func clear_root_tale(s: Vector2, f: Vector2):
 	clear_roots(s, f)
 	ruin(f)
-	reversed_graph.erase(f)
-	graph[s].erase(f)
+	if reversed_graph.has(f):
+		reversed_graph.erase(f)
+	if graph.has(s) and graph[s].has(f):
+		graph[s].erase(f)
