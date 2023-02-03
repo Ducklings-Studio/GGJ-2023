@@ -251,17 +251,11 @@ func _on_Timer_timeout():
 	active_bombs()
 	var nowPoint = len(mushs)
 	while nowPoint == len(mushs) && spawnPoint:
-		if mushMush && mushNum < len(mushsCoords):
-			print("Num: ", mushNum, " len: ", len(mushsCoords), " is_gr: ", is_ground(mushs[mushMush - 1]+mushsCoords[mushNum]))
 		if mushNum < len(baseCoords) && !mushMush && is_ground(base+baseCoords[mushNum]):
 			if can_be_built(base, base+baseCoords[mushNum]):
-				print(base, " ", base+baseCoords[mushNum])
 				put_mushroom(base, base+baseCoords[mushNum])
 				mushs.append(base+baseCoords[mushNum])
 		elif mushMush && mushNum < len(mushsCoords) && is_ground(mushs[mushMush - 1]+mushsCoords[mushNum]):
-			if (mushs[mushMush - 1] == Vector2(-7, 25)):
-				print(mushNum, ": ", mushs[mushMush - 1], " -> ", mushs[mushMush - 1]+mushsCoords[mushNum])
-				print(is_ground(Vector2(-11, 25)))
 			if can_be_built(mushs[mushMush - 1], mushs[mushMush - 1]+mushsCoords[mushNum]):
 				put_mushroom(mushs[mushMush - 1], mushs[mushMush - 1]+mushsCoords[mushNum])
 				mushs.append(mushs[mushMush - 1]+mushsCoords[mushNum])
