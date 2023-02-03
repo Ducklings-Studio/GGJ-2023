@@ -141,8 +141,6 @@ func can_be_built(origin: Vector2, coords: Vector2):
 			return false
 		if o == origin and value > max_d:
 			return false
-		if !$"../fog".get_cellv(coords):
-			return false
 	return true
 
 
