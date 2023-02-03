@@ -29,15 +29,28 @@ margin_bottom = 277.0
 color = Color( 0, 0, 0, 0.470588 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 87.0
-margin_top = 184.0
-margin_right = 936.0
-margin_bottom = 556.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -424.5
+margin_top = -275.0
+margin_right = 424.5
+margin_bottom = 275.0
 custom_constants/separation = 30
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer"]
 margin_right = 849.0
-margin_bottom = 31.0
+margin_bottom = 123.0
+theme = ExtResource( 2 )
+text = "All enemy mycelium 
+was defeated"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 153.0
+margin_right = 849.0
+margin_bottom = 184.0
 custom_constants/separation = 41
 alignment = 1
 
@@ -56,9 +69,9 @@ theme = ExtResource( 3 )
 text = "Easy"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 61.0
+margin_top = 214.0
 margin_right = 849.0
-margin_bottom = 92.0
+margin_bottom = 245.0
 custom_constants/separation = 41
 alignment = 1
 
@@ -77,9 +90,9 @@ theme = ExtResource( 3 )
 text = "00:00"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 122.0
+margin_top = 275.0
 margin_right = 849.0
-margin_bottom = 153.0
+margin_bottom = 306.0
 custom_constants/separation = 41
 alignment = 1
 
@@ -98,9 +111,9 @@ theme = ExtResource( 3 )
 text = "100"
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 183.0
+margin_top = 336.0
 margin_right = 849.0
-margin_bottom = 214.0
+margin_bottom = 367.0
 custom_constants/separation = 41
 alignment = 1
 
@@ -120,9 +133,9 @@ theme = ExtResource( 3 )
 text = "100"
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 244.0
+margin_top = 397.0
 margin_right = 849.0
-margin_bottom = 275.0
+margin_bottom = 428.0
 custom_constants/separation = 41
 alignment = 1
 
@@ -142,9 +155,9 @@ theme = ExtResource( 3 )
 text = "100"
 
 [node name="HBoxContainer6" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 305.0
+margin_top = 458.0
 margin_right = 849.0
-margin_bottom = 336.0
+margin_bottom = 489.0
 custom_constants/separation = 41
 alignment = 1
 
@@ -164,26 +177,12 @@ theme = ExtResource( 3 )
 text = "100"
 
 [node name="MineralsSpend" type="Label" parent="VBoxContainer"]
-margin_top = 366.0
+margin_top = 519.0
 margin_right = 849.0
-margin_bottom = 397.0
+margin_bottom = 550.0
 theme = ExtResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 0.392157 )
 text = "Press any button"
-align = 1
-
-[node name="Label" type="Label" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -261.0
-margin_top = -249.0
-margin_right = 262.0
-margin_bottom = 62.0
-theme = ExtResource( 2 )
-text = "All enemy mycelium 
-was defeated"
 align = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
