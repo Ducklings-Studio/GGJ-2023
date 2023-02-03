@@ -26,14 +26,16 @@ enum {
 var gems = 0
 var graph := {}
 var reversed_graph := {}
+var roots_dict := {}
 
 #Base for duelity
 const BaseX = -1;
 const BaseY = -24;
 
+
 func _ready():
 	set_fogs()
-	add_gems(450)
+	add_gems(100500)
 	
 	build(Vector2(5, 0), 0)
 	#build(Vector2(BaseX, -BaseY), 0)
@@ -116,8 +118,8 @@ func _unhandled_input(event):
 					graph[selected] = [coords]
 				reversed_graph[coords] = selected
 				clean_action()
-			elif action == ATTACK and is_enough_gems(-1) and cat_attack(selected, coords):
-				build_roots(selected, coords, 13)
+			elif action == ATTACK and is_enough_gems(-1) and can_attack(selected, coords):
+				attack(selected, coords)
 				clean_action()
 
 		elif InputMap.event_is_action(event, "ui_right_mouse_button"):
@@ -235,7 +237,6 @@ func build(coords: Vector2, class_id: int):
 		add_gems(-mushroom.cost)
 	
 	objs[coords] = mushroom
-	$floor.set_cellv(coords, 4)
 	
 	if class_id in range(1,5):
 		$figures.set_cellv(coords, class_id + 6)
@@ -245,7 +246,6 @@ func build(coords: Vector2, class_id: int):
 	removeFog(class_id, coords,
 			X_FOG_START, X_FOG_END, 
 			Y_FOG_START, Y_FOG_END);
-
 	
 	if class_id == 0:
 		for i in range(-1, 2):
@@ -259,12 +259,16 @@ func build(coords: Vector2, class_id: int):
 
 
 func ruin(coords: Vector2):
+	if !objs.has(coords):
+		return
 	var mushroom = objs[coords]
 	if mushroom == null: return
 
 	for i in range(-1, 2):
 		for j in range(-1, 2):
 			objs.erase(coords + Vector2(i,j))
+			#graph.erase(coords + Vector2(i,j))
+			#reversed_graph.erase(coords + Vector2(i,j))
 
 	$figures.set_cellv(coords, -1)
 	$figures.remove_child(mushroom)
@@ -309,19 +313,42 @@ func roots_trajectory(s: Vector2, f: Vector2):
 			if s.y == f.y: break
 			error += delta.x
 			s.y += sy
-
+	
 	result.pop_front()
 	return result
+
+
+func clear_roots(s: Vector2, f: Vector2):
+	var roots = roots_trajectory(s, f)
+	
+	for r in roots:
+		roots_dict.erase(r)
+		$floor.set_cellv(r, 0)
 
 
 func build_roots(s: Vector2, f: Vector2, type_id: int):
 	var roots = roots_trajectory(s, f)
 	
 	for r in roots:
+		roots_dict[r] = [s,f]
 		$floor.set_cellv(r, type_id)
 
 
-func cat_attack(s: Vector2, f: Vector2):
+func attack(s: Vector2, f: Vector2):
+	var roots = roots_trajectory(s, f)
+	
+	for r in roots:
+		if roots_dict.has(r) and roots_dict[r][1] != s:
+			eliminate_without_first(roots_dict[r][1])
+			clear_root_tale(roots_dict[r][0], roots_dict[r][1])
+	
+	if reversed_graph.has(s):
+		build_roots(s, f, 13)
+	else:
+		clear_roots(s, f)
+
+
+func can_attack(s: Vector2, f: Vector2):
 	if s == null or f == null:
 		return false
 	
@@ -363,7 +390,8 @@ func explose(coords: Vector2):
 			var tmp_coords = coords + Vector2(i,j)
 			if objs.has(tmp_coords):
 				objs.erase(tmp_coords)
-
+			attack(coords, coords + Vector2(i,j))
+			
 			$figures.set_cellv(tmp_coords, -1)
 			if $floor.get_cellv(tmp_coords) != 12:
 				$floor.set_cellv(tmp_coords, 0)
@@ -380,4 +408,35 @@ func is_not_attackable(coords: Vector2):
 
 
 func is_ground(coords: Vector2):
-	return $floor.get_cellv(coords) in [0,1,3,4,6,7,8,9,11]
+	return $floor.get_cellv(coords) in [0,1,3,4,6,7,8,9,11,13]
+
+
+func eliminate_without_first(m_coords: Vector2):
+	if !graph.has(m_coords):
+		reversed_graph.erase(m_coords)
+		return
+	for c in graph[m_coords]:
+		clear_roots(m_coords, c)
+		cancellate(c)
+	reversed_graph.erase(m_coords)
+	graph.erase(m_coords)
+
+
+func cancellate(m_coords: Vector2):
+	if !graph.has(m_coords):
+		reversed_graph.erase(m_coords)
+		ruin(m_coords)
+		return
+	for c in graph[m_coords]:
+		clear_roots(m_coords, c)
+		cancellate(c)
+	ruin(m_coords)
+	reversed_graph.erase(m_coords)
+	graph.erase(m_coords)
+
+
+func clear_root_tale(s: Vector2, f: Vector2):
+	clear_roots(s, f)
+	ruin(f)
+	reversed_graph.erase(f)
+	graph[s].erase(f)
