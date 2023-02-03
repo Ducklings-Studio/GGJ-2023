@@ -211,10 +211,10 @@ const Y_FOG_START = -6;
 const Y_FOG_END = 6;
 
 #Base mushroom fog review 
-const X_FOG_START_BASE = -15;
-const X_FOG_END_BASE = 15;
-const Y_FOG_START_BASE = -15;
-const Y_FOG_END_BASE = 15;
+const X_FOG_START_BASE = -12;
+const X_FOG_END_BASE = 12;
+const Y_FOG_START_BASE = -12;
+const Y_FOG_END_BASE = 12;
 
 
 func removeFog(class_id: int, coords: Vector2, 
