@@ -224,6 +224,7 @@ func active_bombs():
 		if cell == 2:
 			explose(bombs[i])
 			spawnPoint = true
+			afterStop = 3
 
 
 func select_enemy(mushs, positions):
