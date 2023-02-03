@@ -207,6 +207,20 @@
 12/shape_one_way_margin = 0.0
 12/shapes = [  ]
 12/z_index = 0
+13/name = "TileSet.png 13"
+13/texture = ExtResource( 2 )
+13/tex_offset = Vector2( 0, 0 )
+13/modulate = Color( 1, 1, 1, 1 )
+13/region = Rect2( 32, 32, 16, 16 )
+13/tile_mode = 0
+13/occluder_offset = Vector2( 0, 0 )
+13/navigation_offset = Vector2( 0, 0 )
+13/shape_offset = Vector2( 0, 0 )
+13/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+13/shape_one_way = false
+13/shape_one_way_margin = 0.0
+13/shapes = [  ]
+13/z_index = 0
 
 [sub_resource type="TileSet" id=5]
 0/name = "TileSet.png 0"
@@ -913,6 +927,8 @@ uppercase = true
 [node name="Settings" parent="HUD" instance=ExtResource( 14 )]
 visible = false
 
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="game_started" from="HUD" to="." method="_on_HUD_game_started"]
 [connection signal="game_started" from="HUD" to="HUD/Time" method="_on_HUD_game_started"]
 [connection signal="pressed" from="HUD/Options/MarginContainer/GridContainer/Build" to="HUD" method="_on_Action_pressed" binds= [ 0 ]]
 [connection signal="pressed" from="HUD/Options/MarginContainer/GridContainer/ToBomb" to="HUD" method="_on_Action_pressed" binds= [ 2 ]]
