@@ -63,7 +63,6 @@ func build(coords: Vector2, class_id: int):
 
 func put_mushroom(mushroom: Vector2, coords: Vector2):
 	build(coords, 1)
-	print(mushroom, coords)
 	$"../".build_roots(mushroom, coords, 2)
 
 
@@ -107,9 +106,7 @@ func go_to_enemy(mush: Vector2, base: Vector2):
 		for j in range(min(mush.y, base.y), max(mush.y, base.y)+1):
 			if distance(Vector2(i, j), base) < 2:
 				continue;
-			print_debug(mush, Vector2(i, j))
 			if can_be_built(mush, Vector2(i, j)): #fix can_be_built, doesn't work, or fix my hands
-				print_debug("YES")
 				if bestPosition == null:
 					bestPosition = Vector2(i, j)
 					bestDistance = distance(Vector2(i, j), base)

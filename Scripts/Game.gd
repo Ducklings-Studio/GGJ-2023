@@ -205,10 +205,10 @@ func is_enough_gems(class_id: int):
 
 
 #Simple mushroom fog review
-const X_FOG_START = -6;
-const X_FOG_END = 6;
-const Y_FOG_START = -6;
-const Y_FOG_END = 6;
+const X_FOG_START = -7;
+const X_FOG_END = 7;
+const Y_FOG_START = -7;
+const Y_FOG_END = 7;
 
 #Base mushroom fog review 
 const X_FOG_START_BASE = -12;
