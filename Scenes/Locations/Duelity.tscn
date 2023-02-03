@@ -661,7 +661,8 @@ columns = 3
 [node name="Build" type="TextureButton" parent="HUD/Options/MarginContainer/GridContainer"]
 margin_right = 94.0
 margin_bottom = 93.0
-hint_tooltip = "100"
+hint_tooltip = "Create mushroom: 
+100 minerals"
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -674,7 +675,8 @@ stretch_mode = 3
 margin_left = 99.0
 margin_right = 192.0
 margin_bottom = 93.0
-hint_tooltip = "Price: 500"
+hint_tooltip = "Evolve to bomb: 
+500 minerals"
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -687,7 +689,8 @@ stretch_mode = 3
 margin_left = 197.0
 margin_right = 290.0
 margin_bottom = 93.0
-hint_tooltip = "Price: 200"
+hint_tooltip = "Evolve to protect mushroom: 
+200 minerals"
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -700,7 +703,8 @@ stretch_mode = 3
 margin_top = 98.0
 margin_right = 94.0
 margin_bottom = 190.0
-hint_tooltip = "Price: 300"
+hint_tooltip = "Evolve to strike mushroom: 
+300 minerals"
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -714,7 +718,7 @@ margin_left = 99.0
 margin_top = 98.0
 margin_right = 192.0
 margin_bottom = 190.0
-hint_tooltip = "Price: 100"
+hint_tooltip = "Attack: 100 minerals"
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
