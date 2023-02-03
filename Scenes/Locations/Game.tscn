@@ -935,7 +935,7 @@ uppercase = true
 [node name="Settings" parent="HUD" instance=ExtResource( 14 )]
 visible = false
 
-[connection signal="game_started" from="HUD" to="." method="_on_HUD_game_started"]
+[connection signal="game_started" from="HUD" to="Camera2D" method="_on_HUD_game_started"]
 [connection signal="game_started" from="HUD" to="HUD/Time" method="_on_HUD_game_started"]
 [connection signal="pressed" from="HUD/Options/MarginContainer/GridContainer/Build" to="HUD" method="_on_Action_pressed" binds= [ 0 ]]
 [connection signal="pressed" from="HUD/Options/MarginContainer/GridContainer/ToBomb" to="HUD" method="_on_Action_pressed" binds= [ 2 ]]

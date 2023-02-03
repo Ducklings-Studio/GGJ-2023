@@ -22,7 +22,7 @@ const labels = [
 	"Start!",
 ]
 
-onready var game = get_parent()
+onready var game = $"../Camera2D"
 
 
 func _ready():

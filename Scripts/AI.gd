@@ -249,7 +249,7 @@ func plant_bomb(mush: Vector2, base: Vector2):
 
 
 func active_bombs():
-	print(bombs)
+	#print(bombs)
 	for i in range(0, len(bombs)):
 		var cell = $"../figures".get_cellv(bombs[i])
 		if cell == 2:
@@ -329,7 +329,7 @@ func _on_Timer_timeout():
 			mushNum = -1
 		mushNum += 1
 	if !spawnPoint && !defMushs:
-		print("def")
+		#print("def")
 		defMushs = get_def(mushs)
 		defCounter = 100
 		isAttack = true

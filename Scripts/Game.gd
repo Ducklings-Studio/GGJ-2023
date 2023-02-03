@@ -1,9 +1,5 @@
 extends Node2D
 
-export var delta = Vector2(2.5, 2.5) 
-
-var is_blocking = true
-
 var new_endgame_parameter := {
 	"ModeName": Global.get_endgame_parameter().ModeName,
 	"EndGameText": "",
@@ -27,54 +23,13 @@ var classes := [
 var effects := [
 	preload("res://Scenes/Explosion.tscn"),
 ]
-enum {
-	BUILD, 
-	E_ATTACK, 
-	E_BOMB, 
-	E_DEFENDER, 
-	ATTACK, 
-	EXPLODE,
-}
-var gems = 0
 var graph := {}
 var reversed_graph := {}
 var roots_dict := {}
 
-#Base for duelity
-const BaseX = -1;
-const BaseY = -24;
-
 
 func _ready():
-	set_fogs()
-	
-	add_gems(450)
-	
-	build(Vector2(BaseX, BaseY), 0)
-	
-	clean_action()
 	AudioManager.set_music("res://Assets/Audio/MatchSound.ogg")
-
-
-func _on_HUD_game_started():
-	is_blocking = false
-
-
-func add_gems(amount):
-	gems += amount
-	$HUD.set_gems(gems)
-
-
-const START_X = -70;
-const END_X = 70;
-const START_Y = -70;
-const END_Y = 70;
-
-
-func set_fogs():
-	for i in range(START_X, END_X):
-			for j in range(START_Y, END_Y):
-				$fog.set_cellv(Vector2(i, j), 0)
 
 
 func built(coords):
@@ -104,116 +59,8 @@ func get_centered(coords):
 	return coords
 
 
-var selected
-var action
-
-func _unhandled_input(event):
-	if event is InputEventMouseButton:
-		if !event.is_pressed():
-			return
-
-		if InputMap.event_is_action(event, "ui_left_mouse_button"):
-			var evpos = get_global_mouse_position() + delta
-			var coords = $floor.world_to_map(evpos)
-
-			if objs.has(coords):
-				selected = get_centered(coords)
-				$HUD.show_options(objs[selected].abilities)
-				return
-
-			if action == BUILD and can_be_built(selected, coords):
-				build(coords, 1)
-				build_roots(selected, coords, 2)
-				if graph.has(selected):
-					graph[selected].push_back(coords)
-				else:
-					graph[selected] = [coords]
-				reversed_graph[coords] = selected
-				clean_action()
-			elif action == ATTACK and is_enough_gems(-1) and can_attack(selected, coords):
-				attack(selected, coords)
-				clean_action()
-
-		elif InputMap.event_is_action(event, "ui_right_mouse_button"):
-			clean_action()
-
-	if event is InputEventMouseMotion and selected != null:
-		var evpos = get_global_mouse_position() + delta
-		var coords = $floor.world_to_map(evpos)
-		if action == BUILD:
-			show_build_options(selected, coords)
-		elif action == ATTACK:
-			show_build_options(selected, coords, true)
-
-	if event.is_pressed() or selected == null:
-			return
-
-	if InputMap.event_is_action(event, "build") and "min_build_radius" in objs[selected]:
-		process_action(BUILD)
-		return
-	if InputMap.event_is_action(event, "attack") and objs[selected] is Attacker:
-		process_action(ATTACK)
-		return
-	if InputMap.event_is_action(event, "explode") and objs[selected] is Bomber:
-		process_action(EXPLODE)
-		return
-	
-	if not objs[selected] is Standart:
-		return
-	
-	if InputMap.event_is_action(event, "evolve_attack"):
-		process_action(E_ATTACK)
-		return
-	if InputMap.event_is_action(event, "evolve_bomb"):
-		process_action(E_BOMB)
-		return
-	if InputMap.event_is_action(event, "evolve_defender"):
-		process_action(E_DEFENDER)
-		return
-
-
-func process_action(action_id):
-	action = action_id
-
-	if action == E_ATTACK:
-		if is_enough_gems(4):
-			evolve(selected, 4)
-	elif action == E_BOMB:
-		if is_enough_gems(2):
-			evolve(selected, 2)
-	elif action == E_DEFENDER:
-		if is_enough_gems(3):
-			evolve(selected, 3)
-	elif action == EXPLODE:
-		explode(selected)
-	else:
-		return
-	clean_action()
-
-
-func clean_action():
-	selected = null
-	action = null
-	$HUD.show_options([])
-	$tips.clear()
-
-
-func show_build_options(origin: Vector2, coords: Vector2, is_attack = false):
-	$tips.clear()
-	coords -= Vector2.ONE
-	
-	if is_attack:
-		$tips.set_cellv(coords, 6)
-		return
-
-	if can_be_built(origin, coords + Vector2.ONE): 
-		$tips.set_cellv(coords, 0)
-	else:
-		$tips.set_cellv(coords, 1)
-
-
-func can_be_built(origin: Vector2, coords: Vector2):
-	if not (is_enough_gems(1) and can_build_roots(origin, coords)):
+func can_be_built(origin: Vector2, coords: Vector2, gems: int):
+	if not (is_enough_gems(1, gems, Global.BUILD) and can_build_roots(origin, coords)):
 		return false
 
 	var origins = objs.keys()
@@ -232,68 +79,34 @@ func can_be_built(origin: Vector2, coords: Vector2):
 			return false
 		if o == origin and value > max_d:
 			return false
-		if !$fog.get_cellv(coords):
-			return false
 	return true
 
 
-func is_enough_gems(class_id: int):
-	if action in [BUILD, E_ATTACK, E_BOMB, E_DEFENDER]:
+func is_enough_gems(class_id: int, gems: int, action):
+	if action in [Global.BUILD, Global.E_ATTACK, Global.E_BOMB, Global.E_DEFENDER]:
 		return classes[class_id].instance().cost <= gems
-	if action == ATTACK:
+	if action == Global.ATTACK:
 		return classes[4].instance().attack_price <= gems
-
-
-#Simple mushroom fog review
-const X_FOG_START = -7;
-const X_FOG_END = 7;
-const Y_FOG_START = -7;
-const Y_FOG_END = 7;
-
-#Base mushroom fog review 
-const X_FOG_START_BASE = -12;
-const X_FOG_END_BASE = 12;
-const Y_FOG_START_BASE = -12;
-const Y_FOG_END_BASE = 12;
-
-
-func removeFog(class_id: int, coords: Vector2, 
-				xStart: int, xEnd: int, 
-				yStart: int, yEnd: int):
-	for i in range(xStart, xEnd): 
-		for j in range(yStart, yEnd):
-			$fog.set_cellv(coords + Vector2(i,j), -1);
 
 
 func build(coords: Vector2, class_id: int):
 	var mushroom = classes[class_id].instance()
-	if mushroom.has_method("_on_Miner_timeout"):
-		mushroom.connect("res_mined", self, "add_gems")
 	mushroom.connect("built", self, "built", [coords])
-	
-	if class_id != 0:
-		add_gems(-mushroom.cost)
-	
+
 	objs[coords] = mushroom
 	
 	if class_id in range(1,5):
 		$figures.set_cellv(coords, class_id + 6)
 	else:
 		$figures.set_cellv(coords, class_id)
-		
-	removeFog(class_id, coords,
-			X_FOG_START, X_FOG_END, 
-			Y_FOG_START, Y_FOG_END);
 	
 	if class_id == 0:
 		for i in range(-1, 2):
 			for j in range(-1, 2):
 				objs[coords + Vector2(i,j)] = mushroom
-		removeFog(class_id, coords,
-				X_FOG_START_BASE, X_FOG_END_BASE, 
-				Y_FOG_START_BASE, Y_FOG_END_BASE);
 
 	$figures.add_child(mushroom)
+	return mushroom
 
 
 func ruin(coords: Vector2):
@@ -314,18 +127,19 @@ func ruin(coords: Vector2):
 
 func evolve(coords: Vector2, class_id: int):
 	ruin(coords)
-	build(coords, class_id)
+	var mushroom = build(coords, class_id)
 
 	if class_id != 3:
-		return
+		return mushroom
 	var source = reversed_graph[coords]
 	if objs.has(source) and objs[source] is Defender:
 		build_roots(source, coords, 10)
 	if !graph.has(coords):
-		return
+		return mushroom
 	for i in graph[coords]:
 		if objs.has(i) and objs[i] is Defender:
 			build_roots(coords, i, 10)
+	return mushroom
 
 
 func roots_trajectory(s: Vector2, f: Vector2):

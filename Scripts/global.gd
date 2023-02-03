@@ -11,6 +11,21 @@ var endgame_parameters := {
 	"BgPicture": "",
 	"BgAudio": ""
 }
+enum {
+	BUILD, 
+	E_ATTACK, 
+	E_BOMB, 
+	E_DEFENDER, 
+	ATTACK, 
+	EXPLODE,
+}
+var classes := [
+	preload("res://Scenes/Mushrooms/Base.tscn"),
+	preload("res://Scenes/Mushrooms/Standart.tscn"),
+	preload("res://Scenes/Mushrooms/Bomber.tscn"),
+	preload("res://Scenes/Mushrooms/Defender.tscn"),
+	preload("res://Scenes/Mushrooms/Attacker.tscn"),
+]
 
 
 func set_endgame_parameter(new_endgame_parameter):
