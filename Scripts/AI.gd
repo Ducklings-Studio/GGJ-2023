@@ -82,7 +82,7 @@ func distance(one: Vector2, two: Vector2):
 
 func get_def(mushs):
 	for i in range(0, len(mushs)):
-		if distance(mushs[i], enemyBase) < 10 && $"../floor".get_cellv(mushs[i]) == 1:
+		if distance(mushs[i], enemyBase) < 12 && $"../floor".get_cellv(mushs[i]) == 1:
 			evolve(mushs[i], 4) # todo: change to def
 
 var bombs = []
@@ -223,7 +223,20 @@ func active_bombs():
 		var cell = $"../figures".get_cellv(bombs[i])
 		if cell == 2:
 			explose(bombs[i])
-	
+			spawnPoint = true
+
+
+func select_enemy(mushs, positions):
+	if len(playerPositions) && len(mushs):
+		var nearest = distance(positions[0], mushs[0])
+		var nearestBase = positions[0]
+		for i in range(0, len(positions)):
+			for j in range(0, len(mushs)):
+				if distance(mushs[j], positions[i]) < nearest:
+					nearest = distance(mushs[j], positions[i])
+					nearestBase = positions[i]
+		return nearestBase
+	return null
 
 var base = Vector2(AI_BASE_COORD_X, AI_BASE_COORD_Y)
 var baseCoords := [Vector2(6, 6), Vector2(6, 3), 
@@ -245,10 +258,12 @@ var afterStop = 3
 var defMushs = false
 var defCounter = 100
 var isAttack = false
+var playerPositions = []
 
 
 func _on_Timer_timeout():
 	active_bombs()
+	playerPositions = $"../".objs.keys().slice(0, 0) + $"../".objs.keys().slice(9, len($"../".objs.keys()))
 	var nowPoint = len(mushs)
 	while nowPoint == len(mushs) && spawnPoint:
 		if mushNum < len(baseCoords) && !mushMush && is_ground(base+baseCoords[mushNum]):
@@ -259,6 +274,9 @@ func _on_Timer_timeout():
 			if can_be_built(mushs[mushMush - 1], mushs[mushMush - 1]+mushsCoords[mushNum]):
 				put_mushroom(mushs[mushMush - 1], mushs[mushMush - 1]+mushsCoords[mushNum])
 				mushs.append(mushs[mushMush - 1]+mushsCoords[mushNum])
+				var checkBase = select_enemy(mushs, playerPositions)
+				if checkBase:
+					enemyBase = checkBase
 				if distance(mushs[mushMush - 1]+mushsCoords[mushNum], enemyBase) < 10:
 					afterStop -= 1
 				if afterStop == 0:
