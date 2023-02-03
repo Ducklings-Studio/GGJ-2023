@@ -12,6 +12,8 @@ var new_endgame_parameter := {
 	"MushroomsLost": 0,
 	"MineralsMine": 0,
 	"MineralsSpend": 0,
+	"BgPicture": "",
+	"BgAudio": ""
 }
 
 var objs = {}
@@ -460,8 +462,8 @@ func clear_root_tale(s: Vector2, f: Vector2):
 #   ENDGAME   #
 ###############
 
-#func _input(event):
-	#show_end_game(0);
+func _input(event):
+	show_end_game(1);
 	
 func show_end_game(total: int):
 	get_tree().change_scene("res://Scenes/UI/EndGame.tscn");
@@ -469,9 +471,9 @@ func show_end_game(total: int):
 	if total == 1:
 		new_endgame_parameter.EndGameText = "Your mycelium \nwas defeated";
 		new_endgame_parameter.BgPicture = "LoseBg.png";
-		new_endgame_parameter.BgPicture = "LoseAudio.ogg";
+		new_endgame_parameter.BgAudio = "LoseAudio.ogg";
 	else:
 		new_endgame_parameter.EndGameText = "All enemy mycelium \nwas defeated";
 		new_endgame_parameter.BgPicture = "WinBg.png";
-		new_endgame_parameter.BgPicture = "WinAudio.ogg";
+		new_endgame_parameter.BgAudio = "WinAudio.ogg";
 	Global.set_endgame_parameter(new_endgame_parameter)
