@@ -31,6 +31,7 @@ func _ready():
 	set_fogs()
 	add_gems(450)
 	build(Vector2.RIGHT * 5, 0)
+	build(Vector2(25, -5), 0)
 	clean_action()
 	AudioManager.set_music("res://Assets/Audio/MatchSound.ogg")
 
@@ -289,8 +290,82 @@ func put_mushroom(mushroom: Vector2, coords: Vector2):
 
 
 func is_field(coords: Vector2):
-	return $floor.get_cellv(coords) != 8 # todo: correct it
+	return $floor.get_cellv(coords) != 8 # todo: correct it, change to water (not playground)
 
+
+func distance(one: Vector2, two: Vector2):
+	return sqrt((one.x - two.x) * (one.x - two.x) + (one.y - two.y) * (one.y - two.y))
+
+
+func get_def(mushs):
+	for i in range(0, len(mushs)):
+		if distance(mushs[i], enemyBase) < 10:
+			evolve(mushs[i], 4) # todo: change to def
+
+
+func bombs_attack(mushs):
+	var nearestMush
+	var neatestDist
+	if len(mushs):
+		nearestMush = mushs[0]
+		neatestDist = distance(mushs[0], enemyBase)
+	else:
+		nearestMush = base
+		neatestDist = distance(base, enemyBase)
+	for i in range(1, len(mushs)):
+		if distance(mushs[i], enemyBase) < neatestDist:
+			nearestMush = mushs[i]
+			neatestDist = distance(mushs[i], enemyBase)
+	if neatestDist > 6:
+		nearestMush = go_to_enemy(nearestMush, enemyBase)
+		nearestMush = go_to_enemy(nearestMush, enemyBase)
+	else:
+		plant_bomb(nearestMush, enemyBase)
+
+
+func go_to_enemy(mush: Vector2, base: Vector2):
+	var bestPosition = null
+	var bestDistance = null
+	for i in range(min(mush.x, base.x), max(mush.x, base.x)+1):
+		for j in range(min(mush.y, base.y), max(mush.y, base.y)+1):
+			if distance(Vector2(i, j), base) < 2:
+				continue;
+			print_debug(mush, Vector2(i, j))
+			if can_be_built(mush, Vector2(i, j)): #fix can_be_built, doesn't work, or fix my hands
+				print_debug("YES")
+				if bestPosition == null:
+					bestPosition = Vector2(i, j)
+					bestDistance = distance(Vector2(i, j), base)
+				else:
+					if distance(Vector2(i, j), base) < bestDistance:
+						bestPosition = Vector2(i, j)
+						bestDistance = distance(Vector2(i, j), base)
+	if bestPosition != null:
+		put_mushroom(mush, bestPosition)
+		mushs.append(bestPosition)
+		return bestPosition
+	return mush
+
+
+func plant_bomb(mush: Vector2, base: Vector2):
+	var bestPosition = null
+	var bestDistance = null
+	for i in range(min(mush.x, base.x), max(mush.x, base.x)+1):
+		for j in range(min(mush.y, base.y), max(mush.y, base.y)+1):
+			if distance(Vector2(i, j), base) < 2:
+				continue;
+			if can_be_built(mush, Vector2(i, j)):
+				if bestPosition == null:
+					bestPosition = Vector2(i, j)
+					bestDistance = distance(Vector2(i, j), base)
+				else:
+					if distance(Vector2(i, j), base) < bestDistance:
+						bestPosition = Vector2(i, j)
+						bestDistance = distance(Vector2(i, j), base)
+	if bestPosition != null:
+		put_mushroom(mush, bestPosition)
+		mushs.append(bestPosition)
+		evolve(bestPosition, 2)
 
 var base = Vector2(5, 0)
 var baseCoords := [Vector2(6, 6), Vector2(6, 3), 
@@ -305,10 +380,18 @@ var mushNum = 0
 var mushMush = 0
 var mushsCoords := [Vector2(1, 4), Vector2(4, 0), Vector2(3, -2),
 	Vector2(0, -3), Vector2(-3, -3), Vector2(-3, 0), Vector2(-8, -3)]
+var enemyMush = []
+var enemyBase = Vector2(25, -5)
+var spawnPoint = true
+var afterStop = 3
+var defMushs = false
+var defCounter = 100
+var isAttack = false
+
 
 func _on_Timer_timeout():
 	var nowPoint = len(mushs)
-	while nowPoint == len(mushs):
+	while nowPoint == len(mushs) && spawnPoint:
 		if mushNum < len(baseCoords) && !mushMush && is_field(base+baseCoords[mushNum]):
 			put_mushroom(base, base+baseCoords[mushNum])
 			mushs.append(base+baseCoords[mushNum])
@@ -316,7 +399,25 @@ func _on_Timer_timeout():
 				if can_be_built(mushs[mushMush - 1], mushs[mushMush - 1]+mushsCoords[mushNum]):
 					put_mushroom(mushs[mushMush - 1], mushs[mushMush - 1]+mushsCoords[mushNum])
 					mushs.append(mushs[mushMush - 1]+mushsCoords[mushNum])
+					if distance(mushs[mushMush - 1]+mushsCoords[mushNum], enemyBase) < 10:
+						afterStop -= 1
+					if afterStop == 0:
+						spawnPoint = false
+					elif afterStop < 3:
+						afterStop -= 1
 		else:
 			mushMush += 1
 			mushNum = -1
 		mushNum += 1
+	if !spawnPoint && !defMushs:
+		get_def(mushs)
+		defCounter = 100
+		defMushs = true
+		isAttack = true
+	defCounter -= 1
+	if defCounter == 0:
+		get_def(mushs)
+		defCounter = 100
+	if isAttack:
+		bombs_attack(mushs)
+		isAttack = false
