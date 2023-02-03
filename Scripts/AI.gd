@@ -17,7 +17,7 @@ enum {
 	E_BOMB, 
 	E_DEFENDER, 
 	ATTACK, 
-	EXPLOSE,
+	EXPLODE,
 }
 var gemsAI = 0
 var graph := {}
@@ -84,6 +84,8 @@ func get_def(mushs):
 	for i in range(0, len(mushs)):
 		if distance(mushs[i], enemyBase) < 12 && $"../floor".get_cellv(mushs[i]) == 1:
 			evolve(mushs[i], 4) # todo: change to def
+			return true
+	return false
 
 var bombs = []
 
@@ -102,7 +104,12 @@ func bombs_attack(mushs):
 			neatestDist = distance(mushs[i], enemyBase)
 	while neatestDist > 12:
 		nearestMush = go_to_enemy(nearestMush, enemyBase)
-	bombs.append(plant_bomb(nearestMush, enemyBase))
+	var newBomb = plant_bomb(nearestMush, enemyBase)
+	if newBomb && !bombs.has(nearestMush):
+		bombs.append(newBomb)
+	if !newBomb && !bombs.has(nearestMush):
+		evolve(nearestMush, 2)
+		bombs.append(nearestMush)
 
 
 func go_to_enemy(mush: Vector2, base: Vector2):
@@ -175,7 +182,7 @@ func evolve(coords: Vector2, class_id: int):
 			$"../".build_roots(coords, i, 10)
 
 
-func explose(coords: Vector2):
+func explode(coords: Vector2):
 	var effect = effects[0].instance()
 	effect.position = $"../figures".map_to_world(coords)
 	$"../figures".add_child(effect)
@@ -191,8 +198,25 @@ func explose(coords: Vector2):
 			var tmp_coords = coords + Vector2(i,j)
 			if objs.has(tmp_coords):
 				objs.erase(tmp_coords)
+			attack(coords, coords + Vector2(i,j))
+			
 			$"../figures".set_cellv(tmp_coords, -1)
-			$"../floor".set_cellv(tmp_coords, 0)
+			if $"../floor".get_cellv(tmp_coords) != 12:
+				$"../floor".set_cellv(tmp_coords, 0)
+
+
+func attack(s: Vector2, f: Vector2):
+	var roots = $"../".roots_trajectory(s, f)
+	
+	for r in roots:
+		if $"../".roots_dict.has(r) and $"../".roots_dict[r][1] != s:
+			$"../".eliminate_without_first($"../".roots_dict[r][1])
+			$"../".clear_root_tale($"../".roots_dict[r][0], $"../".roots_dict[r][1])
+	
+	if $"../".reversed_graph.has(s):
+		$"../".build_roots(s, f, 13)
+	else:
+		$"../".clear_roots(s, f)
 
 
 func explosion_ended(timer: Timer, effect):
@@ -225,10 +249,11 @@ func plant_bomb(mush: Vector2, base: Vector2):
 
 
 func active_bombs():
+	print(bombs)
 	for i in range(0, len(bombs)):
 		var cell = $"../figures".get_cellv(bombs[i])
 		if cell == 2:
-			explose(bombs[i])
+			explode(bombs[i])
 			spawnPoint = true
 			afterStop = 3
 
@@ -288,6 +313,7 @@ func _on_Timer_timeout():
 					afterStop -= 1
 				if afterStop == 0:
 					spawnPoint = false
+					defMushs = false
 				elif afterStop < 3:
 					afterStop -= 1
 		elif !mushMush:
@@ -303,13 +329,13 @@ func _on_Timer_timeout():
 			mushNum = -1
 		mushNum += 1
 	if !spawnPoint && !defMushs:
-		get_def(mushs)
+		print("def")
+		defMushs = get_def(mushs)
 		defCounter = 100
-		defMushs = true
 		isAttack = true
 	defCounter -= 1
 	if defCounter == 0:
-		get_def(mushs)
+		defMushs = get_def(mushs)
 		defCounter = 100
 	if isAttack:
 		bombs_attack(mushs)
