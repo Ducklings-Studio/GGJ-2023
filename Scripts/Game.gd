@@ -50,6 +50,7 @@ const END_X = 70;
 const START_Y = -70;
 const END_Y = 70;
 
+
 func set_fogs():
 	for i in range(START_X, END_X):
 			for j in range(START_Y, END_Y):
@@ -100,7 +101,7 @@ func _unhandled_input(event):
 				$HUD.show_options(objs[selected].abilities)
 				return
 
-			if selected != null and action == BUILD and can_be_built(selected, coords):
+			if action == BUILD and can_be_built(selected, coords):
 				build(coords, 1)
 				build_roots(selected, coords, 2)
 				if graph.has(selected):
@@ -109,7 +110,7 @@ func _unhandled_input(event):
 					graph[selected] = [coords]
 				reversed_graph[coords] = selected
 				clean_action()
-			elif selected != null and action == ATTACK and not is_not_enough_gems(-1):
+			elif action == ATTACK and not is_not_enough_gems(-1) and can_build_roots(selected, coords):
 				build_roots(selected, coords, 13)
 				clean_action()
 
@@ -163,7 +164,7 @@ func show_build_options(origin: Vector2, coords: Vector2, is_attack = false):
 
 
 func can_be_built(origin: Vector2, coords: Vector2):
-	if is_not_enough_gems(1):
+	if is_not_enough_gems(1) or not can_build_roots(origin, coords):
 		return false
 
 	var origins = objs.keys()
@@ -258,7 +259,9 @@ func evolve(coords: Vector2, class_id: int):
 			build_roots(coords, i, 10)
 
 
-func build_roots(s: Vector2, f: Vector2, type_id: int):
+func roots_trajectory(s: Vector2, f: Vector2):
+	var result := []
+
 	var delta = (f - s).abs()
 	delta.y *= -1
 	var sx = -1
@@ -268,7 +271,7 @@ func build_roots(s: Vector2, f: Vector2, type_id: int):
 	var error = delta.x + delta.y
 	
 	while true:
-		$floor.set_cellv(s, type_id)
+		result.push_back(s)
 		if s == f: break
 		var e2 = 2*error
 		if e2 >= delta.y:
@@ -279,6 +282,28 @@ func build_roots(s: Vector2, f: Vector2, type_id: int):
 			if s.y == f.y: break
 			error += delta.x
 			s.y += sy
+
+	return result
+
+
+func build_roots(s: Vector2, f: Vector2, type_id: int):
+	var roots = roots_trajectory(s, f)
+	
+	for r in roots:
+		$floor.set_cellv(r, type_id)
+
+
+func can_build_roots(s: Vector2, f: Vector2):
+	if s == null or f == null:
+		return false
+
+	var roots = roots_trajectory(s, f)
+	
+	for r in roots:
+		if not is_ground(r):
+			return false 
+	
+	return true
 
 
 func explose(coords: Vector2):
@@ -297,8 +322,10 @@ func explose(coords: Vector2):
 			var tmp_coords = coords + Vector2(i,j)
 			if objs.has(tmp_coords):
 				objs.erase(tmp_coords)
+
 			$figures.set_cellv(tmp_coords, -1)
-			$floor.set_cellv(tmp_coords, 0)
+			if $floor.get_cellv(tmp_coords) != 12:
+				$floor.set_cellv(tmp_coords, 0)
 
 
 func explosion_ended(timer: Timer, effect):
@@ -307,14 +334,28 @@ func explosion_ended(timer: Timer, effect):
 	$figures.remove_child(effect)
 
 
-func put_mushroom(mushroom: Vector2, coords: Vector2):
-	build(coords, 1)
-	build_roots(mushroom, coords, 2)
-	clean_action()
+func is_ground(coords: Vector2):
+	return $floor.get_cellv(coords) in [0,1,2,3,4,6,7,8,9,11]
 
 
 func is_field(coords: Vector2):
 	return $floor.get_cellv(coords) != 8 # todo: correct it, change to water (not playground)
+
+
+####################################################
+#                 ####       #######
+#                ##  ##        ###
+#               ##    ##       ###
+#              ##########      ###
+#             ##        ##     ###
+#            ##          ##  #######
+####################################################
+
+
+func put_mushroom(mushroom: Vector2, coords: Vector2):
+	build(coords, 1)
+	build_roots(mushroom, coords, 2)
+	clean_action()
 
 
 func distance(one: Vector2, two: Vector2):
