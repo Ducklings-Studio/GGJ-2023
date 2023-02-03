@@ -35,8 +35,8 @@ func _ready():
 	set_fogs()
 	add_gems(450)
 	
-	build(Vector2(5, 0), 0)
-	#build(Vector2(BaseX, -BaseY), 0)
+	#build(Vector2(5, 0), 0)
+	build(Vector2(BaseX, BaseY), 0)
 	
 	clean_action()
 	AudioManager.set_music("res://Assets/Audio/MatchSound.ogg")

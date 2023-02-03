@@ -23,8 +23,14 @@ var gemsAI = 0
 var graph := {}
 var reversed_graph := {}
 
+const ENEMY_BASE_COORD_X = -1;
+const ENEMY_BASE_COORD_Y = -24;
+
+const AI_BASE_COORD_X = -1;
+const AI_BASE_COORD_Y = 24;
+
 func _ready():
-	build(Vector2(25, -5), 0)
+	build(Vector2(AI_BASE_COORD_X, AI_BASE_COORD_Y), 0)
 
 func add_gems(amount):
 	gemsAI += amount
@@ -219,7 +225,7 @@ func active_bombs():
 			explose(bombs[i])
 	
 
-var base = Vector2(25, -5)
+var base = Vector2(AI_BASE_COORD_X, AI_BASE_COORD_Y)
 var baseCoords := [Vector2(6, 6), Vector2(6, 3), 
 	Vector2(6, 0), Vector2(6, -3), Vector2(3, -6), 
 	Vector2(1, -6), Vector2(3, 7), Vector2(0, 6), 
@@ -233,7 +239,7 @@ var mushMush = 0
 var mushsCoords := [Vector2(1, 4), Vector2(4, 0), Vector2(3, -2),
 	Vector2(0, -3), Vector2(-3, -3), Vector2(-3, 0), Vector2(-8, -3)]
 var enemyMush = []
-var enemyBase = Vector2(5, 0)
+var enemyBase = Vector2(ENEMY_BASE_COORD_X, ENEMY_BASE_COORD_Y)
 var spawnPoint = true
 var afterStop = 3
 var defMushs = false
