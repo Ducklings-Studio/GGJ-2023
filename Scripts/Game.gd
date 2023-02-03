@@ -5,6 +5,7 @@ export var delta = Vector2(2.5, 2.5)
 var is_blocking = true
 
 var new_endgame_parameter := {
+	"ModeName": Global.get_endgame_parameter().ModeName,
 	"EndGameText": "",
 	"MatchTimer": "",
 	"Mushrooms": 0,
@@ -457,13 +458,18 @@ func clear_root_tale(s: Vector2, f: Vector2):
 #   ENDGAME   #
 ###############
 
-func _input(event):
-	show_end_game(1);
+#func _input(event):
+	#show_end_game(0);
 	
 func show_end_game(total: int):
 	get_tree().change_scene("res://Scenes/UI/EndGame.tscn");
+	
 	if total == 1:
-		new_endgame_parameter.EndGameText = "Your mycelium was defeated";
+		new_endgame_parameter.EndGameText = "Your mycelium \nwas defeated";
+		new_endgame_parameter.BgPicture = "LoseBg.png";
+		new_endgame_parameter.BgPicture = "LoseAudio.ogg";
 	else:
-		new_endgame_parameter.EndGameText = "All enemy mycelium was defeated";
+		new_endgame_parameter.EndGameText = "All enemy mycelium \nwas defeated";
+		new_endgame_parameter.BgPicture = "WinBg.png";
+		new_endgame_parameter.BgPicture = "WinAudio.ogg";
 	Global.set_endgame_parameter(new_endgame_parameter)

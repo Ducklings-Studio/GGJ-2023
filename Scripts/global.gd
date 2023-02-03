@@ -1,18 +1,24 @@
 extends Node
 
 var endgame_parametrs := {
+	"ModeName": "",
 	"EndGameText": "",
 	"MatchTimer": "",
 	"Mushrooms": 0,
 	"MushroomsLost": 0,
 	"MineralsMine": 0,
-	"MineralsSpend": 0
+	"MineralsSpend": 0,
+	"BgPicture": "",
+	"BgAudio": ""
 }
 
 func set_endgame_parameter(new_endgame_parameter):
 	endgame_parametrs = new_endgame_parameter;
-
-func get_endgame_parametr():
+	
+func set_endgame_mode(new_modeName):
+	endgame_parametrs.ModeName = new_modeName;
+	
+func get_endgame_parameter():
 	return endgame_parametrs;
 
 

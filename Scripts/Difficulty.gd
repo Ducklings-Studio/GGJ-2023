@@ -1,14 +1,17 @@
 extends Control
 
 func _on_Hard_pressed():
+	Global.set_endgame_mode("Hard")
 	get_tree().change_scene("res://Scenes/Locations/Game.tscn")
 
 
 func _on_Normal_pressed():
+	Global.set_endgame_mode("Normal")
 	get_tree().change_scene("res://Scenes/Locations/Chill_Beach.tscn")
 
 
 func _on_Easy_pressed():
+	Global.set_endgame_mode("Easy")
 	get_tree().change_scene("res://Scenes/Locations/Duelity.tscn")
 	
 
