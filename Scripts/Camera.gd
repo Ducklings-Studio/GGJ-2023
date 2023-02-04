@@ -4,7 +4,7 @@ var new_endgame_parameter := {
 	"ModeName": Global.get_endgame_parameter().ModeName,
 	"EndGameText": "",
 	"MatchTimer": "",
-	"Mushrooms": 0,
+	"Mushrooms": 1,
 	"MushroomsLost": 0,
 	"MineralsMine": 0,
 	"MineralsSpend": 0,
@@ -59,6 +59,7 @@ func _ready():
 	set_fogs()
 	add_gems(0)
 
+	get_parent().connect("ended", self, "show_end_game")
 	var base = get_parent().build(BASE_POS, 0, user_id)
 	if base.has_method("_on_Miner_timeout"):
 		base.connect("res_mined", self, "add_gems")
@@ -151,6 +152,7 @@ func _unhandled_input(event):
 				var mushroom = get_parent().build(coords, 1, user_id)
 				if mushroom.has_method("_on_Miner_timeout"):
 					mushroom.connect("res_mined", self, "add_gems")
+				new_endgame_parameter.Mushrooms += 1
 				add_gems(-mushroom.cost)
 				
 				remove_fog(1, coords)
@@ -216,16 +218,18 @@ func process_action(action_id):
 	if action == Global.E_ATTACK:
 		if get_parent().is_enough_gems(4, gems, Global.E_ATTACK):
 			mushroom = get_parent().evolve(selected, 4)
+			new_endgame_parameter.Mushrooms += 1
 	elif action == Global.E_BOMB:
 		if get_parent().is_enough_gems(2, gems, Global.E_BOMB):
 			mushroom = get_parent().evolve(selected, 2)
+			new_endgame_parameter.Mushrooms += 1
 	elif action == Global.E_DEFENDER:
 		if get_parent().is_enough_gems(3, gems, Global.E_DEFENDER):
 			mushroom = get_parent().evolve(selected, 3)
+			new_endgame_parameter.Mushrooms += 1
 	else:
 		return
 
-	print(mushroom)
 	if mushroom != null and mushroom.has_method("_on_Miner_timeout"):
 		mushroom.connect("res_mined", self, "add_gems")
 		add_gems(-mushroom.cost)
@@ -257,15 +261,15 @@ func _on_HUD_game_started():
 	is_blocking = false
 
 
-func show_end_game(total: int):
-	get_tree().change_scene("res://Scenes/UI/EndGame.tscn");
-	new_endgame_parameter.MatchTimer = 23
-	if total == 1:
-		new_endgame_parameter.EndGameText = "Your mycelium \nwas defeated";
-		new_endgame_parameter.BgPicture = "LoseBg.png";
-		new_endgame_parameter.BgAudio = "LoseAudio.ogg";
+func show_end_game(win):
+	get_tree().change_scene("res://Scenes/UI/EndGame.tscn")
+	new_endgame_parameter.MatchTimer = _hud.Get_Time()
+	if win:
+		new_endgame_parameter.EndGameText = "All enemy mycelium \nwas defeated"
+		new_endgame_parameter.BgPicture = "WinBg.png"
+		new_endgame_parameter.BgAudio = "WinAudio.ogg"
 	else:
-		new_endgame_parameter.EndGameText = "All enemy mycelium \nwas defeated";
-		new_endgame_parameter.BgPicture = "WinBg.png";
-		new_endgame_parameter.BgAudio = "WinAudio.ogg";
+		new_endgame_parameter.EndGameText = "Your mycelium \nwas defeated"
+		new_endgame_parameter.BgPicture = "LoseBg.png"
+		new_endgame_parameter.BgAudio = "LoseAudio.ogg"
 	Global.set_endgame_parameter(new_endgame_parameter)

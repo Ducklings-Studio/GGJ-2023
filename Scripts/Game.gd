@@ -15,6 +15,9 @@ var effects := [
 var graph := {}
 var reversed_graph := {}
 var roots_dict := {}
+var bases_count = 0
+
+signal ended(win)
 
 
 func _ready():
@@ -92,6 +95,7 @@ func build(coords: Vector2, class_id: int, user_id = 0):
 		$figures.set_cellv(coords, class_id + 21)
 	
 	if mushroom is Base:
+		bases_count += 1
 		for i in range(-1, 2):
 			for j in range(-1, 2):
 				objs[coords + Vector2(i,j)] = {
@@ -111,6 +115,12 @@ func ruin(coords: Vector2):
 
 	if mushroom is Base:
 		coords = get_centered(coords)
+		if coords == $Camera2D.BASE_POS:
+			emit_signal("ended", false)
+		else:
+			bases_count -= 1
+		if bases_count == 1:
+			emit_signal("ended", true)
 		for i in range(-1, 2):
 			for j in range(-1, 2):
 				objs.erase(coords + Vector2(i,j))

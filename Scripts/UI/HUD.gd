@@ -78,3 +78,10 @@ func show_options(arr):
 
 func _on_Action_pressed(action_id):
 	game.process_action(action_id)
+
+
+func Get_Time():
+	var time = $Time.Get_Time()
+	var minutes = time / 60
+	var seconds = time % 60
+	return "%02d:%02d" % [minutes, seconds]
