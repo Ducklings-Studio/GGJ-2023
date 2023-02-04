@@ -53,7 +53,7 @@ to look around
 
 [node name="BaseMushroomGreen" type="Sprite" parent="ScrollContainer/VBoxContainer"]
 position = Vector2( 670, 730 )
-scale = Vector2( 4, 4 )
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 3 )
 
 [node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer"]

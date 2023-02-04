@@ -48,7 +48,7 @@ text = "How defence is working?
 
 [node name="DefenceMushroomGreen" type="Sprite" parent="ScrollContainer/VBoxContainer"]
 position = Vector2( 697, 178 )
-scale = Vector2( 5, 4 )
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 3 )
 
 [node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer"]

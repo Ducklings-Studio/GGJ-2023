@@ -49,7 +49,7 @@ text = "How attack is working?
 
 [node name="AttackMushroomGreen" type="Sprite" parent="ScrollContainer/VBoxContainer"]
 position = Vector2( 709, 181 )
-scale = Vector2( 5, 5 )
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 3 )
 
 [node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer"]
@@ -64,7 +64,7 @@ align = 2
 
 [node name="AttackActionIcon" type="Sprite" parent="ScrollContainer/VBoxContainer"]
 position = Vector2( 77, 373 )
-scale = Vector2( 2, 2 )
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 4 )
 
 [node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer"]
