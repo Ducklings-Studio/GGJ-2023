@@ -1,5 +1,17 @@
 extends Camera2D
 
+var new_endgame_parameter := {
+	"ModeName": Global.get_endgame_parameter().ModeName,
+	"EndGameText": "",
+	"MatchTimer": "",
+	"Mushrooms": 0,
+	"MushroomsLost": 0,
+	"MineralsMine": 0,
+	"MineralsSpend": 0,
+	"BgPicture": "",
+	"BgAudio": ""
+}
+
 export var user_id: int = 0
 export var gems: int = 450
 export var BASE_POS: Vector2 = Vector2(-1, -24)
@@ -22,7 +34,7 @@ var not_zooming = true
 var selected
 var action
 var is_blocking = true
-
+var gems_spent = 0
 
 var classes := [
 	preload("res://Scenes/Mushrooms/Base.tscn"),
@@ -72,6 +84,8 @@ func remove_fog(class_id: int, coords: Vector2):
 
 
 func add_gems(amount):
+	if amount < 0: new_endgame_parameter.MineralsSpend -= amount
+	else: new_endgame_parameter.MineralsMine += amount
 	gems += amount
 	_hud.set_gems(gems)
 
@@ -241,3 +255,17 @@ func show_build_options(origin: Vector2, coords: Vector2, is_attack = false):
 
 func _on_HUD_game_started():
 	is_blocking = false
+
+
+func show_end_game(total: int):
+	get_tree().change_scene("res://Scenes/UI/EndGame.tscn");
+	new_endgame_parameter.MatchTimer = 23
+	if total == 1:
+		new_endgame_parameter.EndGameText = "Your mycelium \nwas defeated";
+		new_endgame_parameter.BgPicture = "LoseBg.png";
+		new_endgame_parameter.BgAudio = "LoseAudio.ogg";
+	else:
+		new_endgame_parameter.EndGameText = "All enemy mycelium \nwas defeated";
+		new_endgame_parameter.BgPicture = "WinBg.png";
+		new_endgame_parameter.BgAudio = "WinAudio.ogg";
+	Global.set_endgame_parameter(new_endgame_parameter)
