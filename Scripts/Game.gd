@@ -131,7 +131,8 @@ func ruin(coords: Vector2):
 
 
 func evolve(coords: Vector2, class_id: int):
-	if not objs.has(coords): return
+	if is_not_ready(coords): return null
+
 	var old = objs[coords]
 		
 	ruin(coords)
@@ -196,6 +197,8 @@ func build_roots(s: Vector2, f: Vector2, type_id: int):
 
 
 func attack(s: Vector2, f: Vector2):
+	if is_not_ready(s): return
+
 	var roots = roots_trajectory(s, f)
 	
 	for r in roots:
@@ -238,6 +241,8 @@ func can_build_roots(s: Vector2, f: Vector2):
 
 
 func explode(coords: Vector2):
+	if is_not_ready(coords): return
+
 	var effect = effects[0].instance()
 	effect.position = $figures.map_to_world(coords)
 	$figures.add_child(effect)
@@ -317,3 +322,7 @@ func get_mushroom(coords: Vector2):
 	if objs.has(coords):
 		return objs[coords].obj
 	return null
+
+
+func is_not_ready(coords: Vector2):
+	return not objs.has(coords) or $figures.get_cellv(coords) >= 20
