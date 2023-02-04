@@ -1,12 +1,14 @@
 extends Node2D
 
 export var user_id: int = 1
-export var gems: int = 0
+export var gems: int = 1000
 export var AI_BASE_COORDS: Vector2 = Vector2(-1, 24)
 
 
 func _ready():
-	get_parent().build(AI_BASE_COORDS, 0, user_id)
+	var mushroom = get_parent().build(AI_BASE_COORDS, 0, user_id)
+	if mushroom.has_method("_on_Miner_timeout"):
+		mushroom.connect("res_mined", self, "add_gems")
 
 
 func add_gems(amount):
@@ -24,7 +26,7 @@ func put_mushroom(source: Vector2, coords: Vector2):
 
 func get_def(mushs):
 	for m in mushs:
-		if m.distance_to(enemyBase) < 12 && $"../floor".get_cellv(m) == 1:
+		if m.distance_to(enemyBase) < 12 && get_parent().get_mushroom(m) is Standart:
 			get_parent().evolve(m, 4) # todo: change to def
 			return true
 	return false
@@ -61,7 +63,7 @@ func go_to_enemy(mush: Vector2, base: Vector2):
 		for j in range(min(mush.y, base.y), max(mush.y, base.y)+1):
 			if Vector2(i, j).distance_to(base) < 2:
 				continue;
-			if get_parent().can_be_built(mush, Vector2(i, j)):
+			if get_parent().can_be_built(mush, Vector2(i, j), gems, user_id):
 				if bestPosition == null:
 					bestPosition = Vector2(i, j)
 					bestDistance = Vector2(i, j).distance_to(base)
@@ -71,7 +73,7 @@ func go_to_enemy(mush: Vector2, base: Vector2):
 						bestDistance = Vector2(i, j).distance_to(base)
 	if bestPosition != null:
 		put_mushroom(mush, bestPosition)
-		mushs.append(bestPosition)
+		#mushs.append(bestPosition)
 		return bestPosition
 	return mush
 
@@ -83,7 +85,7 @@ func plant_bomb(mush: Vector2, base: Vector2):
 		for j in range(min(mush.y, base.y), max(mush.y, base.y)+1):
 			if Vector2(i, j).distance_to(base) < 2:
 				continue;
-			if get_parent().can_be_built(mush, Vector2(i, j)):
+			if get_parent().can_be_built(mush, Vector2(i, j), gems, user_id):
 				if bestPosition == null:
 					bestPosition = Vector2(i, j)
 					bestDistance = Vector2(i, j).distance_to(base)
@@ -93,14 +95,13 @@ func plant_bomb(mush: Vector2, base: Vector2):
 						bestDistance = Vector2(i, j).distance_to(base)
 	if bestPosition != null:
 		put_mushroom(mush, bestPosition)
-		mushs.append(bestPosition)
+		#mushs.append(bestPosition)
 		get_parent().evolve(bestPosition, 2)
 		return bestPosition
 	return null
 
 
 func active_bombs():
-	#print(bombs)
 	for i in bombs:
 		var mushroom = get_parent().get_mushroom(i)
 		if mushroom is Bomber:
@@ -110,12 +111,12 @@ func active_bombs():
 
 
 func select_enemy(mushs, positions):
-	if len(playerPositions) && len(mushs):
+	if len(positions) && len(mushs):
 		var nearest = positions[0].distance_to(mushs[0])
 		var nearestBase = positions[0]
 		for pos in positions:
 			for m in mushs:
-				if m.distance_to(pos) < nearest:
+				if get_parent().objs[pos].user_id != user_id and m.distance_to(pos) < nearest:
 					nearest = m.distance_to(pos)
 					nearestBase = pos
 		return nearestBase
@@ -146,17 +147,26 @@ var playerPositions = []
 
 func _on_Timer_timeout():
 	active_bombs()
-	playerPositions = $"../".objs.keys().slice(0, 0) + $"../".objs.keys().slice(9, len($"../".objs.keys()))
+	playerPositions = $"../".objs.keys()
+	mushs.clear()
+	for pos in playerPositions:
+		if $"../".objs[pos].user_id == user_id:
+			mushs.append(pos)
 	var nowPoint = len(mushs)
 	while nowPoint == len(mushs) && spawnPoint:
+		if !get_parent().is_enough_gems(1, gems, Global.BUILD):
+			break
 		if mushNum < len(baseCoords) && !mushMush && get_parent().is_ground(AI_BASE_COORDS+baseCoords[mushNum]):
 			if get_parent().can_be_built(AI_BASE_COORDS, AI_BASE_COORDS+baseCoords[mushNum], gems, user_id):
 				put_mushroom(AI_BASE_COORDS, AI_BASE_COORDS+baseCoords[mushNum])
-				mushs.append(AI_BASE_COORDS+baseCoords[mushNum])
+				#mushs.append(AI_BASE_COORDS+baseCoords[mushNum])
+		elif mushNum >= len(mushsCoords) && mushNum < len(baseCoords):
+			mushNum += 1
+			break
 		elif mushMush && mushNum < len(mushsCoords) && get_parent().is_ground(mushs[mushMush - 1]+mushsCoords[mushNum]):
 			if get_parent().can_be_built(mushs[mushMush - 1], mushs[mushMush - 1]+mushsCoords[mushNum], gems, user_id):
 				put_mushroom(mushs[mushMush - 1], mushs[mushMush - 1]+mushsCoords[mushNum])
-				mushs.append(mushs[mushMush - 1]+mushsCoords[mushNum])
+				#mushs.append(mushs[mushMush - 1]+mushsCoords[mushNum])
 				var checkBase = select_enemy(mushs, playerPositions)
 				if checkBase:
 					enemyBase = checkBase
@@ -176,15 +186,15 @@ func _on_Timer_timeout():
 			mushMush += 1
 			mushNum = -1
 		mushNum += 1
-	if !spawnPoint && !defMushs:
-		#print("def")
+	if !spawnPoint && !defMushs && get_parent().is_enough_gems(4, gems, Global.BUILD):
 		defMushs = get_def(mushs)
-		defCounter = 100
-		isAttack = true
+		if !defMushs:
+			defCounter = 100
+			isAttack = true
 	defCounter -= 1
-	if defCounter == 0:
+	if defCounter == 0 and get_parent().is_enough_gems(4, gems, Global.BUILD):
 		defMushs = get_def(mushs)
 		defCounter = 100
-	if isAttack:
+	if isAttack && get_parent().is_enough_gems(2, gems, Global.BUILD):
 		bombs_attack(mushs)
 		isAttack = false

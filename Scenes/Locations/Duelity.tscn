@@ -571,6 +571,7 @@ format = 1
 tile_data = PoolIntArray( -1507329, 0, 0, 1638399, 0, 0 )
 
 [node name="fog" type="TileMap" parent="."]
+visible = false
 mode = 1
 tile_set = SubResource( 5 )
 cell_size = Vector2( 16, 8 )

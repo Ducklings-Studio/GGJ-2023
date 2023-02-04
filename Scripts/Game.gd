@@ -36,7 +36,7 @@ func _ready():
 func built(coords, user_id = 0):
 	var cell = $figures.get_cellv(coords)
 	if cell in range(22, 26):
-		$figures.set_cellv(coords, cell + 5*user_id - 22)
+		$figures.set_cellv(coords, cell + 5*user_id - 21)
 
 
 func get_centered(coords):
@@ -93,7 +93,7 @@ func is_enough_gems(class_id: int, gems: int, action):
 func build(coords: Vector2, class_id: int, user_id = 0):
 	print_debug(user_id)
 	var mushroom = classes[class_id].instance()
-	mushroom.connect("built", self, "built", [coords])
+	mushroom.connect("built", self, "built", [coords, user_id])
 
 	objs[coords] = {
 		obj = mushroom,
@@ -102,7 +102,7 @@ func build(coords: Vector2, class_id: int, user_id = 0):
 	if mushroom is Base:
 		$figures.set_cellv(coords, class_id + 5*user_id)
 	else:
-		$figures.set_cellv(coords, class_id + 22)
+		$figures.set_cellv(coords, class_id + 21)
 	
 	if mushroom is Base:
 		for i in range(-1, 2):
@@ -135,7 +135,7 @@ func ruin(coords: Vector2):
 func evolve(coords: Vector2, class_id: int):
 	if not objs.has(coords): return
 	var old = objs[coords]
-
+		
 	ruin(coords)
 	var mushroom = build(coords, class_id, old.user_id)
 

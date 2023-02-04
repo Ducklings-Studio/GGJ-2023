@@ -791,6 +791,7 @@ __meta__ = {
 }
 
 [node name="fog" type="TileMap" parent="."]
+visible = false
 mode = 1
 tile_set = SubResource( 5 )
 cell_size = Vector2( 16, 8 )
