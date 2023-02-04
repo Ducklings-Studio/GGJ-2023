@@ -50,7 +50,7 @@ func get_centered(coords):
 
 
 func can_be_built(origin: Vector2, coords: Vector2, gems: int, user_id = 0):
-	if not (is_enough_gems(1, gems, Global.BUILD) and can_build_roots(origin, coords)):
+	if not (objs.has(origin) and is_enough_gems(1, gems, Global.BUILD) and can_build_roots(origin, coords)):
 		return false
 
 	for i in objs.keys():
@@ -194,6 +194,14 @@ func build_roots(s: Vector2, f: Vector2, type_id: int):
 	for r in roots:
 		roots_dict[r] = [s,f]
 		$floor.set_cellv(r, type_id)
+	
+	if type_id == 13: return
+	
+	if graph.has(s):
+		graph[s].push_back(f)
+	else:
+		graph[s] = [f]
+	reversed_graph[f] = s
 
 
 func attack(s: Vector2, f: Vector2):
@@ -241,7 +249,7 @@ func can_build_roots(s: Vector2, f: Vector2):
 
 
 func explode(coords: Vector2):
-	if is_not_ready(coords): return
+	if is_not_ready(coords): return false
 
 	var effect = effects[0].instance()
 	effect.position = $figures.map_to_world(coords)
@@ -263,12 +271,11 @@ func explode(coords: Vector2):
 			if roots_dict.has(tmp_coords):
 				eliminate_without_first(roots_dict[tmp_coords][1])
 				clear_root_tale(roots_dict[tmp_coords][0], roots_dict[tmp_coords][1])
-			
-			if $figures.get_cellv(tmp_coords) == 5:
-				print(tmp_coords, objs[tmp_coords])
+
 			$figures.set_cellv(tmp_coords, -1)
 			if $floor.get_cellv(tmp_coords) != 12:
 				$floor.set_cellv(tmp_coords, 0)
+	return true
 
 
 func explosion_ended(timer: Timer, effect):

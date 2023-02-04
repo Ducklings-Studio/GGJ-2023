@@ -158,8 +158,8 @@ func _unhandled_input(event):
 		if InputMap.event_is_action(event, "ui_left_mouse_button"):
 			var evpos = get_global_mouse_position() + delta
 			var coords = _floor.world_to_map(evpos)
-
-			if get_parent().objs.has(coords):
+			
+			if get_parent().objs.has(coords) and get_parent().objs[coords].user_id == user_id:
 				selected = get_parent().get_centered(coords)
 				_hud.show_options(get_parent().get_mushroom(selected).abilities)
 				return
@@ -173,12 +173,6 @@ func _unhandled_input(event):
 				
 				remove_fog(1, coords)
 				get_parent().build_roots(selected, coords, 2)
-				
-				if get_parent().graph.has(selected):
-					get_parent().graph[selected].push_back(coords)
-				else:
-					get_parent().graph[selected] = [coords]
-				get_parent().reversed_graph[coords] = selected
 				
 				clean_action()
 			elif action == Global.ATTACK and get_parent().is_enough_gems(-1, gems, Global.ATTACK) and get_parent().can_attack(selected, coords):
@@ -227,8 +221,8 @@ func process_action(action_id):
 	action = action_id
 
 	if action == Global.EXPLODE:
-		shake_strength = RANDOM_SHAKE_STRENGTH
-		get_parent().explode(selected)
+		if get_parent().explode(selected):
+			shake_strength = RANDOM_SHAKE_STRENGTH
 		return
 
 	var mushroom

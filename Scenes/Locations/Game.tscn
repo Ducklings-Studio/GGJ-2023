@@ -769,6 +769,10 @@ script = ExtResource( 5 )
 user_id = 2
 AI_BASE_COORDS = Vector2( 24, 24 )
 
+[node name="AI3" parent="." instance=ExtResource( 24 )]
+user_id = 3
+AI_BASE_COORDS = Vector2( 64, 0 )
+
 [node name="floor" type="TileMap" parent="."]
 mode = 1
 tile_set = SubResource( 3 )
