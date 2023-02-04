@@ -195,7 +195,7 @@ func build_roots(s: Vector2, f: Vector2, type_id: int):
 		$floor.set_cellv(r, type_id)
 
 
-func attack(s: Vector2, f: Vector2, draw_tale = true):
+func attack(s: Vector2, f: Vector2):
 	var roots = roots_trajectory(s, f)
 	
 	for r in roots:
@@ -205,7 +205,7 @@ func attack(s: Vector2, f: Vector2, draw_tale = true):
 			eliminate_without_first(roots_dict[r][1])
 			clear_root_tale(roots_dict[r][0], roots_dict[r][1])
 	
-	if draw_tale and reversed_graph.has(s):
+	if reversed_graph.has(s):
 		build_roots(s, f, 13)
 	else:
 		clear_roots(s, f)
@@ -252,9 +252,15 @@ func explode(coords: Vector2):
 		for j in range(-2, 3):
 			var tmp_coords = coords + Vector2(i,j)
 			if objs.has(tmp_coords):
+				cancellate(tmp_coords)
 				objs.erase(tmp_coords)
-			attack(coords, coords + Vector2(i,j), false)
 			
+			if roots_dict.has(tmp_coords):
+				eliminate_without_first(roots_dict[tmp_coords][1])
+				clear_root_tale(roots_dict[tmp_coords][0], roots_dict[tmp_coords][1])
+			
+			if $figures.get_cellv(tmp_coords) == 5:
+				print(tmp_coords, objs[tmp_coords])
 			$figures.set_cellv(tmp_coords, -1)
 			if $floor.get_cellv(tmp_coords) != 12:
 				$floor.set_cellv(tmp_coords, 0)
