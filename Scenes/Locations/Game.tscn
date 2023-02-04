@@ -509,7 +509,7 @@
 19/z_index = 0
 20/name = "indicators.png 20"
 20/texture = ExtResource( 16 )
-20/tex_offset = Vector2( 0, 0 )
+20/tex_offset = Vector2( 1, -11 )
 20/modulate = Color( 1, 1, 1, 1 )
 20/region = Rect2( 0, 0, 16, 16 )
 20/tile_mode = 0
@@ -523,7 +523,7 @@
 20/z_index = 0
 21/name = "indicators.png 21"
 21/texture = ExtResource( 16 )
-21/tex_offset = Vector2( 0, 0 )
+21/tex_offset = Vector2( 1, -11 )
 21/modulate = Color( 1, 1, 1, 1 )
 21/region = Rect2( 16, 0, 16, 16 )
 21/tile_mode = 0
@@ -537,7 +537,7 @@
 21/z_index = 0
 22/name = "indicators.png 22"
 22/texture = ExtResource( 16 )
-22/tex_offset = Vector2( 0, 0 )
+22/tex_offset = Vector2( 1, -11 )
 22/modulate = Color( 1, 1, 1, 1 )
 22/region = Rect2( 32, 0, 16, 16 )
 22/tile_mode = 0
@@ -551,7 +551,7 @@
 22/z_index = 0
 23/name = "indicators.png 23"
 23/texture = ExtResource( 16 )
-23/tex_offset = Vector2( 0, 0 )
+23/tex_offset = Vector2( 1, -11 )
 23/modulate = Color( 1, 1, 1, 1 )
 23/region = Rect2( 32, 16, 16, 16 )
 23/tile_mode = 0
@@ -565,7 +565,7 @@
 23/z_index = 0
 24/name = "indicators.png 24"
 24/texture = ExtResource( 16 )
-24/tex_offset = Vector2( 0, 0 )
+24/tex_offset = Vector2( 1, -11 )
 24/modulate = Color( 1, 1, 1, 1 )
 24/region = Rect2( 32, 32, 16, 16 )
 24/tile_mode = 0
@@ -579,7 +579,7 @@
 24/z_index = 0
 25/name = "indicators.png 25"
 25/texture = ExtResource( 16 )
-25/tex_offset = Vector2( 0, 0 )
+25/tex_offset = Vector2( 1, -11 )
 25/modulate = Color( 1, 1, 1, 1 )
 25/region = Rect2( 32, 48, 16, 16 )
 25/tile_mode = 0
@@ -791,7 +791,6 @@ __meta__ = {
 }
 
 [node name="fog" type="TileMap" parent="."]
-visible = false
 mode = 1
 tile_set = SubResource( 5 )
 cell_size = Vector2( 16, 8 )
@@ -884,6 +883,8 @@ columns = 3
 [node name="Build" type="TextureButton" parent="HUD/Options/MarginContainer/GridContainer"]
 margin_right = 94.0
 margin_bottom = 93.0
+hint_tooltip = "Create mushroom: 
+100 minerals"
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -896,6 +897,8 @@ stretch_mode = 3
 margin_left = 99.0
 margin_right = 192.0
 margin_bottom = 93.0
+hint_tooltip = "Evolve to bomb: 
+500 minerals"
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -908,6 +911,8 @@ stretch_mode = 3
 margin_left = 197.0
 margin_right = 290.0
 margin_bottom = 93.0
+hint_tooltip = "Evolve to protect mushroom: 
+200 minerals"
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -920,6 +925,8 @@ stretch_mode = 3
 margin_top = 98.0
 margin_right = 94.0
 margin_bottom = 190.0
+hint_tooltip = "Evolve to strike mushroom: 
+300 minerals"
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -933,6 +940,7 @@ margin_left = 99.0
 margin_top = 98.0
 margin_right = 192.0
 margin_bottom = 190.0
+hint_tooltip = "Attack: 100 minerals"
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -946,6 +954,7 @@ margin_left = 197.0
 margin_top = 98.0
 margin_right = 290.0
 margin_bottom = 190.0
+hint_tooltip = "BOOM"
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
