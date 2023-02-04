@@ -1,5 +1,9 @@
 extends Camera2D
 
+export var user_id: int = 0
+export var gems: int = 450
+export var BASE_POS: Vector2 = Vector2(-1, -24)
+
 export var delta = Vector2(2.5, 2.5)
 
 export var panSpeed = 10.0
@@ -18,7 +22,6 @@ var not_zooming = true
 var selected
 var action
 var is_blocking = true
-var gems = 0
 
 
 var classes := [
@@ -29,32 +32,34 @@ var classes := [
 	preload("res://Scenes/Mushrooms/Attacker.tscn"),
 ]
 
-#Base for duelity
-const BASE_POS = Vector2(-1, -24)
-
 const START_X = -70;
 const END_X = 70;
 const START_Y = -70;
 const END_Y = 70;
 
+onready var _floor = $"../floor"
+onready var _fog = $"../fog"
+onready var _tips = $"../tips"
+onready var _hud = $"../HUD"
+
 
 func _ready():
 	set_fogs()
-	add_gems(450)
+	add_gems(0)
 
-	var base = get_parent().build(BASE_POS, 0)
+	var base = get_parent().build(BASE_POS, 0, user_id)
 	if base.has_method("_on_Miner_timeout"):
 		base.connect("res_mined", self, "add_gems")
 	remove_fog(0, BASE_POS)
 	
-	position = $"../floor".map_to_world(BASE_POS)
+	position = _floor.map_to_world(BASE_POS)
 	clean_action()
 
 
 func set_fogs():
 	for i in range(START_X, END_X):
 		for j in range(START_Y, END_Y):
-			$"../fog".set_cellv(Vector2(i, j), 0)
+			_fog.set_cellv(Vector2(i, j), 0)
 
 
 func remove_fog(class_id: int, coords: Vector2):
@@ -63,12 +68,12 @@ func remove_fog(class_id: int, coords: Vector2):
 		radius = 12
 	for i in range(-radius, radius + 1): 
 		for j in range(-radius, radius + 1):
-			$"../fog".set_cellv(coords + Vector2(i,j), -1);
+			_fog.set_cellv(coords + Vector2(i,j), -1);
 
 
 func add_gems(amount):
 	gems += amount
-	$"../HUD".set_gems(gems)
+	_hud.set_gems(gems)
 
 
 func _process(delta):
@@ -121,26 +126,28 @@ func _unhandled_input(event):
 
 		if InputMap.event_is_action(event, "ui_left_mouse_button"):
 			var evpos = get_global_mouse_position() + delta
-			var coords = $"../floor".world_to_map(evpos)
+			var coords = _floor.world_to_map(evpos)
 
 			if get_parent().objs.has(coords):
 				selected = get_parent().get_centered(coords)
-				$"../HUD".show_options(get_parent().objs[selected].abilities)
+				_hud.show_options(get_parent().get_mushroom(selected).abilities)
 				return
 
-			if action == Global.BUILD and $"../fog".get_cellv(coords) and get_parent().can_be_built(selected, coords, gems):
-				var mushroom = get_parent().build(coords, 1)
+			if action == Global.BUILD and _fog.get_cellv(coords) and get_parent().can_be_built(selected, coords, gems):
+				var mushroom = get_parent().build(coords, 1, user_id)
 				if mushroom.has_method("_on_Miner_timeout"):
 					mushroom.connect("res_mined", self, "add_gems")
 				add_gems(-mushroom.cost)
 				
 				remove_fog(1, coords)
 				get_parent().build_roots(selected, coords, 2)
+				
 				if get_parent().graph.has(selected):
 					get_parent().graph[selected].push_back(coords)
 				else:
 					get_parent().graph[selected] = [coords]
 				get_parent().reversed_graph[coords] = selected
+				
 				clean_action()
 			elif action == Global.ATTACK and get_parent().is_enough_gems(-1, gems, Global.ATTACK) and get_parent().can_attack(selected, coords):
 				get_parent().attack(selected, coords)
@@ -157,20 +164,20 @@ func _unhandled_input(event):
 		elif action == Global.ATTACK:
 			show_build_options(selected, coords, true)
 
-	if event.is_pressed() or selected == null:
-		return
+	if event.is_pressed() or selected == null: return
 
-	if InputMap.event_is_action(event, "build") and "min_build_radius" in get_parent().objs[selected]:
+	var mushroom = get_parent().get_mushroom(selected)
+	if InputMap.event_is_action(event, "build") and "min_build_radius" in mushroom:
 		process_action(Global.BUILD)
 		return
-	if InputMap.event_is_action(event, "attack") and get_parent().objs[selected] is Attacker:
+	if InputMap.event_is_action(event, "attack") and mushroom is Attacker:
 		process_action(Global.ATTACK)
 		return
-	if InputMap.event_is_action(event, "explode") and get_parent().objs[selected] is Bomber:
+	if InputMap.event_is_action(event, "explode") and mushroom is Bomber:
 		process_action(Global.EXPLODE)
 		return
 	
-	if not get_parent().objs[selected] is Standart:
+	if not mushroom is Standart:
 		return
 	
 	if InputMap.event_is_action(event, "evolve_attack"):
@@ -214,22 +221,22 @@ func process_action(action_id):
 func clean_action():
 	selected = null
 	action = null
-	$"../HUD".show_options([])
-	$"../tips".clear()
+	_hud.show_options([])
+	_tips.clear()
 
 
 func show_build_options(origin: Vector2, coords: Vector2, is_attack = false):
-	$"../tips".clear()
+	_tips.clear()
 	coords -= Vector2.ONE
 	
 	if is_attack:
-		$"../tips".set_cellv(coords, 6)
+		_tips.set_cellv(coords, 6)
 		return
 
-	if $"../fog".get_cellv(coords) and get_parent().can_be_built(origin, coords + Vector2.ONE, gems): 
-		$"../tips".set_cellv(coords, 0)
+	if _fog.get_cellv(coords) and get_parent().can_be_built(origin, coords + Vector2.ONE, gems): 
+		_tips.set_cellv(coords, 0)
 	else:
-		$"../tips".set_cellv(coords, 1)
+		_tips.set_cellv(coords, 1)
 
 
 func _on_HUD_game_started():
