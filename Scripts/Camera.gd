@@ -26,6 +26,8 @@ export var zoomMin = 0.25
 export var zoomMax = 3.0
 export var marginX = 200.0
 export var marginY = 200.0
+export var RANDOM_SHAKE_STRENGTH: float = 15.0
+export var SHAKE_DECAY_RATE: float = 5.0
 
 var mousepos = Vector2()
 var zoomfactor = 1.0
@@ -53,9 +55,13 @@ onready var _floor = $"../floor"
 onready var _fog = $"../fog"
 onready var _tips = $"../tips"
 onready var _hud = $"../HUD"
+onready var rand = RandomNumberGenerator.new()
+
+var shake_strength: float = 0.0
 
 
 func _ready():
+	rand.randomize()
 	set_fogs()
 	add_gems(0)
 
@@ -92,6 +98,9 @@ func add_gems(amount):
 
 
 func _process(delta):
+	shake_strength = lerp(shake_strength, 0, SHAKE_DECAY_RATE * delta)
+	offset = get_random_offset()
+	
 	if is_blocking:
 		return
 	var inpx = (int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left")))
@@ -117,6 +126,13 @@ func _process(delta):
 
 	if not_zooming:
 		zoomfactor = 1.0
+
+
+func get_random_offset() -> Vector2:
+	return Vector2(
+		rand.randf_range(-shake_strength, shake_strength),
+		rand.randf_range(-shake_strength, shake_strength)
+	)
 
 
 func _unhandled_input(event):
@@ -211,6 +227,7 @@ func process_action(action_id):
 	action = action_id
 
 	if action == Global.EXPLODE:
+		shake_strength = RANDOM_SHAKE_STRENGTH
 		get_parent().explode(selected)
 		return
 
