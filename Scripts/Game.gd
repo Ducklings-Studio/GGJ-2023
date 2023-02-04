@@ -142,13 +142,13 @@ func evolve(coords: Vector2, class_id: int):
 
 	var source = reversed_graph[coords]
 	if get_mushroom(source) is Defender:
-		build_roots(source, coords, 10)
+		build_roots(source, coords, 10, true)
 
 	if !graph.has(coords): return mushroom
 
 	for i in graph[coords]:
 		if get_mushroom(i) is Defender:
-			build_roots(coords, i, 10)
+			build_roots(coords, i, 10, true)
 	return mushroom
 
 
@@ -188,14 +188,14 @@ func clear_roots(s: Vector2, f: Vector2):
 		$floor.set_cellv(r, 0)
 
 
-func build_roots(s: Vector2, f: Vector2, type_id: int):
+func build_roots(s: Vector2, f: Vector2, type_id: int, evolve = false):
 	var roots = roots_trajectory(s, f)
 	
 	for r in roots:
 		roots_dict[r] = [s,f]
 		$floor.set_cellv(r, type_id)
 	
-	if type_id == 13: return
+	if type_id == 13 or evolve: return
 	
 	if graph.has(s):
 		graph[s].push_back(f)

@@ -38,31 +38,31 @@ margin_bottom = 200.0
 custom_styles/bg = SubResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 734.0
+margin_right = 817.0
 margin_bottom = 877.0
 custom_constants/separation = 65
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_right = 734.0
+margin_right = 817.0
 margin_bottom = 186.0
 theme = ExtResource( 8 )
-text = "How building is working?
-  Choose mushroom or base
-(just click LMB on it) "
+text = "How does the building work?
+  Choose a mushroom or the 
+base (just click LMB on it) "
 
 [node name="SimpleMushroomGreen" type="Sprite" parent="ScrollContainer/VBoxContainer"]
-position = Vector2( 689, 177 )
+position = Vector2( 736, 177 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 4 )
 
 [node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer"]
 margin_top = 251.0
-margin_right = 734.0
+margin_right = 817.0
 margin_bottom = 437.0
 theme = ExtResource( 8 )
-text = "Next step is click on abilitiy
-in right bottom corner
-or press R"
+text = "The next step is to click on the 
+abilitiy in the right 
+bottom corner or press R"
 align = 2
 
 [node name="CreateSimpeMushroomIcon" type="Sprite" parent="ScrollContainer/VBoxContainer"]
@@ -72,12 +72,12 @@ texture = ExtResource( 7 )
 
 [node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer"]
 margin_top = 502.0
-margin_right = 734.0
+margin_right = 817.0
 margin_bottom = 877.0
 theme = ExtResource( 8 )
 text = "Or you can evolve 
-mushroom by clicking 
-on one of blue action
+a mushroom by clicking 
+on one of the blue actions
 
 
 "

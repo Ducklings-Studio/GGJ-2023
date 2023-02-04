@@ -27,23 +27,23 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -425.0
-margin_top = -250.0
-margin_right = 425.0
-margin_bottom = 200.0
+margin_left = -432.0
+margin_top = -224.0
+margin_right = 435.0
+margin_bottom = 209.0
 custom_styles/bg = SubResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 815.0
-margin_bottom = 437.0
+margin_right = 863.0
+margin_bottom = 500.0
 custom_constants/separation = 65
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_right = 815.0
+margin_right = 863.0
 margin_bottom = 186.0
 theme = ExtResource( 4 )
-text = "How defence is working?
-  Choose protective mushroom 
+text = "How does the defence work?
+  Choose a protective mushroom 
 (just click LMB on it) "
 
 [node name="DefenceMushroomGreen" type="Sprite" parent="ScrollContainer/VBoxContainer"]
@@ -53,11 +53,12 @@ texture = ExtResource( 3 )
 
 [node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer"]
 margin_top = 251.0
-margin_right = 815.0
-margin_bottom = 437.0
+margin_right = 863.0
+margin_bottom = 500.0
 theme = ExtResource( 4 )
-text = "And root between this 
-mushroom now is impenetrable
+text = "And the root between this 
+mushroom and a neighbor 
+defender is now impenetrable
 (for your root too)"
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
