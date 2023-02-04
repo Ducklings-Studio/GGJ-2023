@@ -1,17 +1,5 @@
 extends Node2D
 
-var new_endgame_parameter := {
-	"ModeName": Global.get_endgame_parameter().ModeName,
-	"EndGameText": "",
-	"MatchTimer": "",
-	"Mushrooms": 0,
-	"MushroomsLost": 0,
-	"MineralsMine": 0,
-	"MineralsSpend": 0,
-	"BgPicture": "",
-	"BgAudio": ""
-}
-
 # dict of MapObjects
 var objs = {}
 var classes := [
@@ -91,7 +79,6 @@ func is_enough_gems(class_id: int, gems: int, action):
 
 
 func build(coords: Vector2, class_id: int, user_id = 0):
-	print_debug(user_id)
 	var mushroom = classes[class_id].instance()
 	mushroom.connect("built", self, "built", [coords, user_id])
 
@@ -123,6 +110,7 @@ func ruin(coords: Vector2):
 	if mushroom == null: return
 
 	if mushroom is Base:
+		coords = get_centered(coords)
 		for i in range(-1, 2):
 			for j in range(-1, 2):
 				objs.erase(coords + Vector2(i,j))
@@ -201,6 +189,8 @@ func attack(s: Vector2, f: Vector2, draw_tale = true):
 	var roots = roots_trajectory(s, f)
 	
 	for r in roots:
+		if objs.has(r):
+			cancellate(r)
 		if roots_dict.has(r) and roots_dict[r][1] != s:
 			eliminate_without_first(roots_dict[r][1])
 			clear_root_tale(roots_dict[r][0], roots_dict[r][1])
@@ -311,25 +301,3 @@ func get_mushroom(coords: Vector2):
 	if objs.has(coords):
 		return objs[coords].obj
 	return null
-
-
-###############
-#   ENDGAME   #
-###############
-
-func _input(event):
-	pass
-	#show_end_game(1);
-	
-func show_end_game(total: int):
-	get_tree().change_scene("res://Scenes/UI/EndGame.tscn");
-	
-	if total == 1:
-		new_endgame_parameter.EndGameText = "Your mycelium \nwas defeated";
-		new_endgame_parameter.BgPicture = "LoseBg.png";
-		new_endgame_parameter.BgAudio = "LoseAudio.ogg";
-	else:
-		new_endgame_parameter.EndGameText = "All enemy mycelium \nwas defeated";
-		new_endgame_parameter.BgPicture = "WinBg.png";
-		new_endgame_parameter.BgAudio = "WinAudio.ogg";
-	Global.set_endgame_parameter(new_endgame_parameter)
