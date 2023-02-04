@@ -12,6 +12,7 @@ var new_endgame_parameter := {
 	"BgAudio": ""
 }
 
+# dict of MapObjects
 var objs = {}
 var classes := [
 	preload("res://Scenes/Mushrooms/Base.tscn"),
@@ -32,16 +33,14 @@ func _ready():
 	AudioManager.set_music("res://Assets/Audio/MatchSound.ogg")
 
 
-func built(coords):
+func built(coords, user_id = 0):
 	var cell = $figures.get_cellv(coords)
-	if cell in range(7, 11):
-		$figures.set_cellv(coords, cell - 6)
+	if cell in range(22, 26):
+		$figures.set_cellv(coords, cell + 5*user_id - 22)
 
 
 func get_centered(coords):
-	assert (objs.has(coords))
-
-	if objs[coords] is Base:
+	if get_mushroom(coords) is Base:
 		if objs.has(coords + Vector2.DOWN):
 			if !objs.has(coords + Vector2.UP):
 				coords += Vector2.DOWN
@@ -54,30 +53,32 @@ func get_centered(coords):
 		else:
 			coords += Vector2.LEFT
 		
-		assert(objs.has(coords) and objs[coords] is Base)
+		assert(get_mushroom(coords) is Base)
 
 	return coords
 
 
-func can_be_built(origin: Vector2, coords: Vector2, gems: int):
+func can_be_built(origin: Vector2, coords: Vector2, gems: int, user_id = 0):
 	if not (is_enough_gems(1, gems, Global.BUILD) and can_build_roots(origin, coords)):
 		return false
 
-	var origins = objs.keys()
-	for o in origins:
-		var mushroom = objs[o]
+	for i in objs.keys():
+		if i == coords: return false
+		if objs[i].user_id != user_id: continue
+		 
+		var mushroom = get_mushroom(i)
 		
 		#TODO: rewrite via groups
 		if not "min_build_radius" in mushroom:
 			continue
 		var min_d = mushroom.min_build_radius
 		var max_d = mushroom.max_build_radius
-		var dsq = (o - coords).abs()
+		var dsq = (i - coords).abs()
 		var value = max(dsq.x, dsq.y)
 
 		if min_d > value:
 			return false
-		if o == origin and value > max_d:
+		if i == origin and value > max_d:
 			return false
 	return true
 
@@ -89,55 +90,65 @@ func is_enough_gems(class_id: int, gems: int, action):
 		return classes[4].instance().attack_price <= gems
 
 
-func build(coords: Vector2, class_id: int):
+func build(coords: Vector2, class_id: int, user_id = 0):
+	print_debug(user_id)
 	var mushroom = classes[class_id].instance()
 	mushroom.connect("built", self, "built", [coords])
 
-	objs[coords] = mushroom
-	
-	if class_id in range(1,5):
-		$figures.set_cellv(coords, class_id + 6)
+	objs[coords] = {
+		obj = mushroom,
+		user_id = user_id,
+	}
+	if mushroom is Base:
+		$figures.set_cellv(coords, class_id + 5*user_id)
 	else:
-		$figures.set_cellv(coords, class_id)
+		$figures.set_cellv(coords, class_id + 22)
 	
-	if class_id == 0:
+	if mushroom is Base:
 		for i in range(-1, 2):
 			for j in range(-1, 2):
-				objs[coords + Vector2(i,j)] = mushroom
+				objs[coords + Vector2(i,j)] = {
+					obj = mushroom,
+					user_id = user_id,
+				}
 
 	$figures.add_child(mushroom)
 	return mushroom
 
 
 func ruin(coords: Vector2):
-	if !objs.has(coords):
-		return
-	var mushroom = objs[coords]
+	if !objs.has(coords): return
+
+	var mushroom = get_mushroom(coords)
 	if mushroom == null: return
 
-	for i in range(-1, 2):
-		for j in range(-1, 2):
-			objs.erase(coords + Vector2(i,j))
-			#graph.erase(coords + Vector2(i,j))
-			#reversed_graph.erase(coords + Vector2(i,j))
+	if mushroom is Base:
+		for i in range(-1, 2):
+			for j in range(-1, 2):
+				objs.erase(coords + Vector2(i,j))
+	objs.erase(coords)
 
 	$figures.set_cellv(coords, -1)
 	$figures.remove_child(mushroom)
 
 
 func evolve(coords: Vector2, class_id: int):
-	ruin(coords)
-	var mushroom = build(coords, class_id)
+	if not objs.has(coords): return
+	var old = objs[coords]
 
-	if class_id != 3:
-		return mushroom
+	ruin(coords)
+	var mushroom = build(coords, class_id, old.user_id)
+
+	if not mushroom is Defender: return mushroom
+
 	var source = reversed_graph[coords]
-	if objs.has(source) and objs[source] is Defender:
+	if get_mushroom(source) is Defender:
 		build_roots(source, coords, 10)
-	if !graph.has(coords):
-		return mushroom
+
+	if !graph.has(coords): return mushroom
+
 	for i in graph[coords]:
-		if objs.has(i) and objs[i] is Defender:
+		if get_mushroom(i) is Defender:
 			build_roots(coords, i, 10)
 	return mushroom
 
@@ -186,7 +197,7 @@ func build_roots(s: Vector2, f: Vector2, type_id: int):
 		$floor.set_cellv(r, type_id)
 
 
-func attack(s: Vector2, f: Vector2):
+func attack(s: Vector2, f: Vector2, draw_tale = true):
 	var roots = roots_trajectory(s, f)
 	
 	for r in roots:
@@ -194,7 +205,7 @@ func attack(s: Vector2, f: Vector2):
 			eliminate_without_first(roots_dict[r][1])
 			clear_root_tale(roots_dict[r][0], roots_dict[r][1])
 	
-	if reversed_graph.has(s):
+	if draw_tale and reversed_graph.has(s):
 		build_roots(s, f, 13)
 	else:
 		clear_roots(s, f)
@@ -242,7 +253,7 @@ func explode(coords: Vector2):
 			var tmp_coords = coords + Vector2(i,j)
 			if objs.has(tmp_coords):
 				objs.erase(tmp_coords)
-			attack(coords, coords + Vector2(i,j))
+			attack(coords, coords + Vector2(i,j), false)
 			
 			$figures.set_cellv(tmp_coords, -1)
 			if $floor.get_cellv(tmp_coords) != 12:
@@ -294,6 +305,12 @@ func clear_root_tale(s: Vector2, f: Vector2):
 		reversed_graph.erase(f)
 	if graph.has(s) and graph[s].has(f):
 		graph[s].erase(f)
+
+
+func get_mushroom(coords: Vector2):
+	if objs.has(coords):
+		return objs[coords].obj
+	return null
 
 
 ###############
