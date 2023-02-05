@@ -54,6 +54,7 @@ config/name="Mushroots"
 config/description="Would you like to play mushrooms? It's time to try! In Mushroots you can build, evolve, attack and... EXPLODE. And all in order to protect your mycelium and grow as much as possible. Q,W,E,R - to use an ability LMB - to select a mushroom RMB - to cancel selected SPACE and move MOUSE - to look around SCROLL - to resize the map
 "
 run/main_scene="res://Scenes/UI/Menu.tscn"
+boot_splash/image="res://Assets/Logo2.png"
 boot_splash/fullsize=false
 boot_splash/use_filter=false
 config/icon="res://Assets/Icons/Mushroots_Logo.svg"
