@@ -44,7 +44,7 @@ func get_centered(coords):
 		else:
 			coords += Vector2.LEFT
 		
-		assert(get_mushroom(coords) is Base)
+		#assert(get_mushroom(coords) is Base)
 
 	return coords
 

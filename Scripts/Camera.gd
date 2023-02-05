@@ -46,10 +46,10 @@ var classes := [
 	preload("res://Scenes/Mushrooms/Attacker.tscn"),
 ]
 
-const START_X = -70;
-const END_X = 70;
-const START_Y = -70;
-const END_Y = 70;
+const START_X = -200;
+const END_X = 200;
+const START_Y = -200;
+const END_Y = 200;
 
 onready var _floor = $"../floor"
 onready var _fog = $"../fog"
@@ -62,7 +62,7 @@ var shake_strength: float = 0.0
 
 func _ready():
 	rand.randomize()
-	set_fogs()
+	#set_fog()
 	add_gems(0)
 
 	get_parent().connect("ended", self, "show_end_game")
@@ -75,7 +75,7 @@ func _ready():
 	clean_action()
 
 
-func set_fogs():
+func set_fog():
 	for i in range(START_X, END_X):
 		for j in range(START_Y, END_Y):
 			_fog.set_cellv(Vector2(i, j), 0)
@@ -193,6 +193,7 @@ func _unhandled_input(event):
 	if event.is_pressed() or selected == null: return
 
 	var mushroom = get_parent().get_mushroom(selected)
+	if mushroom == null: return
 	if InputMap.event_is_action(event, "build") and "min_build_radius" in mushroom:
 		process_action(Global.BUILD)
 		return
