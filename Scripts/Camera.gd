@@ -46,10 +46,10 @@ var classes := [
 	preload("res://Scenes/Mushrooms/Attacker.tscn"),
 ]
 
-const START_X = -200;
-const END_X = 200;
-const START_Y = -200;
-const END_Y = 200;
+const START_X = -75
+const END_X = 75
+const START_Y = -75
+const END_Y = 75
 
 onready var _floor = $"../floor"
 onready var _fog = $"../fog"
@@ -62,7 +62,7 @@ var shake_strength: float = 0.0
 
 func _ready():
 	rand.randomize()
-	#set_fog()
+	set_fog()
 	add_gems(0)
 
 	get_parent().connect("ended", self, "show_end_game")

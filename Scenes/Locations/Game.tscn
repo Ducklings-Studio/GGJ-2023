@@ -851,9 +851,9 @@ margin_right = 290.0
 margin_bottom = 190.0
 script = ExtResource( 4 )
 camera_node = NodePath("../../../../Camera2D")
-tilemap_nodes = [ NodePath("../../../../floor"), NodePath("../../../../fog") ]
+tilemap_nodes = [ NodePath("../../../../floor") ]
+fog_node = NodePath("../../../../fog")
 cell_colors = {
-0: Color( 0, 0, 0, 1 ),
 1: Color( 0.686275, 0.85098, 0.501961, 1 ),
 4: Color( 0.682353, 0.811765, 0.807843, 1 ),
 5: Color( 0.360784, 0.843137, 0.831373, 1 ),
