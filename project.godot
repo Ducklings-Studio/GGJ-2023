@@ -57,6 +57,7 @@ run/main_scene="res://Scenes/UI/Menu.tscn"
 boot_splash/image="res://Assets/Logo2.png"
 boot_splash/fullsize=false
 boot_splash/use_filter=false
+boot_splash/bg_color=Color( 0.0941176, 0.0941176, 0.0941176, 1 )
 config/icon="res://Assets/Icons/Mushroots_Logo.svg"
 config/windows_native_icon="res://Assets/Icons/Mushroots_Logo.ico"
 
