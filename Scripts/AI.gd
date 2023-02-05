@@ -121,17 +121,14 @@ func active_bombs():
 			get_parent().explode(i)
 			spawnPoint = true
 			waitForBomb = false
-			
-			#get_parent().is_enough_gems(-1, gems, Global.ATTACK) and get_parent().can_attack(selected, coords)
+
 
 func do_attack():
 	for i in attackers:
 		var mushroom = get_parent().get_mushroom(i)
 		if mushroom is Attacker:
-			print(targets)
 			for target in targets:
 				if target.killer == i:
-					print("kar ", target)
 					if get_parent().is_enough_gems(-1, gems, Global.ATTACK) and get_parent().can_attack(i, target.victim):
 						get_parent().attack(i, target.victim)
 
@@ -146,7 +143,6 @@ func wait_evolve():
 				evolves.erase(bomb)
 		elif evolves[coords].type == "hit":
 			var attacker = coords
-			print("attacker ", attacker)
 			var mushroom = get_parent().evolve(attacker, 4)
 			if mushroom:
 				attackers.append(attacker)
@@ -237,7 +233,6 @@ func _on_Timer_timeout():
 				if isEnemy:
 					nearestEnemy = isEnemy
 				if nearestEnemy.dist < 10:
-					print("c ", nearestEnemy.base, " ", nearestEnemy.enemy, " ", nearestEnemy.dist)
 					spawnPoint = false
 					defMushs = false
 		elif !mushMush:
