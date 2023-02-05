@@ -274,7 +274,12 @@ func _on_HUD_game_started():
 
 
 func show_end_game(win):
-	get_tree().change_scene("res://Scenes/UI/EndGame.tscn")
+	var timer = Timer.new()
+	timer.connect("timeout", self, "_on_finisher_timeout", [timer])
+	timer.wait_time = 2
+	add_child(timer)
+	timer.start()
+	
 	new_endgame_parameter.MatchTimer = _hud.Get_Time()
 	if win:
 		new_endgame_parameter.EndGameText = "All enemy mycelium \nwas defeated"
@@ -285,3 +290,9 @@ func show_end_game(win):
 		new_endgame_parameter.BgPicture = "LoseBg.png"
 		new_endgame_parameter.BgAudio = "LoseAudio.ogg"
 	Global.set_endgame_parameter(new_endgame_parameter)
+
+
+func _on_finisher_timeout(timer: Timer):
+	timer.stop()
+	remove_child(timer)
+	get_tree().change_scene("res://Scenes/UI/EndGame.tscn")
