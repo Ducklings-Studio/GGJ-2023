@@ -26,6 +26,7 @@ var classes := [
 	preload("res://Scenes/Mushrooms/Defender.tscn"),
 	preload("res://Scenes/Mushrooms/Attacker.tscn"),
 ]
+var I_ATTACK: Attacker = classes[4].instance()
 
 
 func set_endgame_parameter(new_endgame_parameter):

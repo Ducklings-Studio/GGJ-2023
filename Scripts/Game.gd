@@ -206,6 +206,8 @@ func build_roots(s: Vector2, f: Vector2, type_id: int, evolve = false):
 
 func attack(s: Vector2, f: Vector2):
 	if is_not_ready(s): return
+	var l = ((f-s).abs() / Global.I_ATTACK.attack_radius).floor().length()
+	if l > 0: return
 
 	var roots = roots_trajectory(s, f)
 	
