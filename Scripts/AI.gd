@@ -129,7 +129,7 @@ func do_attack():
 		if mushroom is Attacker:
 			for target in targets:
 				if target.killer == i:
-					if get_parent().is_enough_gems(-1, gems, Global.ATTACK) and get_parent().can_attack(i, target.victim):
+					if get_parent().is_enough_gems(-1, gems, Global.ATTACK) and get_parent().can_attack(i, target.victim) and !(get_parent().get_mushroom(target.victim) is Defender):
 						var fl = get_parent().attack(i, target.victim)
 						if fl:
 							add_gems(-Global.I_ATTACK.attack_price)
