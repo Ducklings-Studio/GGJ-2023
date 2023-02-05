@@ -61,7 +61,7 @@ func bombs_attack(mushs, positions):
 
 func attacker_go(mushs, positions):
 	var nearestEnemy = select_enemy(mushs, playerPositions)
-	if nearestEnemy.dist >= 10:
+	if nearestEnemy.dist >= 10 || get_parent().get_centered(nearestEnemy.enemy) == AI_BASE_COORDS:
 		return
 	targets.append({"killer": nearestEnemy.enemy, "victim": nearestEnemy.base})
 	evolves[nearestEnemy.enemy] = {
@@ -139,17 +139,23 @@ func wait_evolve():
 	for coords in evolves.keys():
 		if evolves[coords].type == "bomb":
 			var bomb = coords
-			var mushroom = get_parent().evolve(bomb, 2)
-			if mushroom:
-				bombs.append(bomb)
+			if get_parent().get_centered(bomb) != AI_BASE_COORDS:
+				var mushroom = get_parent().evolve(bomb, 2)
+				if mushroom:
+					bombs.append(bomb)
+					evolves.erase(bomb)
+			else:
 				evolves.erase(bomb)
 		elif evolves[coords].type == "hit":
 			var attacker = coords
-			var mushroom = get_parent().evolve(attacker, 4)
-			if mushroom:
-				attackers.append(attacker)
+			if get_parent().get_centered(attacker) != AI_BASE_COORDS:
+				var mushroom = get_parent().evolve(attacker, 4)
+				if mushroom:
+					attackers.append(attacker)
+					evolves.erase(attacker)
+			else:
 				evolves.erase(attacker)
-				
+
 
 func update_targets():
 	for target in targets:
@@ -258,7 +264,7 @@ func _on_Timer_timeout():
 			isBombAttack = true
 		else:
 			var nearEnemy = select_enemy(mushs, playerPositions)
-			if nearEnemy.dist < 10 && get_parent().can_attack(nearEnemy.base, nearEnemy.enemy):
+			if nearEnemy.dist < 10 && get_parent().can_attack(nearEnemy.base, nearEnemy.enemy) && get_parent().get_centered(nearEnemy.enemy) != AI_BASE_COORDS:
 				isAttack = true
 	#defCounter -= 1
 	#if defCounter == 0 and get_parent().is_enough_gems(4, gems, Global.BUILD):
