@@ -250,6 +250,12 @@ func _on_Timer_timeout():
 			mushNum = 0
 			break
 		mushNum += 1
+	if spawnPoint:
+		var foundEnemy = select_enemy(mushs, playerPositions)
+		if foundEnemy:
+			if foundEnemy.dist < 10:
+				spawnPoint = false
+
 	if !spawnPoint && !defMushs && get_parent().is_enough_gems(4, gems, Global.BUILD):
 		if !waitForBomb:
 			isBombAttack = true
