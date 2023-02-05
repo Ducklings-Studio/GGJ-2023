@@ -177,6 +177,7 @@ func _unhandled_input(event):
 				clean_action()
 			elif action == Global.ATTACK and get_parent().is_enough_gems(-1, gems, Global.ATTACK) and get_parent().can_attack(selected, coords):
 				get_parent().attack(selected, coords)
+				add_gems(-Global.I_ATTACK.attack_price)
 				clean_action()
 
 		elif InputMap.event_is_action(event, "ui_right_mouse_button"):

@@ -8,3 +8,4 @@ abilities = [ 4 ]
 cost = 300
 time_to_build = 15
 res_per_sec = 0
+attack_price = 150

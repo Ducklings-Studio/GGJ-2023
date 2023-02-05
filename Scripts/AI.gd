@@ -1,7 +1,7 @@
 extends Node2D
 
 export var user_id: int = 1
-export var gems: int = 3000
+export var gems: int = 700
 export var AI_BASE_COORDS: Vector2 = Vector2(-1, 24)
 
 
@@ -131,6 +131,7 @@ func do_attack():
 				if target.killer == i:
 					if get_parent().is_enough_gems(-1, gems, Global.ATTACK) and get_parent().can_attack(i, target.victim):
 						get_parent().attack(i, target.victim)
+						add_gems(-Global.I_ATTACK.attack_price)
 
 
 func wait_evolve():

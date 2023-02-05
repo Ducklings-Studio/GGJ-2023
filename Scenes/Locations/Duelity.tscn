@@ -764,7 +764,6 @@ default_font = SubResource( 16 )
 script = ExtResource( 5 )
 
 [node name="AI" parent="." instance=ExtResource( 24 )]
-gems = 700
 
 [node name="floor" type="TileMap" parent="."]
 mode = 1
@@ -813,7 +812,6 @@ __meta__ = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 0, 1 )
-current = true
 zoom = Vector2( 0.4, 0.4 )
 editor_draw_limits = true
 script = ExtResource( 3 )
