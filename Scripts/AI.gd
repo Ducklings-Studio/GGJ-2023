@@ -256,7 +256,7 @@ func _on_Timer_timeout():
 			isBombAttack = true
 		else:
 			var nearEnemy = select_enemy(mushs, playerPositions)
-			if nearEnemy.dist < 10:
+			if nearEnemy.dist < 10 && get_parent().can_attack(nearEnemy.base, nearEnemy.enemy):
 				isAttack = true
 	#defCounter -= 1
 	#if defCounter == 0 and get_parent().is_enough_gems(4, gems, Global.BUILD):
