@@ -764,7 +764,7 @@ default_font = SubResource( 16 )
 script = ExtResource( 5 )
 
 [node name="AI" parent="." instance=ExtResource( 24 )]
-gems = -100000
+gems = 700
 
 [node name="floor" type="TileMap" parent="."]
 mode = 1
