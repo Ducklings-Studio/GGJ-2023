@@ -148,7 +148,10 @@ func wait_evolve():
 				evolves.erase(bomb)
 		elif evolves[coords].type == "hit":
 			var attacker = coords
-			if get_parent().get_centered(attacker) != AI_BASE_COORDS:
+			if get_parent().get_mushroom(attacker) is Attacker:
+				attackers.append(attacker)
+				evolves.erase(attacker)
+			elif get_parent().get_centered(attacker) != AI_BASE_COORDS:
 				var mushroom = get_parent().evolve(attacker, 4)
 				if mushroom:
 					attackers.append(attacker)
