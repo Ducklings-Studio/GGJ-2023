@@ -255,6 +255,26 @@ func can_attack(s: Vector2, f: Vector2):
 	return true
 
 
+func can_attack_user(s: Vector2, f: Vector2):
+	if s == null or f == null:
+		return 1
+	var l = (f-s).abs()
+	if max(l.x, l.y) > Global.I_ATTACK.attack_radius: return 1
+	
+	var roots = roots_trajectory(s, f)
+	
+	var prev = s
+	for r in roots:
+		if prev.x != r.x and prev.y != r.y:
+			if is_defender_root(prev.x, r.y) and is_defender_root(r.x, prev.y):
+				return 2
+		if is_not_attackable(r):
+			return 3 
+		prev = r
+	
+	return 0
+
+
 func is_defender_root(x, y):
 	return $floor.get_cell(x, y) == 10
 

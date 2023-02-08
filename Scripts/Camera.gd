@@ -174,15 +174,11 @@ func _unhandled_input(event):
 				clean_action()
 			elif action == Global.ATTACK:
 				if get_parent().is_enough_gems(-1, gems, Global.ATTACK):
-					if get_parent().can_attack(selected, coords):
-						if get_parent().attack(selected, coords):
-							add_gems(-Global.I_ATTACK.attack_price)
-					else:
-						var l = (coords-selected).abs()
-						if max(l.x, l.y) > Global.I_ATTACK.attack_radius:
-							emit_signal("error", 1)
-						else:
-							emit_signal("error", 2)
+					var err = get_parent().can_attack_user(selected, coords)
+					if err == 0 and get_parent().attack(selected, coords):
+						add_gems(-Global.I_ATTACK.attack_price)
+					elif err in [1,2]:
+						emit_signal("error", err)
 				else:
 					emit_signal("error", 0)
 				clean_action()
