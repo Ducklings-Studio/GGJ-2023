@@ -70,7 +70,7 @@ custom_styles/pressed = ExtResource( 2 )
 custom_styles/focus = ExtResource( 2 )
 custom_styles/disabled = ExtResource( 2 )
 custom_styles/normal = ExtResource( 2 )
-text = "Help"
+text = "Tutorial"
 
 [node name="Settings" type="Button" parent="MarginContainer/VBoxContainer" groups=["ui_buttons"]]
 margin_top = 164.0

@@ -1,5 +1,7 @@
 extends Camera2D
 
+signal error(err_id)
+
 var new_endgame_parameter := {
 	"ModeName": Global.get_endgame_parameter().ModeName,
 	"EndGameText": "",
@@ -159,7 +161,9 @@ func _unhandled_input(event):
 			var evpos = get_global_mouse_position() + delta
 			var coords = _floor.world_to_map(evpos)
 			
-			if get_parent().objs.has(coords) and get_parent().objs[coords].user_id == user_id:
+			var tmp = can_select(coords)
+			if tmp != Vector2.INF:
+				coords = tmp
 				selected = get_parent().get_centered(coords)
 				_hud.show_options(get_parent().get_mushroom(selected).abilities)
 				return
@@ -175,10 +179,19 @@ func _unhandled_input(event):
 				get_parent().build_roots(selected, coords, 2)
 				
 				clean_action()
-			elif action == Global.ATTACK and get_parent().is_enough_gems(-1, gems, Global.ATTACK) and get_parent().can_attack(selected, coords):
-				var fl = get_parent().attack(selected, coords)
-				if fl:
-					add_gems(-Global.I_ATTACK.attack_price)
+			elif action == Global.ATTACK:
+				if get_parent().is_enough_gems(-1, gems, Global.ATTACK):
+					if get_parent().can_attack(selected, coords):
+						if get_parent().attack(selected, coords):
+							add_gems(-Global.I_ATTACK.attack_price)
+					else:
+						var l = (coords-selected).abs()
+						if max(l.x, l.y) > Global.I_ATTACK.attack_radius:
+							emit_signal("error", 1)
+						else:
+							emit_signal("error", 2)
+				else:
+					emit_signal("error", 0)
 				clean_action()
 
 		elif InputMap.event_is_action(event, "ui_right_mouse_button"):
@@ -233,14 +246,20 @@ func process_action(action_id):
 		if get_parent().is_enough_gems(4, gems, Global.E_ATTACK):
 			mushroom = get_parent().evolve(selected, 4)
 			new_endgame_parameter.Mushrooms += 1
+		else:
+			emit_signal("error", 0)
 	elif action == Global.E_BOMB:
 		if get_parent().is_enough_gems(2, gems, Global.E_BOMB):
 			mushroom = get_parent().evolve(selected, 2)
 			new_endgame_parameter.Mushrooms += 1
+		else:
+			emit_signal("error", 0)
 	elif action == Global.E_DEFENDER:
 		if get_parent().is_enough_gems(3, gems, Global.E_DEFENDER):
 			mushroom = get_parent().evolve(selected, 3)
 			new_endgame_parameter.Mushrooms += 1
+		else:
+			emit_signal("error", 0)
 	else:
 		return
 
@@ -298,3 +317,12 @@ func _on_finisher_timeout(timer: Timer):
 	timer.stop()
 	remove_child(timer)
 	get_tree().change_scene("res://Scenes/UI/EndGame.tscn")
+
+
+func can_select(coords: Vector2) -> Vector2:
+	for i in range(3):
+		var tmp = coords + Vector2(i,i) 
+		if get_parent().objs.has(tmp) and get_parent().objs[tmp].user_id == user_id:
+			return tmp
+	return Vector2.INF
+	

@@ -35,17 +35,17 @@ margin_bottom = 200.0
 custom_styles/bg = SubResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 817.0
+margin_right = 800.0
 margin_bottom = 625.0
 custom_constants/separation = 65
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_right = 817.0
+margin_right = 800.0
 margin_bottom = 186.0
 theme = ExtResource( 5 )
-text = "How does the attack work?
+text = "How does attack work?
   Choose a striking mushroom 
-(just click LMB on it) "
+(just left click it) "
 
 [node name="AttackMushroomGreen" type="Sprite" parent="ScrollContainer/VBoxContainer"]
 position = Vector2( 709, 181 )
@@ -54,12 +54,12 @@ texture = ExtResource( 3 )
 
 [node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer"]
 margin_top = 251.0
-margin_right = 817.0
+margin_right = 800.0
 margin_bottom = 437.0
 theme = ExtResource( 5 )
-text = "The next step is to click on the 
-abilitiy in the right 
-bottom corner or press E"
+text = "The next step is to click the
+abilitiy in the bottom
+right corner or press E"
 align = 2
 
 [node name="AttackActionIcon" type="Sprite" parent="ScrollContainer/VBoxContainer"]
@@ -69,7 +69,7 @@ texture = ExtResource( 4 )
 
 [node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer"]
 margin_top = 502.0
-margin_right = 817.0
+margin_right = 800.0
 margin_bottom = 625.0
 theme = ExtResource( 5 )
 text = "Click on the field

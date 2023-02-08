@@ -12,10 +12,10 @@ var endgame_parameters := {
 	"BgAudio": ""
 }
 enum {
-	BUILD, 
-	E_ATTACK, 
+	BUILD = 1, 
 	E_BOMB, 
 	E_DEFENDER, 
+	E_ATTACK,
 	ATTACK, 
 	EXPLODE,
 }
@@ -25,6 +25,11 @@ var classes := [
 	preload("res://Scenes/Mushrooms/Bomber.tscn"),
 	preload("res://Scenes/Mushrooms/Defender.tscn"),
 	preload("res://Scenes/Mushrooms/Attacker.tscn"),
+]
+var errors := [
+	"Not Enough Minerals",
+	"Too far",
+	"Impossible to break through the defense"
 ]
 var I_ATTACK: Attacker = classes[4].instance()
 

@@ -23,11 +23,13 @@ const labels = [
 ]
 
 onready var game = $"../Camera2D"
+onready var error_msg = $Error
 
 
 func _ready():
 	assert (len(labels) == len(audios))
 
+	game.connect("error", self, "error")
 	Global.upload_buttons()
 
 	AudioManager.play("res://Assets/Audio/Effects/PrepareYourself.wav")
@@ -35,6 +37,17 @@ func _ready():
 	start_timer.wait_time = 1
 	add_child(start_timer)
 	start_timer.start()
+
+
+func error(id: int):
+	error_msg.set_text(Global.errors[id])
+	error_msg.set_visible(true)
+	var timer = Timer.new()
+	timer.wait_time = 1
+	timer.connect("timeout", self, "clean_error", [timer])
+	add_child(timer)
+	timer.start()
+
 
 
 func count():
@@ -85,3 +98,9 @@ func Get_Time():
 	var minutes = time / 60
 	var seconds = time % 60
 	return "%02d:%02d" % [minutes, seconds]
+
+
+func clean_error(timer: Timer):
+	timer.stop()
+	remove_child(timer)
+	error_msg.set_visible(false)

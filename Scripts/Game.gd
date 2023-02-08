@@ -206,17 +206,27 @@ func build_roots(s: Vector2, f: Vector2, type_id: int, evolve = false):
 
 func attack(s: Vector2, f: Vector2):
 	if is_not_ready(s): return false
-	var l = ((f-s).abs() / Global.I_ATTACK.attack_radius).floor().length()
-	if l > 0: return false
+	var l = (f-s).abs()
+	if max(l.x, l.y) > Global.I_ATTACK.attack_radius: return false
 
 	var roots = roots_trajectory(s, f)
 	
+	var prev = s
 	for r in roots:
 		if objs.has(r):
 			cancellate(r)
-		if roots_dict.has(r) and roots_dict[r][1] != s:
-			eliminate_without_first(roots_dict[r][1])
-			clear_root_tale(roots_dict[r][0], roots_dict[r][1])
+		var variants = [r]
+		if prev.x != r.x and prev.y != r.y:
+			var tmp_1 = Vector2(prev.x, r.y)
+			var tmp_2 = Vector2(r.x, prev.y)
+			if $floor.get_cellv(tmp_1) == $floor.get_cellv(tmp_2):
+				variants.push_back(tmp_1)
+				variants.push_back(tmp_2)
+		prev = r
+		for v in variants:
+			if roots_dict.has(v) and roots_dict[v][1] != s:
+				eliminate_without_first(roots_dict[v][1])
+				clear_root_tale(roots_dict[v][0], roots_dict[v][1])
 	
 	if reversed_graph.has(s):
 		build_roots(s, f, 13)
@@ -228,14 +238,25 @@ func attack(s: Vector2, f: Vector2):
 func can_attack(s: Vector2, f: Vector2):
 	if s == null or f == null:
 		return false
+	var l = (f-s).abs()
+	if max(l.x, l.y) > Global.I_ATTACK.attack_radius: return false
 	
 	var roots = roots_trajectory(s, f)
 	
+	var prev = s
 	for r in roots:
+		if prev.x != r.x and prev.y != r.y:
+			if is_defender_root(prev.x, r.y) and is_defender_root(r.x, prev.y):
+				return false
 		if is_not_attackable(r):
 			return false 
+		prev = r
 	
 	return true
+
+
+func is_defender_root(x, y):
+	return $floor.get_cell(x, y) == 10
 
 
 func can_build_roots(s: Vector2, f: Vector2):
@@ -244,10 +265,15 @@ func can_build_roots(s: Vector2, f: Vector2):
 	
 	var roots = roots_trajectory(s, f)
 	
+	var prev = Vector2.INF
 	for r in roots:
 		if not is_ground(r):
 			return false 
-	
+		if prev != Vector2.INF and prev.x != r.x and prev.y != r.y:
+			if is_connection_root(prev.x, r.y) and is_connection_root(r.x, prev.y):
+				return false
+		prev = r
+
 	return true
 
 
@@ -336,3 +362,7 @@ func get_mushroom(coords: Vector2):
 
 func is_not_ready(coords: Vector2):
 	return not objs.has(coords) or $figures.get_cellv(coords) >= 20
+
+
+func is_connection_root(x, y):
+	return $floor.get_cell(x, y) in [2, 10]

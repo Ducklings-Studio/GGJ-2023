@@ -42,9 +42,9 @@ custom_constants/separation = 65
 margin_right = 863.0
 margin_bottom = 186.0
 theme = ExtResource( 4 )
-text = "How does the defence work?
+text = "How does defence work?
   Choose a protective mushroom 
-(just click LMB on it) "
+(just left click it) "
 
 [node name="DefenceMushroomGreen" type="Sprite" parent="ScrollContainer/VBoxContainer"]
 position = Vector2( 697, 178 )

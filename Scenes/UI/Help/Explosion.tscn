@@ -43,9 +43,9 @@ custom_constants/separation = 65
 margin_right = 845.0
 margin_bottom = 186.0
 theme = ExtResource( 5 )
-text = "How does the explosion work?
+text = "How does explosion work?
   Choose an unstable mushroom 
-(just click LMB on it) "
+(just left click it) "
 
 [node name="BlackMushroomGreen" type="Sprite" parent="ScrollContainer/VBoxContainer"]
 position = Vector2( 700, 183 )
@@ -57,9 +57,9 @@ margin_top = 251.0
 margin_right = 845.0
 margin_bottom = 437.0
 theme = ExtResource( 5 )
-text = "The next step is to click on the 
-abilitiy in the right 
-bottom corner or press Q"
+text = "The next step is to click the 
+abilitiy in the bottom 
+right corner or press Q"
 align = 2
 
 [node name="ExplosiveActionIcon" type="Sprite" parent="ScrollContainer/VBoxContainer"]

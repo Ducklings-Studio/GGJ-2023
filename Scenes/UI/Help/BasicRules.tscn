@@ -48,7 +48,7 @@ use an ability
  - RMB to cancel the selected 
 mushroom or ability
  - SPACE and move MOUSE 
-to look around
+to look around (or the arrows) 
  - SCROLL to resize the map"
 
 [node name="BaseMushroomGreen" type="Sprite" parent="ScrollContainer/VBoxContainer"]
