@@ -12,10 +12,10 @@ var endgame_parameters := {
 	"BgAudio": ""
 }
 enum {
-	BUILD = 1, 
+	BUILD, 
+	E_ATTACK, 
 	E_BOMB, 
 	E_DEFENDER, 
-	E_ATTACK,
 	ATTACK, 
 	EXPLODE,
 }

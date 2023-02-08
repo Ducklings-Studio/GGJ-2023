@@ -999,9 +999,23 @@ texture_normal = ExtResource( 18 )
 expand = true
 stretch_mode = 3
 
-[node name="ToBomb" type="TextureButton" parent="HUD/Options/MarginContainer/GridContainer"]
+[node name="ToAttack" type="TextureButton" parent="HUD/Options/MarginContainer/GridContainer"]
 margin_left = 99.0
 margin_right = 192.0
+margin_bottom = 93.0
+hint_tooltip = "Evolve into a strike mushroom: 
+300 minerals"
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 17 )
+expand = true
+stretch_mode = 3
+
+[node name="ToBomb" type="TextureButton" parent="HUD/Options/MarginContainer/GridContainer"]
+margin_left = 197.0
+margin_right = 290.0
 margin_bottom = 93.0
 hint_tooltip = "Evolve into a bomb: 
 500 minerals"
@@ -1014,9 +1028,9 @@ expand = true
 stretch_mode = 3
 
 [node name="ToDefend" type="TextureButton" parent="HUD/Options/MarginContainer/GridContainer"]
-margin_left = 197.0
-margin_right = 290.0
-margin_bottom = 93.0
+margin_top = 98.0
+margin_right = 94.0
+margin_bottom = 190.0
 hint_tooltip = "Evolve into a protective mushroom: 
 200 minerals"
 mouse_filter = 1
@@ -1024,20 +1038,6 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture_normal = ExtResource( 19 )
-expand = true
-stretch_mode = 3
-
-[node name="ToAttack" type="TextureButton" parent="HUD/Options/MarginContainer/GridContainer"]
-margin_top = 98.0
-margin_right = 94.0
-margin_bottom = 190.0
-hint_tooltip = "Evolve into a strike mushroom: 
-300 minerals"
-mouse_filter = 1
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture_normal = ExtResource( 17 )
 expand = true
 stretch_mode = 3
 
@@ -1278,9 +1278,9 @@ align = 1
 [connection signal="game_started" from="HUD" to="Camera2D" method="_on_HUD_game_started"]
 [connection signal="game_started" from="HUD" to="HUD/Time" method="_on_HUD_game_started"]
 [connection signal="pressed" from="HUD/Options/MarginContainer/GridContainer/Build" to="HUD" method="_on_Action_pressed" binds= [ 0 ]]
+[connection signal="pressed" from="HUD/Options/MarginContainer/GridContainer/ToAttack" to="HUD" method="_on_Action_pressed" binds= [ 1 ]]
 [connection signal="pressed" from="HUD/Options/MarginContainer/GridContainer/ToBomb" to="HUD" method="_on_Action_pressed" binds= [ 2 ]]
 [connection signal="pressed" from="HUD/Options/MarginContainer/GridContainer/ToDefend" to="HUD" method="_on_Action_pressed" binds= [ 3 ]]
-[connection signal="pressed" from="HUD/Options/MarginContainer/GridContainer/ToAttack" to="HUD" method="_on_Action_pressed" binds= [ 1 ]]
 [connection signal="pressed" from="HUD/Options/MarginContainer/GridContainer/Attack" to="HUD" method="_on_Action_pressed" binds= [ 4 ]]
 [connection signal="pressed" from="HUD/Options/MarginContainer/GridContainer/Explose" to="HUD" method="_on_Action_pressed" binds= [ 5 ]]
 [connection signal="pressed" from="HUD/Menu/MarginContainer/VBoxContainer/Back" to="HUD/Menu" method="_on_Back_pressed"]

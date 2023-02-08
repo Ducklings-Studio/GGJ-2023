@@ -160,13 +160,6 @@ func _unhandled_input(event):
 		if InputMap.event_is_action(event, "ui_left_mouse_button"):
 			var evpos = get_global_mouse_position() + delta
 			var coords = _floor.world_to_map(evpos)
-			
-			var tmp = can_select(coords)
-			if tmp != Vector2.INF:
-				coords = tmp
-				selected = get_parent().get_centered(coords)
-				_hud.show_options(get_parent().get_mushroom(selected).abilities)
-				return
 
 			if action == Global.BUILD and _fog.get_cellv(coords) and get_parent().can_be_built(selected, coords, gems):
 				var mushroom = get_parent().build(coords, 1, user_id)
@@ -193,7 +186,13 @@ func _unhandled_input(event):
 				else:
 					emit_signal("error", 0)
 				clean_action()
-
+			else:
+				var tmp = can_select(coords)
+				if tmp != Vector2.INF:
+					coords = tmp
+					selected = get_parent().get_centered(coords)
+					_hud.show_options(get_parent().get_mushroom(selected).abilities)
+					return
 		elif InputMap.event_is_action(event, "ui_right_mouse_button"):
 			clean_action()
 
