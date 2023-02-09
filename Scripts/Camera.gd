@@ -68,6 +68,7 @@ func _ready():
 	add_gems(0)
 
 	get_parent().connect("ended", self, "show_end_game")
+	get_parent().connect("mushroom_destroyed", self, "_on_mushroom_destroyed")
 	var base = get_parent().build(BASE_POS, 0, user_id)
 	if base.has_method("_on_Miner_timeout"):
 		base.connect("res_mined", self, "add_gems")
@@ -76,6 +77,11 @@ func _ready():
 	position = _floor.map_to_world(BASE_POS)
 	_hud.show_options([])
 	clean_action()
+
+
+func _on_mushroom_destroyed(coords):
+	if coords == selected:
+		select(null)
 
 
 func set_fog():
@@ -235,18 +241,20 @@ func select(coords):
 		if selected != null:
 			_tips.set_cellv(selected, -1)
 			var m = get_parent().get_mushroom(selected)
-			if m != null:
+			if m != null && m.has_signal("build"):
 				m.disconnect("built", self, "show_selected")
 		selected = coords
 		var m = get_parent().get_mushroom(selected)
 		_hud.show_options(m.abilities)
-		m.connect("built", self, "show_selected")
+		if not m.is_connected("built", self, "show_selected"):
+			m.connect("built", self, "show_selected")
 		show_selected()
 	else:
 		if selected != null:
 			_tips.set_cellv(selected, -1)
 			var m = get_parent().get_mushroom(selected)
-			m.disconnect("built", self, "show_selected")
+			if m != null && m.has_signal("build"):
+				m.disconnect("built", self, "show_selected")
 		selected = null
 		_hud.show_options([])
 
@@ -284,7 +292,8 @@ func process_action(action_id):
 	if mushroom != null and mushroom.has_method("_on_Miner_timeout"):
 		mushroom.connect("res_mined", self, "add_gems")
 		add_gems(-mushroom.cost)
-	_tips.set_cellv(selected, -1)
+	if selected != null:
+		_tips.set_cellv(selected, -1)
 	clean_action()
 
 
@@ -342,9 +351,13 @@ func _on_finisher_timeout(timer: Timer):
 
 func can_select(coords: Vector2) -> Vector2:
 	for i in range(3):
-		var tmp = coords + Vector2(i,i) 
-		if get_parent().objs.has(tmp) and get_parent().objs[tmp].user_id == user_id:
-			return tmp
+		var arr = [Vector2(i, i)]
+		if i != 2:
+			arr = [Vector2(i+1, i), Vector2(i, i), Vector2(i, i+1)]
+		for r in arr:
+			var tmp = coords + r
+			if get_parent().objs.has(tmp) and get_parent().objs[tmp].user_id == user_id:
+				return tmp
 	return Vector2.INF
 
 
@@ -366,4 +379,3 @@ func show_selected():
 	else:
 		return
 	_tips.set_cellv(selected, idx)
-

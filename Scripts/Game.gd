@@ -106,6 +106,7 @@ func build(coords: Vector2, class_id: int, user_id = 0):
 	$figures.add_child(mushroom)
 	return mushroom
 
+signal mushroom_destroyed(coords)
 
 func ruin(coords: Vector2):
 	if !objs.has(coords): return
@@ -128,6 +129,7 @@ func ruin(coords: Vector2):
 
 	$figures.set_cellv(coords, -1)
 	$figures.remove_child(mushroom)
+	emit_signal("mushroom_destroyed", coords)
 
 
 func evolve(coords: Vector2, class_id: int):
@@ -263,11 +265,15 @@ func can_attack_user(s: Vector2, f: Vector2):
 	
 	var roots = roots_trajectory(s, f)
 	
+	if is_not_attackable(f): return 4
+	
 	var prev = s
 	for r in roots:
 		if prev.x != r.x and prev.y != r.y:
 			if is_defender_root(prev.x, r.y) and is_defender_root(r.x, prev.y):
 				return 3
+		if is_defender_root(r.x, r.y):
+			return 3
 		if is_not_attackable(r):
 			return 4
 		prev = r
