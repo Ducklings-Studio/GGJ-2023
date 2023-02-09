@@ -68,13 +68,20 @@ func _ready():
 	add_gems(0)
 
 	get_parent().connect("ended", self, "show_end_game")
+	get_parent().connect("mushroom_destroyed", self, "_on_mushroom_destroyed")
 	var base = get_parent().build(BASE_POS, 0, user_id)
 	if base.has_method("_on_Miner_timeout"):
 		base.connect("res_mined", self, "add_gems")
 	remove_fog(0, BASE_POS)
 	
 	position = _floor.map_to_world(BASE_POS)
+	_hud.show_options([])
 	clean_action()
+
+
+func _on_mushroom_destroyed(coords):
+	if coords == selected:
+		select(null)
 
 
 func set_fog():
@@ -177,19 +184,20 @@ func _unhandled_input(event):
 					var err = get_parent().can_attack_user(selected, coords)
 					if err == 0 and get_parent().attack(selected, coords):
 						add_gems(-Global.I_ATTACK.attack_price)
-					elif err in [1,2]:
+					else:
 						emit_signal("error", err)
 				else:
-					emit_signal("error", 0)
+					emit_signal("error", 1)
 				clean_action()
 			else:
 				var tmp = can_select(coords)
 				if tmp != Vector2.INF:
 					coords = tmp
-					selected = get_parent().get_centered(coords)
-					_hud.show_options(get_parent().get_mushroom(selected).abilities)
+					select(get_parent().get_centered(coords))
+					var m = get_parent().get_mushroom(selected)
 					return
 		elif InputMap.event_is_action(event, "ui_right_mouse_button"):
+			select(null)
 			clean_action()
 
 	if event is InputEventMouseMotion and selected != null:
@@ -228,12 +236,35 @@ func _unhandled_input(event):
 		return
 
 
+func select(coords):
+	if coords != null:
+		if selected != null:
+			_tips.set_cellv(selected, -1)
+			var m = get_parent().get_mushroom(selected)
+			if m != null && m.has_signal("build"):
+				m.disconnect("built", self, "show_selected")
+		selected = coords
+		var m = get_parent().get_mushroom(selected)
+		_hud.show_options(m.abilities)
+		if not m.is_connected("built", self, "show_selected"):
+			m.connect("built", self, "show_selected")
+		show_selected()
+	else:
+		if selected != null:
+			_tips.set_cellv(selected, -1)
+			var m = get_parent().get_mushroom(selected)
+			if m != null && m.has_signal("build"):
+				m.disconnect("built", self, "show_selected")
+		selected = null
+		_hud.show_options([])
+
 func process_action(action_id):
 	action = action_id
 
 	if action == Global.EXPLODE:
 		if get_parent().explode(selected):
 			shake_strength = RANDOM_SHAKE_STRENGTH
+			select(null)
 		return
 
 	var mushroom
@@ -242,38 +273,42 @@ func process_action(action_id):
 			mushroom = get_parent().evolve(selected, 4)
 			new_endgame_parameter.Mushrooms += 1
 		else:
-			emit_signal("error", 0)
+			emit_signal("error", 1)
 	elif action == Global.E_BOMB:
 		if get_parent().is_enough_gems(2, gems, Global.E_BOMB):
 			mushroom = get_parent().evolve(selected, 2)
 			new_endgame_parameter.Mushrooms += 1
 		else:
-			emit_signal("error", 0)
+			emit_signal("error", 1)
 	elif action == Global.E_DEFENDER:
 		if get_parent().is_enough_gems(3, gems, Global.E_DEFENDER):
 			mushroom = get_parent().evolve(selected, 3)
 			new_endgame_parameter.Mushrooms += 1
 		else:
-			emit_signal("error", 0)
+			emit_signal("error", 1)
 	else:
 		return
 
 	if mushroom != null and mushroom.has_method("_on_Miner_timeout"):
 		mushroom.connect("res_mined", self, "add_gems")
 		add_gems(-mushroom.cost)
+	if selected != null:
+		_tips.set_cellv(selected, -1)
 	clean_action()
 
 
+var _prev_coords
 func clean_action():
-	selected = null
 	action = null
-	_hud.show_options([])
-	_tips.clear()
+	if _prev_coords != null:
+		_tips.set_cellv(_prev_coords, -1)
 
 
 func show_build_options(origin: Vector2, coords: Vector2, is_attack = false):
-	_tips.clear()
+	if _prev_coords != null:
+		_tips.set_cellv(_prev_coords, -1)
 	coords -= Vector2.ONE
+	_prev_coords = coords
 	
 	if is_attack:
 		_tips.set_cellv(coords, 6)
@@ -316,8 +351,31 @@ func _on_finisher_timeout(timer: Timer):
 
 func can_select(coords: Vector2) -> Vector2:
 	for i in range(3):
-		var tmp = coords + Vector2(i,i) 
-		if get_parent().objs.has(tmp) and get_parent().objs[tmp].user_id == user_id:
-			return tmp
+		var arr = [Vector2(i, i)]
+		if i != 2:
+			arr = [Vector2(i+1, i), Vector2(i, i), Vector2(i, i+1)]
+		for r in arr:
+			var tmp = coords + r
+			if get_parent().objs.has(tmp) and get_parent().objs[tmp].user_id == user_id:
+				return tmp
 	return Vector2.INF
-	
+
+
+func show_selected():
+	if selected == null: return
+	var m = get_parent().get_mushroom(selected)
+	if get_parent().is_not_ready(selected): return
+	var idx
+	if m is Base:
+		idx = 11
+	elif m is Standart:
+		idx = 7
+	elif m is Bomber:
+		idx = 8
+	elif m is Defender:
+		idx = 9
+	elif m is Attacker:
+		idx = 10
+	else:
+		return
+	_tips.set_cellv(selected, idx)

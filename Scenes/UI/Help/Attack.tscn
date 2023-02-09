@@ -36,7 +36,7 @@ custom_styles/bg = SubResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 margin_right = 734.0
-margin_bottom = 625.0
+margin_bottom = 688.0
 custom_constants/separation = 65
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
@@ -63,17 +63,18 @@ corner or press E"
 align = 2
 
 [node name="AttackActionIcon" type="Sprite" parent="ScrollContainer/VBoxContainer"]
-position = Vector2( 77, 373 )
+position = Vector2( 88, 420 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 4 )
 
 [node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer"]
 margin_top = 502.0
 margin_right = 734.0
-margin_bottom = 625.0
+margin_bottom = 688.0
 theme = ExtResource( 5 )
-text = "Finally, click the field
-you want to attack"
+text = "Finally, click on a
+mushroom, or a section of a
+root you want to cut."
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 anchor_top = 1.0

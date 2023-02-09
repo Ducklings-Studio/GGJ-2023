@@ -106,6 +106,7 @@ func build(coords: Vector2, class_id: int, user_id = 0):
 	$figures.add_child(mushroom)
 	return mushroom
 
+signal mushroom_destroyed(coords)
 
 func ruin(coords: Vector2):
 	if !objs.has(coords): return
@@ -128,6 +129,7 @@ func ruin(coords: Vector2):
 
 	$figures.set_cellv(coords, -1)
 	$figures.remove_child(mushroom)
+	emit_signal("mushroom_destroyed", coords)
 
 
 func evolve(coords: Vector2, class_id: int):
@@ -187,6 +189,12 @@ func clear_roots(s: Vector2, f: Vector2):
 		roots_dict.erase(r)
 		$floor.set_cellv(r, 0)
 
+func find_closest(s: Vector2, user_id):
+	for k in objs.keys():
+		if abs(s.x - k.x) <= 7 and abs(s.y - k.y) <= 7:
+			if objs[k].user_id == user_id:
+				return k
+	return null
 
 func build_roots(s: Vector2, f: Vector2, type_id: int, evolve = false):
 	var roots = roots_trajectory(s, f)
@@ -206,6 +214,11 @@ func build_roots(s: Vector2, f: Vector2, type_id: int, evolve = false):
 
 func attack(s: Vector2, f: Vector2):
 	if is_not_ready(s): return false
+	
+	var m = get_mushroom(s)
+	if not m is Attacker: return false
+	if not m.try_attack(): return false
+	
 	var l = (f-s).abs()
 	if max(l.x, l.y) > Global.I_ATTACK.attack_radius: return false
 
@@ -232,44 +245,37 @@ func attack(s: Vector2, f: Vector2):
 		build_roots(s, f, 13)
 	else:
 		clear_roots(s, f)
+
 	return true
 
 
 func can_attack(s: Vector2, f: Vector2):
-	if s == null or f == null:
-		return false
-	var l = (f-s).abs()
-	if max(l.x, l.y) > Global.I_ATTACK.attack_radius: return false
-	
-	var roots = roots_trajectory(s, f)
-	
-	var prev = s
-	for r in roots:
-		if prev.x != r.x and prev.y != r.y:
-			if is_defender_root(prev.x, r.y) and is_defender_root(r.x, prev.y):
-				return false
-		if is_not_attackable(r):
-			return false 
-		prev = r
-	
-	return true
+	return can_attack_user(s, f) == 0
 
 
 func can_attack_user(s: Vector2, f: Vector2):
 	if s == null or f == null:
-		return 1
+		return 2
 	var l = (f-s).abs()
-	if max(l.x, l.y) > Global.I_ATTACK.attack_radius: return 1
+	if max(l.x, l.y) > Global.I_ATTACK.attack_radius: return 2
+	
+	var m = get_mushroom(s)
+	if not m is Attacker: return 5
+	if not m.can_attack(): return 5
 	
 	var roots = roots_trajectory(s, f)
+	
+	if is_not_attackable(f): return 4
 	
 	var prev = s
 	for r in roots:
 		if prev.x != r.x and prev.y != r.y:
 			if is_defender_root(prev.x, r.y) and is_defender_root(r.x, prev.y):
-				return 2
+				return 3
+		if is_defender_root(r.x, r.y):
+			return 3
 		if is_not_attackable(r):
-			return 3 
+			return 4
 		prev = r
 	
 	return 0
