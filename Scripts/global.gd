@@ -27,9 +27,12 @@ var classes := [
 	preload("res://Scenes/Mushrooms/Attacker.tscn"),
 ]
 var errors := [
+	"",
 	"Not Enough Minerals",
 	"Too far",
-	"Impossible to break through the defense"
+	"Impossible to break through the defense",
+	"Cannot attack this tile",
+	"Reloading"
 ]
 var I_ATTACK: Attacker = classes[4].instance()
 

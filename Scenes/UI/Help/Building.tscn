@@ -38,16 +38,17 @@ margin_bottom = 200.0
 custom_styles/bg = SubResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 736.0
-margin_bottom = 1129.0
+margin_right = 816.0
+margin_bottom = 1570.0
 custom_constants/separation = 65
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_right = 736.0
-margin_bottom = 186.0
+margin_right = 816.0
+margin_bottom = 249.0
 theme = ExtResource( 8 )
 text = "How does building work?
-Select a mushroom or the 
+To build a new mushroom,
+select a mushroom or the 
 base (just left click it) "
 
 [node name="SimpleMushroomGreen" type="Sprite" parent="ScrollContainer/VBoxContainer"]
@@ -56,9 +57,9 @@ scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 4 )
 
 [node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_top = 251.0
-margin_right = 736.0
-margin_bottom = 437.0
+margin_top = 314.0
+margin_right = 816.0
+margin_bottom = 500.0
 theme = ExtResource( 8 )
 text = "Then click this ability in the 
 bottom right corner 
@@ -66,38 +67,44 @@ or press R"
 align = 2
 
 [node name="CreateSimpeMushroomIcon" type="Sprite" parent="ScrollContainer/VBoxContainer"]
-position = Vector2( 82, 373 )
+position = Vector2( 78, 417 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 7 )
 
 [node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_top = 502.0
-margin_right = 736.0
-margin_bottom = 1129.0
+margin_top = 565.0
+margin_right = 816.0
+margin_bottom = 1570.0
 theme = ExtResource( 8 )
-text = "You can have this
+text = "It costs 100 resources to
+build a basic mushroom.
+You can have this
 mushroom produce
-resources, or you can
+resources (1 resource
+per second), or you can
 evolve this mushroom 
-into a striking mushroom,
-a defensive mushroom,
-or an explosive mushroom.
+into a striking mushroom
+for 300 resources,
+a defensive mushroom for
+200 resources, or an explosive
+mushroom for 500
+resources.
 
 
 "
 
 [node name="EvolveAttackIcon" type="Sprite" parent="ScrollContainer/VBoxContainer"]
-position = Vector2( 599, 1015 )
+position = Vector2( 681, 1450 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 5 )
 
 [node name="EvolveBlackIcon" type="Sprite" parent="ScrollContainer/VBoxContainer"]
-position = Vector2( 403, 1012 )
+position = Vector2( 151, 1466 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
 
 [node name="EvolveShieldIcon" type="Sprite" parent="ScrollContainer/VBoxContainer"]
-position = Vector2( 195, 1015 )
+position = Vector2( 417, 1454 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
