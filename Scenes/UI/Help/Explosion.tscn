@@ -57,7 +57,7 @@ margin_top = 251.0
 margin_right = 806.0
 margin_bottom = 437.0
 theme = ExtResource( 5 )
-text = "Then click this            
+text = "Then click this
 ability in the bottom 
 right corner or press Q"
 align = 2
@@ -72,7 +72,7 @@ margin_top = 502.0
 margin_right = 806.0
 margin_bottom = 625.0
 theme = ExtResource( 5 )
-text = "Finally, bow before
+text = "Finally, marvel at
 an amazing mushroom blast"
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
