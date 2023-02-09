@@ -1,0 +1,117 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets/Style/Pixellari_style.tres" type="Theme" id=1]
+[ext_resource path="res://Assets/Style/button_styleboxflat.tres" type="StyleBox" id=2]
+[ext_resource path="res://Scripts/UI/Menu.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/UI/Settings.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Style/button_styleboxflat_hover.tres" type="StyleBox" id=5]
+[ext_resource path="res://Assets/MenuBg.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/UI/Difficulty.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/UI/Help.tscn" type="PackedScene" id=8]
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 7
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -160.5
+margin_top = -173.0
+margin_right = 160.5
+margin_bottom = 173.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 301.0
+margin_bottom = 326.0
+custom_constants/separation = 22
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer" groups=["ui_buttons"]]
+margin_right = 281.0
+margin_bottom = 60.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 15
+size_flags_vertical = 15
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "Play"
+
+[node name="Help" type="Button" parent="MarginContainer/VBoxContainer" groups=["ui_buttons"]]
+margin_top = 82.0
+margin_right = 281.0
+margin_bottom = 142.0
+mouse_default_cursor_shape = 2
+theme = ExtResource( 1 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "Tutorial"
+
+[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer" groups=["ui_buttons"]]
+margin_top = 164.0
+margin_right = 281.0
+margin_bottom = 224.0
+mouse_default_cursor_shape = 2
+theme = ExtResource( 1 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "Settings"
+
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer" groups=["ui_buttons"]]
+margin_top = 246.0
+margin_right = 281.0
+margin_bottom = 306.0
+mouse_default_cursor_shape = 2
+theme = ExtResource( 1 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "Exit"
+
+[node name="Settings" parent="." instance=ExtResource( 4 )]
+visible = false
+
+[node name="Difficulty" parent="." instance=ExtResource( 7 )]
+visible = false
+
+[node name="Help" parent="." instance=ExtResource( 8 )]
+visible = false
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Help" to="." method="_on_Help_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_Settings_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]
