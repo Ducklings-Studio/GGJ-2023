@@ -68,7 +68,7 @@ custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-text = "Build"
+text = "Building"
 
 [node name="StrikingMushroom" type="Button" parent="HBoxContainer/VBoxContainer" groups=["ui_buttons"]]
 margin_top = 230.0
