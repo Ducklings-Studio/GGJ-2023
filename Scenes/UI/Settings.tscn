@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Assets/Other/slider.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Style/Pixellari_style.tres" type="Theme" id=2]
@@ -6,9 +6,16 @@
 [ext_resource path="res://Scripts/UI/Settings.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Style/button_styleboxflat_hover.tres" type="StyleBox" id=5]
 [ext_resource path="res://Assets/MenuBg.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Style/small_text.tres" type="Theme" id=7]
+
+[sub_resource type="StyleBoxFlat" id=9]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color( 0, 0, 0, 0.862745 )
+corner_radius_top_left = 10
 
 [sub_resource type="StyleBoxFlat" id=8]
-corner_radius_top_left = 12
+bg_color = Color( 0, 0, 0, 0.862745 )
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
@@ -30,6 +37,23 @@ bg_color = Color( 0, 0, 0, 0.392157 )
 [sub_resource type="ImageTexture" id=1]
 
 [sub_resource type="ImageTexture" id=2]
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.117647, 0.117647, 0.117647, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 
 [node name="Settings" type="Control"]
 anchor_right = 1.0
@@ -63,36 +87,34 @@ margin_top = 20.0
 margin_right = 588.0
 margin_bottom = 267.0
 
-[node name="Panel" type="Panel" parent="MarginContainer/Control"]
-modulate = Color( 0, 0, 0, 0.862745 )
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/Control"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -225.5
-margin_top = -164.0
-margin_right = 225.5
-margin_bottom = 164.0
+margin_left = -282.0
+margin_top = -208.5
+margin_right = 282.0
+margin_bottom = 208.5
+theme = ExtResource( 7 )
+custom_constants/side_margin = 0
+custom_styles/tab_fg = SubResource( 9 )
 custom_styles/panel = SubResource( 8 )
+tab_align = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -200.0
-margin_top = -123.5
-margin_right = 200.0
-margin_bottom = 123.5
-custom_constants/separation = 120
+[node name="Audio" type="VBoxContainer" parent="MarginContainer/Control/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 41.0
 
-[node name="Control" type="Control" parent="MarginContainer/Control/VBoxContainer"]
-margin_right = 400.0
-margin_bottom = 63.0
+[node name="Control" type="Control" parent="MarginContainer/Control/TabContainer/Audio"]
+margin_right = 564.0
+margin_bottom = 186.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Audio" type="Label" parent="MarginContainer/Control/VBoxContainer/Control"]
+[node name="Audio" type="Label" parent="MarginContainer/Control/TabContainer/Audio/Control"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -104,7 +126,7 @@ margin_bottom = -2.0
 theme = ExtResource( 2 )
 text = "Sound FX"
 
-[node name="AudiSlider" type="HSlider" parent="MarginContainer/Control/VBoxContainer/Control" groups=["ui_sliders"]]
+[node name="AudiSlider" type="HSlider" parent="MarginContainer/Control/TabContainer/Audio/Control" groups=["ui_sliders"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -124,14 +146,14 @@ max_value = 10.0
 value = 5.0
 scrollable = false
 
-[node name="Control2" type="Control" parent="MarginContainer/Control/VBoxContainer"]
-margin_top = 183.0
-margin_right = 400.0
-margin_bottom = 247.0
+[node name="Control2" type="Control" parent="MarginContainer/Control/TabContainer/Audio"]
+margin_top = 190.0
+margin_right = 564.0
+margin_bottom = 376.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Music" type="Label" parent="MarginContainer/Control/VBoxContainer/Control2"]
+[node name="Music" type="Label" parent="MarginContainer/Control/TabContainer/Audio/Control2"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -143,7 +165,7 @@ margin_bottom = -2.0
 theme = ExtResource( 2 )
 text = "Music"
 
-[node name="MusicSlider" type="HSlider" parent="MarginContainer/Control/VBoxContainer/Control2" groups=["ui_sliders"]]
+[node name="MusicSlider" type="HSlider" parent="MarginContainer/Control/TabContainer/Audio/Control2" groups=["ui_sliders"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -162,6 +184,302 @@ custom_styles/grabber_area = SubResource( 4 )
 max_value = 10.0
 value = 5.0
 scrollable = false
+
+[node name="Control" type="MarginContainer" parent="MarginContainer/Control/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 41.0
+custom_constants/margin_right = 0
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="Scroll" type="ScrollContainer" parent="MarginContainer/Control/TabContainer/Control"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 564.0
+margin_bottom = 356.0
+scroll_horizontal_enabled = false
+scroll_vertical = 399
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll"]
+margin_left = 1.0
+margin_top = -399.0
+margin_right = 531.0
+margin_bottom = 336.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+custom_constants/separation = 15
+alignment = 1
+
+[node name="MOVE_LEFT" type="HBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox"]
+margin_right = 530.0
+margin_bottom = 60.0
+size_flags_vertical = 6
+custom_constants/separation = 40
+
+[node name="Left" type="Label" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_LEFT"]
+margin_right = 300.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 300, 0 )
+theme = ExtResource( 2 )
+text = "Move Left"
+
+[node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_LEFT"]
+margin_left = 340.0
+margin_right = 530.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 190, 0 )
+focus_mode = 0
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/normal = SubResource( 11 )
+toggle_mode = true
+enabled_focus_mode = 0
+text = "LEFT ARROW"
+
+[node name="MOVE_RIGHT" type="HBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox"]
+margin_top = 75.0
+margin_right = 530.0
+margin_bottom = 135.0
+size_flags_vertical = 6
+custom_constants/separation = 40
+
+[node name="Right" type="Label" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_RIGHT"]
+margin_right = 300.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 300, 0 )
+theme = ExtResource( 2 )
+text = "Move Right"
+
+[node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_RIGHT"]
+margin_left = 340.0
+margin_right = 530.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 190, 0 )
+focus_mode = 0
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/normal = SubResource( 11 )
+toggle_mode = true
+enabled_focus_mode = 0
+text = "LEFT ARROW"
+
+[node name="MOVE_UP" type="HBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox"]
+margin_top = 150.0
+margin_right = 530.0
+margin_bottom = 210.0
+size_flags_vertical = 6
+custom_constants/separation = 40
+
+[node name="Up" type="Label" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_UP"]
+margin_right = 300.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 300, 0 )
+theme = ExtResource( 2 )
+text = "Move Up"
+
+[node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_UP"]
+margin_left = 340.0
+margin_right = 530.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 190, 0 )
+focus_mode = 0
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/normal = SubResource( 11 )
+toggle_mode = true
+enabled_focus_mode = 0
+text = "LEFT ARROW"
+
+[node name="MOVE_DOWN" type="HBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox"]
+margin_top = 225.0
+margin_right = 530.0
+margin_bottom = 285.0
+size_flags_vertical = 6
+custom_constants/separation = 40
+
+[node name="Down" type="Label" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_DOWN"]
+margin_right = 300.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 300, 0 )
+theme = ExtResource( 2 )
+text = "Move Down"
+
+[node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_DOWN"]
+margin_left = 340.0
+margin_right = 530.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 190, 0 )
+focus_mode = 0
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/normal = SubResource( 11 )
+toggle_mode = true
+enabled_focus_mode = 0
+text = "LEFT ARROW"
+
+[node name="BUILD" type="HBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox"]
+margin_top = 300.0
+margin_right = 530.0
+margin_bottom = 360.0
+size_flags_vertical = 6
+custom_constants/separation = 40
+
+[node name="Build" type="Label" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/BUILD"]
+margin_right = 300.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 300, 0 )
+theme = ExtResource( 2 )
+text = "Build"
+
+[node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/BUILD"]
+margin_left = 340.0
+margin_right = 530.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 190, 0 )
+focus_mode = 0
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/normal = SubResource( 11 )
+toggle_mode = true
+enabled_focus_mode = 0
+text = "LEFT ARROW"
+
+[node name="E_ATTACKER" type="HBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox"]
+margin_top = 375.0
+margin_right = 530.0
+margin_bottom = 435.0
+size_flags_vertical = 6
+custom_constants/separation = 40
+
+[node name="Attack" type="Label" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/E_ATTACKER"]
+margin_right = 300.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 300, 0 )
+theme = ExtResource( 2 )
+text = "E_Attacker"
+
+[node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/E_ATTACKER"]
+margin_left = 340.0
+margin_right = 530.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 190, 0 )
+focus_mode = 0
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/normal = SubResource( 11 )
+toggle_mode = true
+enabled_focus_mode = 0
+text = "LEFT ARROW"
+
+[node name="E_DEFENDER" type="HBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox"]
+margin_top = 450.0
+margin_right = 530.0
+margin_bottom = 510.0
+size_flags_vertical = 6
+custom_constants/separation = 40
+
+[node name="Defend" type="Label" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/E_DEFENDER"]
+margin_right = 300.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 300, 0 )
+theme = ExtResource( 2 )
+text = "E_Defense"
+
+[node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/E_DEFENDER"]
+margin_left = 340.0
+margin_right = 530.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 190, 0 )
+focus_mode = 0
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/normal = SubResource( 11 )
+toggle_mode = true
+enabled_focus_mode = 0
+text = "LEFT ARROW"
+
+[node name="E_BOMB" type="HBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox"]
+margin_top = 525.0
+margin_right = 530.0
+margin_bottom = 585.0
+size_flags_vertical = 6
+custom_constants/separation = 40
+
+[node name="Bomb" type="Label" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/E_BOMB"]
+margin_right = 300.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 300, 0 )
+theme = ExtResource( 2 )
+text = "E_Bomb"
+
+[node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/E_BOMB"]
+margin_left = 340.0
+margin_right = 530.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 190, 0 )
+focus_mode = 0
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/normal = SubResource( 11 )
+toggle_mode = true
+enabled_focus_mode = 0
+text = "LEFT ARROW"
+
+[node name="ATTACK" type="HBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox"]
+margin_top = 600.0
+margin_right = 530.0
+margin_bottom = 660.0
+size_flags_vertical = 6
+custom_constants/separation = 40
+
+[node name="Attack" type="Label" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/ATTACK"]
+margin_right = 300.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 300, 0 )
+theme = ExtResource( 2 )
+text = "Attack"
+
+[node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/ATTACK"]
+margin_left = 340.0
+margin_right = 530.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 190, 0 )
+focus_mode = 0
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/normal = SubResource( 11 )
+toggle_mode = true
+enabled_focus_mode = 0
+text = "LEFT ARROW"
+
+[node name="EXPLODE" type="HBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox"]
+margin_top = 675.0
+margin_right = 530.0
+margin_bottom = 735.0
+size_flags_vertical = 6
+custom_constants/separation = 40
+
+[node name="Explode" type="Label" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/EXPLODE"]
+margin_right = 300.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 300, 0 )
+theme = ExtResource( 2 )
+text = "Explode"
+
+[node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/EXPLODE"]
+margin_left = 340.0
+margin_right = 530.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 190, 0 )
+focus_mode = 0
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/normal = SubResource( 11 )
+toggle_mode = true
+enabled_focus_mode = 0
+text = "LEFT ARROW"
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 anchor_top = 1.0
@@ -188,6 +506,16 @@ custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 text = "Back"
 
-[connection signal="value_changed" from="MarginContainer/Control/VBoxContainer/Control/AudiSlider" to="." method="_on_AudiSlider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/Control/VBoxContainer/Control2/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/Control/TabContainer/Audio/Control/AudiSlider" to="." method="_on_AudiSlider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/Control/TabContainer/Audio/Control2/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
+[connection signal="pressed" from="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_LEFT/Button" to="." method="_on_bind_key" binds= [ "MOVE_LEFT" ]]
+[connection signal="pressed" from="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_RIGHT/Button" to="." method="_on_bind_key" binds= [ "MOVE_RIGHT" ]]
+[connection signal="pressed" from="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_UP/Button" to="." method="_on_bind_key" binds= [ "MOVE_UP" ]]
+[connection signal="pressed" from="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_DOWN/Button" to="." method="_on_bind_key" binds= [ "MOVE_DOWN" ]]
+[connection signal="pressed" from="MarginContainer/Control/TabContainer/Control/Scroll/VBox/BUILD/Button" to="." method="_on_bind_key" binds= [ "BUILD" ]]
+[connection signal="pressed" from="MarginContainer/Control/TabContainer/Control/Scroll/VBox/E_ATTACKER/Button" to="." method="_on_bind_key" binds= [ "E_ATTACKER" ]]
+[connection signal="pressed" from="MarginContainer/Control/TabContainer/Control/Scroll/VBox/E_DEFENDER/Button" to="." method="_on_bind_key" binds= [ "E_DEFENDER" ]]
+[connection signal="pressed" from="MarginContainer/Control/TabContainer/Control/Scroll/VBox/E_BOMB/Button" to="." method="_on_bind_key" binds= [ "E_BOMB" ]]
+[connection signal="pressed" from="MarginContainer/Control/TabContainer/Control/Scroll/VBox/ATTACK/Button" to="." method="_on_bind_key" binds= [ "ATTACK" ]]
+[connection signal="pressed" from="MarginContainer/Control/TabContainer/Control/Scroll/VBox/EXPLODE/Button" to="." method="_on_bind_key" binds= [ "EXPLODE" ]]
 [connection signal="pressed" from="MarginContainer2/Back" to="." method="_on_Back_pressed"]

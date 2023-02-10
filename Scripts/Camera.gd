@@ -112,8 +112,8 @@ func _process(delta):
 	
 	if is_blocking:
 		return
-	var inpx = (int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left")))
-	var inpy = (int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up")))
+	var inpx = (int(Input.is_action_pressed("MOVE_RIGHT")) - int(Input.is_action_pressed("MOVE_LEFT")))
+	var inpy = (int(Input.is_action_pressed("MOVE_DOWN")) - int(Input.is_action_pressed("MOVE_UP")))
 	position.x = lerp(position.x, position.x + inpx * speed * zoom.x, speed * delta)
 	position.y = lerp(position.y, position.y + inpy * speed * zoom.y, speed * delta)
 
@@ -212,26 +212,26 @@ func _unhandled_input(event):
 
 	var mushroom = get_parent().get_mushroom(selected)
 	if mushroom == null: return
-	if InputMap.event_is_action(event, "build") and "min_build_radius" in mushroom:
+	if InputMap.event_is_action(event, "BUILD") and "min_build_radius" in mushroom:
 		process_action(Global.BUILD)
 		return
-	if InputMap.event_is_action(event, "attack") and mushroom is Attacker:
+	if InputMap.event_is_action(event, "ATTACK") and mushroom is Attacker:
 		process_action(Global.ATTACK)
 		return
-	if InputMap.event_is_action(event, "explode") and mushroom is Bomber:
+	if InputMap.event_is_action(event, "EXPLODE") and mushroom is Bomber:
 		process_action(Global.EXPLODE)
 		return
 	
 	if not mushroom is Standart:
 		return
 	
-	if InputMap.event_is_action(event, "evolve_attack"):
+	if InputMap.event_is_action(event, "E_ATTACKER"):
 		process_action(Global.E_ATTACK)
 		return
-	if InputMap.event_is_action(event, "evolve_bomb"):
+	if InputMap.event_is_action(event, "E_BOMB"):
 		process_action(Global.E_BOMB)
 		return
-	if InputMap.event_is_action(event, "evolve_defender"):
+	if InputMap.event_is_action(event, "E_DEFENDER"):
 		process_action(Global.E_DEFENDER)
 		return
 
