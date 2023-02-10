@@ -103,7 +103,6 @@ custom_styles/panel = SubResource( 8 )
 tab_align = 0
 
 [node name="Audio" type="VBoxContainer" parent="MarginContainer/Control/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 41.0
@@ -186,6 +185,7 @@ value = 5.0
 scrollable = false
 
 [node name="Control" type="MarginContainer" parent="MarginContainer/Control/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 41.0
@@ -200,13 +200,11 @@ margin_top = 20.0
 margin_right = 564.0
 margin_bottom = 356.0
 scroll_horizontal_enabled = false
-scroll_vertical = 399
 
 [node name="VBox" type="VBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll"]
-margin_left = 1.0
-margin_top = -399.0
-margin_right = 531.0
-margin_bottom = 336.0
+margin_left = 7.0
+margin_right = 537.0
+margin_bottom = 735.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 custom_constants/separation = 15
