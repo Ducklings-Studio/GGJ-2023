@@ -19,6 +19,18 @@ enum {
 	ATTACK, 
 	EXPLODE,
 }
+enum ACTIONS {
+	MOVE_LEFT, 
+	MOVE_RIGHT, 
+	MOVE_UP, 
+	MOVE_DOWN,
+	BUILD,
+	ATTACK,
+	EXPLODE,
+	E_ATTACKER,
+	E_DEFENDER,
+	E_BOMB,
+}
 var classes := [
 	preload("res://Scenes/Mushrooms/Base.tscn"),
 	preload("res://Scenes/Mushrooms/Standart.tscn"),
