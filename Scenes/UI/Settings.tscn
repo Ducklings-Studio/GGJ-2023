@@ -221,7 +221,7 @@ margin_right = 300.0
 margin_bottom = 62.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 2 )
-text = "Move Left"
+text = "K_S_LEFT"
 
 [node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_LEFT"]
 margin_left = 340.0
@@ -248,7 +248,7 @@ margin_right = 300.0
 margin_bottom = 62.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 2 )
-text = "Move Right"
+text = "K_S_RIGHT"
 
 [node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_RIGHT"]
 margin_left = 340.0
@@ -275,7 +275,7 @@ margin_right = 300.0
 margin_bottom = 62.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 2 )
-text = "Move Up"
+text = "K_S_UP"
 
 [node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_UP"]
 margin_left = 340.0
@@ -302,7 +302,7 @@ margin_right = 300.0
 margin_bottom = 62.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 2 )
-text = "Move Down"
+text = "K_S_DOWN"
 
 [node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_DOWN"]
 margin_left = 340.0
@@ -329,7 +329,7 @@ margin_right = 300.0
 margin_bottom = 62.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 2 )
-text = "Build"
+text = "K_S_BLD"
 
 [node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/BUILD"]
 margin_left = 340.0
@@ -356,7 +356,7 @@ margin_right = 300.0
 margin_bottom = 62.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 2 )
-text = "E_Attacker"
+text = "K_S_E_A"
 
 [node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/E_ATTACKER"]
 margin_left = 340.0
@@ -383,7 +383,7 @@ margin_right = 300.0
 margin_bottom = 62.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 2 )
-text = "E_Defense"
+text = "K_S_E_D"
 
 [node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/E_DEFENDER"]
 margin_left = 340.0
@@ -410,7 +410,7 @@ margin_right = 300.0
 margin_bottom = 62.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 2 )
-text = "E_Bomb"
+text = "K_S_E_B"
 
 [node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/E_BOMB"]
 margin_left = 340.0
@@ -437,7 +437,7 @@ margin_right = 300.0
 margin_bottom = 62.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 2 )
-text = "Attack"
+text = "K_S_ATK"
 
 [node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/ATTACK"]
 margin_left = 340.0
@@ -464,7 +464,7 @@ margin_right = 300.0
 margin_bottom = 62.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 2 )
-text = "Explode"
+text = "K_S_EXP"
 
 [node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/EXPLODE"]
 margin_left = 340.0
