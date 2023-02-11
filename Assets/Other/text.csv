@@ -3,6 +3,11 @@ K_PLAY,Play,Грати
 K_TUTOR,Tutorial,Посібник
 K_SETTING,Settings,Налаштування
 K_EXIT,Exit,Вийти
+K_H_BR,Basic Rules,Початок
+K_H_B,Building,Будівництво
+K_H_A,Attack,Атака
+K_H_D,Defense,Захист
+K_H_E,Explosion,Вибух
 K_BACK,Back,Назад
 K_MENU,Menu,Меню
 K_LANG,Language,Мова

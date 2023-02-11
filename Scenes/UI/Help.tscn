@@ -54,7 +54,7 @@ custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-text = "Basic rules"
+text = "K_H_BR"
 
 [node name="Building" type="Button" parent="HBoxContainer/VBoxContainer" groups=["ui_buttons"]]
 margin_top = 137.0
@@ -68,7 +68,7 @@ custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-text = "Building"
+text = "K_H_B"
 
 [node name="StrikingMushroom" type="Button" parent="HBoxContainer/VBoxContainer" groups=["ui_buttons"]]
 margin_top = 229.0
@@ -82,7 +82,7 @@ custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-text = "Attack"
+text = "K_H_A"
 
 [node name="ProtectiveMushroom" type="Button" parent="HBoxContainer/VBoxContainer" groups=["ui_buttons"]]
 margin_top = 321.0
@@ -96,7 +96,7 @@ custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-text = "Defence"
+text = "K_H_D"
 
 [node name="UnstableMushroom2" type="Button" parent="HBoxContainer/VBoxContainer" groups=["ui_buttons"]]
 margin_top = 413.0
@@ -110,7 +110,7 @@ custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-text = "Explosion"
+text = "K_H_E"
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 anchor_top = 1.0
