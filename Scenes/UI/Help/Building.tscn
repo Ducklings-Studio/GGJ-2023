@@ -31,80 +31,71 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -425.0
-margin_top = -250.0
-margin_right = 425.0
-margin_bottom = 200.0
+margin_left = -450.0
+margin_top = -257.0
+margin_right = 450.0
+margin_bottom = 193.0
 custom_styles/bg = SubResource( 1 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 816.0
-margin_bottom = 1570.0
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
+margin_right = 900.0
+margin_bottom = 356.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 880.0
+margin_bottom = 336.0
 custom_constants/separation = 65
 
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_right = 816.0
-margin_bottom = 249.0
+[node name="Label" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer"]
+margin_right = 860.0
+margin_bottom = 62.0
 theme = ExtResource( 8 )
-text = "How does building work?
-To build a new mushroom,
-select a mushroom or the 
-base (just left click it) "
+text = "K_T_B_1"
 
-[node name="SimpleMushroomGreen" type="Sprite" parent="ScrollContainer/VBoxContainer"]
-position = Vector2( 736, 177 )
+[node name="SimpleMushroomGreen" type="Sprite" parent="ScrollContainer/MarginContainer/VBoxContainer"]
+position = Vector2( 736, 257 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 4 )
 
-[node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_top = 314.0
-margin_right = 816.0
-margin_bottom = 500.0
+[node name="Label2" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 127.0
+margin_right = 860.0
+margin_bottom = 189.0
 theme = ExtResource( 8 )
-text = "Then click this ability in the 
-bottom right corner 
-or press R"
+text = "K_T_B_2"
 align = 2
 
-[node name="CreateSimpeMushroomIcon" type="Sprite" parent="ScrollContainer/VBoxContainer"]
-position = Vector2( 78, 417 )
+[node name="CreateSimpeMushroomIcon" type="Sprite" parent="ScrollContainer/MarginContainer/VBoxContainer"]
+position = Vector2( 54, 409 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 7 )
 
-[node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_top = 565.0
-margin_right = 816.0
-margin_bottom = 1570.0
+[node name="Label3" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 254.0
+margin_right = 860.0
+margin_bottom = 316.0
 theme = ExtResource( 8 )
-text = "It costs 100 resources to
-build a basic mushroom.
-You can have this
-mushroom produce
-resources (1 resource
-per second), or you can
-evolve this mushroom 
-into a striking mushroom
-for 300 resources,
-a defensive mushroom for
-200 resources, or an explosive
-mushroom for 500
-resources.
+text = "K_T_B_3"
 
-
-"
-
-[node name="EvolveAttackIcon" type="Sprite" parent="ScrollContainer/VBoxContainer"]
-position = Vector2( 681, 1450 )
+[node name="EvolveAttackIcon" type="Sprite" parent="ScrollContainer/MarginContainer/VBoxContainer"]
+position = Vector2( 681, 1490 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 5 )
 
-[node name="EvolveBlackIcon" type="Sprite" parent="ScrollContainer/VBoxContainer"]
-position = Vector2( 151, 1466 )
+[node name="EvolveBlackIcon" type="Sprite" parent="ScrollContainer/MarginContainer/VBoxContainer"]
+position = Vector2( 151, 1506 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
 
-[node name="EvolveShieldIcon" type="Sprite" parent="ScrollContainer/VBoxContainer"]
-position = Vector2( 417, 1454 )
+[node name="EvolveShieldIcon" type="Sprite" parent="ScrollContainer/MarginContainer/VBoxContainer"]
+position = Vector2( 417, 1494 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
@@ -112,7 +103,8 @@ texture = ExtResource( 3 )
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -100.0
-margin_right = 188.0
+margin_right = 236.0
+margin_bottom = 2.0
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
@@ -121,8 +113,8 @@ custom_constants/margin_bottom = 20
 [node name="Back" type="Button" parent="MarginContainer2" groups=["ui_buttons"]]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 168.0
-margin_bottom = 80.0
+margin_right = 216.0
+margin_bottom = 82.0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 8 )
 custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
@@ -131,6 +123,6 @@ custom_styles/pressed = ExtResource( 9 )
 custom_styles/focus = ExtResource( 9 )
 custom_styles/disabled = ExtResource( 9 )
 custom_styles/normal = ExtResource( 9 )
-text = "Back"
+text = "K_BACK"
 
 [connection signal="pressed" from="MarginContainer2/Back" to="." method="_on_Back_pressed"]

@@ -19,3 +19,7 @@ func _on_Exit_pressed():
 
 func _on_MenuBtn_pressed():
 	set_visible(true)
+
+
+func _on_Help_pressed():
+	$"../Help".set_visible(true)

@@ -27,38 +27,35 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -432.0
-margin_top = -224.0
-margin_right = 435.0
-margin_bottom = 209.0
+margin_left = -450.0
+margin_top = -257.0
+margin_right = 450.0
+margin_bottom = 176.0
 custom_styles/bg = SubResource( 1 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 809.0
-margin_bottom = 942.0
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
+margin_right = 900.0
+margin_bottom = 102.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 880.0
+margin_bottom = 82.0
 custom_constants/separation = 65
 
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_right = 809.0
-margin_bottom = 942.0
+[node name="Label" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer"]
+margin_right = 860.0
+margin_bottom = 62.0
 theme = ExtResource( 4 )
-text = "How does defence work?
-After you evolve some of
-your mushrooms into
-defensive mushrooms,
-they form a wall (within range)
-that cannot be built through
-(or shot through with the
-striking mushroom) neither
-by you or the enemy.
-However, you can build 
-off of your defensive
-mushrooms.
-The only way to break the wall
-is using an explosive
-mushroom."
+text = "K_T_D_1"
 
-[node name="DefenceMushroomGreen" type="Sprite" parent="ScrollContainer/VBoxContainer"]
+[node name="DefenceMushroomGreen" type="Sprite" parent="ScrollContainer/MarginContainer/VBoxContainer"]
 position = Vector2( 697, 178 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 3 )
@@ -67,7 +64,8 @@ texture = ExtResource( 3 )
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -100.0
-margin_right = 188.0
+margin_right = 236.0
+margin_bottom = 2.0
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
@@ -76,8 +74,8 @@ custom_constants/margin_bottom = 20
 [node name="Back" type="Button" parent="MarginContainer2" groups=["ui_buttons"]]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 168.0
-margin_bottom = 80.0
+margin_right = 216.0
+margin_bottom = 82.0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 4 )
 custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
@@ -86,6 +84,6 @@ custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 5 )
 custom_styles/normal = ExtResource( 5 )
-text = "Back"
+text = "K_BACK"
 
 [connection signal="pressed" from="MarginContainer2/Back" to="." method="_on_Back_pressed"]

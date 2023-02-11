@@ -13,6 +13,8 @@ onready var AudiSlider = $MarginContainer/Control/TabContainer/Audio/Control/Aud
 onready var musicValueTemp = MusicSlider.value
 onready var interfaceValueTemp = AudiSlider.value
 
+onready var locales = $MarginContainer/Control/TabContainer/Other/Scroll/VBox/Lang/Option
+
 var can_change_key = false
 var action_string
 
@@ -27,6 +29,7 @@ func _ready():
 	AudioManager.set_volume()
 	
 	_set_keys() 
+	_set_locales()
 
 
 func _input(event):
@@ -89,3 +92,14 @@ func _change_key(new_key):
 
 func _on_bind_key(key):
 	_mark_button(key)
+
+
+func _set_locales():
+	for l in Global.Locales:
+		locales.add_item(Global.from_code(l))
+	locales.selected = Global.locale_chosen
+
+
+func _on_locale_selected(index):
+	Global.locale_chosen = index
+	TranslationServer.set_locale(Global.Locales[index])

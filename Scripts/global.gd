@@ -40,13 +40,15 @@ var classes := [
 ]
 var errors := [
 	"",
-	"Not Enough Minerals",
-	"Too far",
-	"Impossible to break through the defense",
-	"Cannot attack this tile",
-	"Reloading"
+	"K_NOT_M",
+	"K_FAR",
+	"K_IBD",
+	"K_NOT_A",
+	"K_RELOAD"
 ]
 var I_ATTACK: Attacker = classes[4].instance()
+var Locales = TranslationServer.get_loaded_locales()
+var locale_chosen = Locales.find(TranslationServer.get_locale())
 
 
 func set_endgame_parameter(new_endgame_parameter):
@@ -82,3 +84,10 @@ func play_button():
 
 func play_slider(_tmp):
 	AudioManager.play("res://Assets/Audio/Effects/SliderSound.wav")
+
+
+func from_code(code: String):
+	var name = TranslationServer.get_locale_name(code)
+	if name.empty():
+		return code
+	return name

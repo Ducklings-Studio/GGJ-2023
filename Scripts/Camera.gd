@@ -77,6 +77,8 @@ func _ready():
 	position = _floor.map_to_world(BASE_POS)
 	_hud.show_options([])
 	clean_action()
+	
+	new_endgame_parameter.MineralsMine = gems
 
 
 func _on_mushroom_destroyed(coords):
@@ -208,33 +210,6 @@ func _unhandled_input(event):
 		elif action == Global.ATTACK:
 			show_build_options(selected, coords, true)
 
-	if event.is_pressed() or selected == null: return
-
-	var mushroom = get_parent().get_mushroom(selected)
-	if mushroom == null: return
-	if InputMap.event_is_action(event, "BUILD") and "min_build_radius" in mushroom:
-		process_action(Global.BUILD)
-		return
-	if InputMap.event_is_action(event, "ATTACK") and mushroom is Attacker:
-		process_action(Global.ATTACK)
-		return
-	if InputMap.event_is_action(event, "EXPLODE") and mushroom is Bomber:
-		process_action(Global.EXPLODE)
-		return
-	
-	if not mushroom is Standart:
-		return
-	
-	if InputMap.event_is_action(event, "E_ATTACKER"):
-		process_action(Global.E_ATTACK)
-		return
-	if InputMap.event_is_action(event, "E_BOMB"):
-		process_action(Global.E_BOMB)
-		return
-	if InputMap.event_is_action(event, "E_DEFENDER"):
-		process_action(Global.E_DEFENDER)
-		return
-
 
 func select(coords):
 	if coords != null:
@@ -258,29 +233,40 @@ func select(coords):
 		selected = null
 		_hud.show_options([])
 
-func process_action(action_id):
-	action = action_id
 
-	if action == Global.EXPLODE:
+func process_action(action_id):
+	var mushroom = get_parent().get_mushroom(selected)
+	if mushroom == null: return
+	
+	action = action_id
+	
+	if action == Global.ATTACK and not mushroom is Attacker:
+		action = null
+		return
+	
+	if action == Global.BUILD and not "min_build_radius" in mushroom:
+		action = null
+		return
+	
+	if action == Global.EXPLODE and mushroom is Bomber:
 		if get_parent().explode(selected):
 			shake_strength = RANDOM_SHAKE_STRENGTH
 			select(null)
 		return
 
-	var mushroom
-	if action == Global.E_ATTACK:
+	if action == Global.E_ATTACK and mushroom is Standart:
 		if get_parent().is_enough_gems(4, gems, Global.E_ATTACK):
 			mushroom = get_parent().evolve(selected, 4)
 			new_endgame_parameter.Mushrooms += 1
 		else:
 			emit_signal("error", 1)
-	elif action == Global.E_BOMB:
+	elif action == Global.E_BOMB and mushroom is Standart:
 		if get_parent().is_enough_gems(2, gems, Global.E_BOMB):
 			mushroom = get_parent().evolve(selected, 2)
 			new_endgame_parameter.Mushrooms += 1
 		else:
 			emit_signal("error", 1)
-	elif action == Global.E_DEFENDER:
+	elif action == Global.E_DEFENDER and mushroom is Standart:
 		if get_parent().is_enough_gems(3, gems, Global.E_DEFENDER):
 			mushroom = get_parent().evolve(selected, 3)
 			new_endgame_parameter.Mushrooms += 1
@@ -289,9 +275,9 @@ func process_action(action_id):
 	else:
 		return
 
-	if mushroom != null and mushroom.has_method("_on_Miner_timeout"):
-		mushroom.connect("res_mined", self, "add_gems")
-		add_gems(-mushroom.cost)
+	#if mushroom != null and mushroom.has_method("_on_Miner_timeout"):
+	#	mushroom.connect("res_mined", self, "add_gems")
+	#	add_gems(-mushroom.cost)
 	if selected != null:
 		_tips.set_cellv(selected, -1)
 	clean_action()
@@ -333,11 +319,11 @@ func show_end_game(win):
 	
 	new_endgame_parameter.MatchTimer = _hud.Get_Time()
 	if win:
-		new_endgame_parameter.EndGameText = "All enemy mycelium \nwas defeated"
+		new_endgame_parameter.EndGameText = "K_WIN"
 		new_endgame_parameter.BgPicture = "WinBg.png"
 		new_endgame_parameter.BgAudio = "WinAudio.ogg"
 	else:
-		new_endgame_parameter.EndGameText = "Your mycelium \nwas defeated"
+		new_endgame_parameter.EndGameText = "K_LOST"
 		new_endgame_parameter.BgPicture = "LoseBg.png"
 		new_endgame_parameter.BgAudio = "LoseAudio.ogg"
 	Global.set_endgame_parameter(new_endgame_parameter)
