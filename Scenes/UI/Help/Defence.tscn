@@ -34,29 +34,15 @@ margin_bottom = 209.0
 custom_styles/bg = SubResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 791.0
-margin_bottom = 972.0
+margin_right = 207.0
+margin_bottom = 62.0
 custom_constants/separation = 65
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_right = 791.0
-margin_bottom = 972.0
+margin_right = 207.0
+margin_bottom = 62.0
 theme = ExtResource( 4 )
-text = "How does defence work?
-After you evolve some of
-your mushrooms into
-defensive mushrooms,
-they form a wall (within range)
-that cannot be built through
-(or shot through with the
-striking mushroom) neither
-by you or the enemy.
-However, you can build 
-off of your defensive
-mushrooms.
-The only way to break the wall
-is using an explosive
-mushroom."
+text = "K_T_D_1"
 
 [node name="DefenceMushroomGreen" type="Sprite" parent="ScrollContainer/VBoxContainer"]
 position = Vector2( 697, 178 )

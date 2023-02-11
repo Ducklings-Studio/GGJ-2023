@@ -38,18 +38,15 @@ margin_bottom = 200.0
 custom_styles/bg = SubResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 801.0
-margin_bottom = 1616.0
+margin_right = 218.0
+margin_bottom = 316.0
 custom_constants/separation = 65
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_right = 801.0
-margin_bottom = 257.0
+margin_right = 218.0
+margin_bottom = 62.0
 theme = ExtResource( 8 )
-text = "How does building work?
-To build a new mushroom,
-select a mushroom or the 
-base (just left click it) "
+text = "K_T_B_1"
 
 [node name="SimpleMushroomGreen" type="Sprite" parent="ScrollContainer/VBoxContainer"]
 position = Vector2( 736, 177 )
@@ -57,13 +54,11 @@ scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 4 )
 
 [node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_top = 322.0
-margin_right = 801.0
-margin_bottom = 514.0
+margin_top = 127.0
+margin_right = 218.0
+margin_bottom = 189.0
 theme = ExtResource( 8 )
-text = "Then click this ability in the 
-bottom right corner 
-or press R"
+text = "K_T_B_2"
 align = 2
 
 [node name="CreateSimpeMushroomIcon" type="Sprite" parent="ScrollContainer/VBoxContainer"]
@@ -72,26 +67,11 @@ scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 7 )
 
 [node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_top = 579.0
-margin_right = 801.0
-margin_bottom = 1616.0
+margin_top = 254.0
+margin_right = 218.0
+margin_bottom = 316.0
 theme = ExtResource( 8 )
-text = "It costs 100 resources to
-build a basic mushroom.
-You can have this
-mushroom produce
-resources (1 resource
-per second), or you can
-evolve this mushroom 
-into a striking mushroom
-for 300 resources,
-a defensive mushroom for
-200 resources, or an explosive
-mushroom for 500
-resources.
-
-
-"
+text = "K_T_B_3"
 
 [node name="EvolveAttackIcon" type="Sprite" parent="ScrollContainer/VBoxContainer"]
 position = Vector2( 681, 1450 )

@@ -35,17 +35,15 @@ margin_bottom = 200.0
 custom_styles/bg = SubResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 788.0
-margin_bottom = 641.0
+margin_right = 213.0
+margin_bottom = 316.0
 custom_constants/separation = 65
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_right = 788.0
-margin_bottom = 192.0
+margin_right = 213.0
+margin_bottom = 62.0
 theme = ExtResource( 5 )
-text = "How do explosions work?
-Select an explosive mushroom 
-(just left click it) "
+text = "K_T_E_1"
 
 [node name="BlackMushroomGreen" type="Sprite" parent="ScrollContainer/VBoxContainer"]
 position = Vector2( 700, 183 )
@@ -53,13 +51,11 @@ scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 4 )
 
 [node name="Label4" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_top = 257.0
-margin_right = 788.0
-margin_bottom = 449.0
+margin_top = 127.0
+margin_right = 213.0
+margin_bottom = 189.0
 theme = ExtResource( 5 )
-text = "Then click this
-ability in the bottom 
-right corner or press Q"
+text = "K_T_E_2"
 align = 2
 
 [node name="ExplosiveActionIcon" type="Sprite" parent="ScrollContainer/VBoxContainer"]
@@ -68,12 +64,11 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
 [node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_top = 514.0
-margin_right = 788.0
-margin_bottom = 641.0
+margin_top = 254.0
+margin_right = 213.0
+margin_bottom = 316.0
 theme = ExtResource( 5 )
-text = "Finally, marvel at
-an amazing mushroom blast"
+text = "K_T_E_3"
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 anchor_top = 1.0

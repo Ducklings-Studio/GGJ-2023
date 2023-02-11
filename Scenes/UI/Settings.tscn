@@ -542,7 +542,7 @@ custom_constants/margin_bottom = 20
 [node name="Back" type="Button" parent="MarginContainer2" groups=["ui_buttons"]]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 240.0
+margin_right = 216.0
 margin_bottom = 82.0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 2 )
