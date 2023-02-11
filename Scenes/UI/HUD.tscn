@@ -1,6 +1,7 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Scripts/UI/Minimap.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/UI/Help.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/UI/TimePanel.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Style/small_text.tres" type="Theme" id=4]
 [ext_resource path="res://Assets/Style/Pixellari_style.tres" type="Theme" id=5]
@@ -19,6 +20,13 @@
 [ext_resource path="res://Assets/Style/inter_small.tres" type="Theme" id=18]
 [ext_resource path="res://Scripts/UI/HUD_menu.gd" type="Script" id=19]
 [ext_resource path="res://Scripts/UI/HUD.gd" type="Script" id=20]
+
+[sub_resource type="DynamicFont" id=16]
+size = 100
+font_data = ExtResource( 17 )
+
+[sub_resource type="Theme" id=6]
+default_font = SubResource( 16 )
 
 [sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0, 0, 0, 0.784314 )
@@ -107,15 +115,23 @@ content_margin_top = 2.0
 bg_color = Color( 0, 0, 0, 0.784314 )
 corner_radius_bottom_left = 10
 
-[sub_resource type="DynamicFont" id=16]
-size = 100
-font_data = ExtResource( 17 )
-
-[sub_resource type="Theme" id=6]
-default_font = SubResource( 16 )
-
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 20 )
+
+[node name="Label" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -170.0
+margin_top = -50.0
+margin_right = 170.0
+margin_bottom = 50.0
+theme = SubResource( 6 )
+align = 1
+valign = 1
+uppercase = true
 
 [node name="Minimap" type="PanelContainer" parent="."]
 anchor_top = 1.0
@@ -271,15 +287,14 @@ expand = true
 stretch_mode = 3
 
 [node name="Menu" type="PanelContainer" parent="."]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -203.5
-margin_top = -164.0
+margin_top = -205.0
 margin_right = 203.5
-margin_bottom = 164.0
+margin_bottom = 205.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 custom_styles/panel = SubResource( 10 )
@@ -289,7 +304,7 @@ script = ExtResource( 19 )
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 402.0
-margin_bottom = 323.0
+margin_bottom = 405.0
 rect_clip_content = true
 custom_constants/margin_right = 5
 custom_constants/margin_top = 5
@@ -300,7 +315,7 @@ custom_constants/margin_bottom = 5
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 392.0
-margin_bottom = 313.0
+margin_bottom = 395.0
 custom_constants/separation = 20
 
 [node name="Label" type="Label" parent="Menu/MarginContainer/VBoxContainer"]
@@ -343,10 +358,25 @@ custom_styles/disabled = ExtResource( 15 )
 custom_styles/normal = ExtResource( 15 )
 text = "K_SETTING"
 
-[node name="Exit" type="Button" parent="Menu/MarginContainer/VBoxContainer" groups=["ui_buttons"]]
+[node name="Help" type="Button" parent="Menu/MarginContainer/VBoxContainer" groups=["ui_buttons"]]
 margin_top = 246.0
 margin_right = 387.0
 margin_bottom = 308.0
+mouse_default_cursor_shape = 2
+theme = ExtResource( 5 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
+custom_styles/hover = ExtResource( 9 )
+custom_styles/pressed = ExtResource( 15 )
+custom_styles/focus = ExtResource( 15 )
+custom_styles/disabled = ExtResource( 15 )
+custom_styles/normal = ExtResource( 15 )
+text = "K_TUTOR"
+
+[node name="Exit" type="Button" parent="Menu/MarginContainer/VBoxContainer" groups=["ui_buttons"]]
+margin_top = 328.0
+margin_right = 387.0
+margin_bottom = 390.0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 5 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
@@ -447,22 +477,10 @@ enabled_focus_mode = 0
 text = "K_MENU"
 icon_align = 1
 
-[node name="Label" type="Label" parent="."]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -170.0
-margin_top = -50.0
-margin_right = 170.0
-margin_bottom = 50.0
-theme = SubResource( 6 )
-align = 1
-valign = 1
-uppercase = true
-
 [node name="Settings" parent="." instance=ExtResource( 14 )]
+visible = false
+
+[node name="Help" parent="." instance=ExtResource( 2 )]
 visible = false
 
 [node name="Error" type="Label" parent="."]
@@ -485,6 +503,7 @@ align = 1
 [connection signal="pressed" from="Options/MarginContainer/GridContainer/Explode" to="." method="_on_Action_pressed" binds= [ 5 ]]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Back" to="Menu" method="_on_Back_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Settings" to="Menu" method="_on_Settings_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Help" to="Menu" method="_on_Help_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Exit" to="Menu" method="_on_Exit_pressed"]
 [connection signal="timeout" from="Time/MarginContainer/Timer" to="Time" method="_on_Timer_timeout"]
 [connection signal="pressed" from="MenuBtn" to="Menu" method="_on_MenuBtn_pressed"]

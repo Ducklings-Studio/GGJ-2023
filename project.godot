@@ -141,6 +141,7 @@ MOVE_DOWN={
 
 [locale]
 
+test="en"
 translations=PoolStringArray( "res://Assets/Other/text.en.translation", "res://Assets/Other/text.uk.translation" )
 locale_filter=[ 1, [  ] ]
 
