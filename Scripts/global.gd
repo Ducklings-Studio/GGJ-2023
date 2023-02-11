@@ -52,6 +52,7 @@ var code_to_name := {
 	"en": "English",
 	"uk": "Ukrainian",
 }
+var locale_chosen = 0
 
 
 func set_endgame_parameter(new_endgame_parameter):

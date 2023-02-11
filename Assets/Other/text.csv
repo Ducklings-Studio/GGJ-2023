@@ -44,7 +44,7 @@ K_FAR,Too far,Занадто далеко
 K_IBD,Impossible to break through the defense,Неможливо прорвати оборону
 K_NOT_A,Cannot attack this tile,Неможливо атакувати цю територію
 K_RELOAD,Reloading,Перезарядження
-K_LOST,Your mycelium \nwas defeated,Ваш міцелій переможений
+K_LOST,Your mycelium \nwas defeated,Ваш міцелій переможено
 K_WIN,All enemy mycelium \nwas defeated,Міцелій ворогів переможено
 K_MODE,Mode:,Режим:
 K_TIME,Match time: ,Час:

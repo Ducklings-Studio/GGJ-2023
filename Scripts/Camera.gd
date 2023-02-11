@@ -77,6 +77,8 @@ func _ready():
 	position = _floor.map_to_world(BASE_POS)
 	_hud.show_options([])
 	clean_action()
+	
+	new_endgame_parameter.MineralsMine = gems
 
 
 func _on_mushroom_destroyed(coords):
@@ -317,11 +319,11 @@ func show_end_game(win):
 	
 	new_endgame_parameter.MatchTimer = _hud.Get_Time()
 	if win:
-		new_endgame_parameter.EndGameText = "All enemy mycelium \nwas defeated"
+		new_endgame_parameter.EndGameText = "K_WIN"
 		new_endgame_parameter.BgPicture = "WinBg.png"
 		new_endgame_parameter.BgAudio = "WinAudio.ogg"
 	else:
-		new_endgame_parameter.EndGameText = "Your mycelium \nwas defeated"
+		new_endgame_parameter.EndGameText = "K_LOST"
 		new_endgame_parameter.BgPicture = "LoseBg.png"
 		new_endgame_parameter.BgAudio = "LoseAudio.ogg"
 	Global.set_endgame_parameter(new_endgame_parameter)

@@ -97,7 +97,9 @@ func _on_bind_key(key):
 func _set_locales():
 	for l in Global.Locales:
 		locales.add_item(Global.from_code(l))
+	locales.selected = Global.locale_chosen
 
 
 func _on_locale_selected(index):
+	Global.locale_chosen = index
 	TranslationServer.set_locale(Global.Locales[index])
