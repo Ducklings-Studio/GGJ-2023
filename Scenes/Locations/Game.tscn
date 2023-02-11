@@ -1268,11 +1268,11 @@ texture = ExtResource( 17 )
 [node name="MenuBtn" type="Button" parent="HUD" groups=["ui_buttons"]]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -102.0
-margin_bottom = 34.0
+margin_left = -121.0
+margin_bottom = 38.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
-theme = ExtResource( 8 )
+theme = ExtResource( 30 )
 custom_styles/hover = SubResource( 11 )
 custom_styles/pressed = SubResource( 12 )
 custom_styles/normal = SubResource( 13 )

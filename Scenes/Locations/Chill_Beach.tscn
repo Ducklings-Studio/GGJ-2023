@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://Assets/Environment/TileSet.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Fonts/Pixellari.ttf" type="DynamicFontData" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://Assets/Icons/ExplosiveAction_Icon.png" type="Texture" id=26]
 [ext_resource path="res://Scenes/AI.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Assets/Buildinigs/Mushrooms_Green-Selected.png" type="Texture" id=28]
+[ext_resource path="res://Assets/Style/inter_small.tres" type="Theme" id=29]
 
 [sub_resource type="TileSet" id=17]
 0/name = "TileSet.png 0"
@@ -1347,11 +1348,11 @@ texture = ExtResource( 16 )
 [node name="MenuBtn" type="Button" parent="HUD" groups=["ui_buttons"]]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -102.0
-margin_bottom = 34.0
+margin_left = -121.0
+margin_bottom = 38.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
-theme = ExtResource( 21 )
+theme = ExtResource( 29 )
 custom_styles/hover = SubResource( 48 )
 custom_styles/pressed = SubResource( 30 )
 custom_styles/normal = SubResource( 31 )
@@ -1382,7 +1383,7 @@ visible = false
 anchor_right = 1.0
 margin_top = 10.0
 margin_bottom = 31.0
-theme = ExtResource( 21 )
+theme = ExtResource( 29 )
 custom_colors/font_color = Color( 1, 0.819608, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Too far"
