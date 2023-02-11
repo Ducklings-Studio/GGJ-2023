@@ -48,11 +48,7 @@ var errors := [
 ]
 var I_ATTACK: Attacker = classes[4].instance()
 var Locales = TranslationServer.get_loaded_locales()
-var code_to_name := {
-	"en": "English",
-	"uk": "Ukrainian",
-}
-var locale_chosen = 0
+var locale_chosen = Locales.find(TranslationServer.get_locale())
 
 
 func set_endgame_parameter(new_endgame_parameter):
@@ -91,6 +87,7 @@ func play_slider(_tmp):
 
 
 func from_code(code: String):
-	if code_to_name.has(code):
-		return code_to_name[code]
-	return code
+	var name = TranslationServer.get_locale_name(code)
+	if name.empty():
+		return code
+	return name
