@@ -41,16 +41,16 @@ custom_constants/separation = 30
 
 [node name="Title" type="Label" parent="VBoxContainer"]
 margin_right = 849.0
-margin_bottom = 123.0
+margin_bottom = 127.0
 theme = ExtResource( 3 )
 text = "All enemy mycelium 
 was defeated"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 153.0
+margin_top = 157.0
 margin_right = 849.0
-margin_bottom = 184.0
+margin_bottom = 188.0
 custom_constants/separation = 41
 alignment = 1
 
@@ -69,9 +69,9 @@ theme = ExtResource( 2 )
 text = "Easy"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 214.0
+margin_top = 218.0
 margin_right = 849.0
-margin_bottom = 245.0
+margin_bottom = 249.0
 custom_constants/separation = 41
 alignment = 1
 
@@ -90,9 +90,9 @@ theme = ExtResource( 2 )
 text = "00:00"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 275.0
+margin_top = 279.0
 margin_right = 849.0
-margin_bottom = 306.0
+margin_bottom = 310.0
 custom_constants/separation = 41
 alignment = 1
 
@@ -134,9 +134,9 @@ theme = ExtResource( 2 )
 text = "100"
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 336.0
+margin_top = 340.0
 margin_right = 849.0
-margin_bottom = 367.0
+margin_bottom = 371.0
 custom_constants/separation = 41
 alignment = 1
 
@@ -145,7 +145,7 @@ margin_left = 292.0
 margin_right = 464.0
 margin_bottom = 31.0
 theme = ExtResource( 2 )
-text = "Minerals get:"
+text = "Minerals got:"
 align = 1
 
 [node name="MineralsMine" type="Label" parent="VBoxContainer/HBoxContainer5"]
@@ -156,9 +156,9 @@ theme = ExtResource( 2 )
 text = "100"
 
 [node name="HBoxContainer6" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 397.0
+margin_top = 401.0
 margin_right = 849.0
-margin_bottom = 428.0
+margin_bottom = 432.0
 custom_constants/separation = 41
 alignment = 1
 
@@ -178,9 +178,9 @@ theme = ExtResource( 2 )
 text = "100"
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_top = 458.0
+margin_top = 462.0
 margin_right = 849.0
-margin_bottom = 489.0
+margin_bottom = 493.0
 theme = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 0.392157 )
 text = "Press any button"

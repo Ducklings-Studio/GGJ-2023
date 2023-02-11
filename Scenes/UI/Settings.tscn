@@ -123,7 +123,7 @@ margin_top = -62.0
 margin_right = 200.0
 margin_bottom = -2.0
 theme = ExtResource( 2 )
-text = "Sound FX"
+text = "K_SFX"
 
 [node name="AudiSlider" type="HSlider" parent="MarginContainer/Control/TabContainer/Audio/Control" groups=["ui_sliders"]]
 anchor_left = 0.5
@@ -162,7 +162,7 @@ margin_top = -62.0
 margin_right = 200.0
 margin_bottom = -2.0
 theme = ExtResource( 2 )
-text = "Music"
+text = "K_MUSIC"
 
 [node name="MusicSlider" type="HSlider" parent="MarginContainer/Control/TabContainer/Audio/Control2" groups=["ui_sliders"]]
 anchor_left = 0.5
@@ -204,7 +204,7 @@ scroll_horizontal_enabled = false
 [node name="VBox" type="VBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll"]
 margin_left = 7.0
 margin_right = 537.0
-margin_bottom = 735.0
+margin_bottom = 755.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 custom_constants/separation = 15
@@ -212,13 +212,13 @@ alignment = 1
 
 [node name="MOVE_LEFT" type="HBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox"]
 margin_right = 530.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 size_flags_vertical = 6
 custom_constants/separation = 40
 
 [node name="Left" type="Label" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_LEFT"]
 margin_right = 300.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 2 )
 text = "Move Left"
@@ -226,7 +226,7 @@ text = "Move Left"
 [node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_LEFT"]
 margin_left = 340.0
 margin_right = 530.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 190, 0 )
 focus_mode = 0
 custom_styles/hover = SubResource( 10 )
@@ -237,15 +237,15 @@ enabled_focus_mode = 0
 text = "LEFT ARROW"
 
 [node name="MOVE_RIGHT" type="HBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox"]
-margin_top = 75.0
+margin_top = 77.0
 margin_right = 530.0
-margin_bottom = 135.0
+margin_bottom = 139.0
 size_flags_vertical = 6
 custom_constants/separation = 40
 
 [node name="Right" type="Label" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_RIGHT"]
 margin_right = 300.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 2 )
 text = "Move Right"
@@ -253,7 +253,7 @@ text = "Move Right"
 [node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_RIGHT"]
 margin_left = 340.0
 margin_right = 530.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 190, 0 )
 focus_mode = 0
 custom_styles/hover = SubResource( 10 )
@@ -264,15 +264,15 @@ enabled_focus_mode = 0
 text = "LEFT ARROW"
 
 [node name="MOVE_UP" type="HBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox"]
-margin_top = 150.0
+margin_top = 154.0
 margin_right = 530.0
-margin_bottom = 210.0
+margin_bottom = 216.0
 size_flags_vertical = 6
 custom_constants/separation = 40
 
 [node name="Up" type="Label" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_UP"]
 margin_right = 300.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 2 )
 text = "Move Up"
@@ -280,7 +280,7 @@ text = "Move Up"
 [node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_UP"]
 margin_left = 340.0
 margin_right = 530.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 190, 0 )
 focus_mode = 0
 custom_styles/hover = SubResource( 10 )
@@ -291,15 +291,15 @@ enabled_focus_mode = 0
 text = "LEFT ARROW"
 
 [node name="MOVE_DOWN" type="HBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox"]
-margin_top = 225.0
+margin_top = 231.0
 margin_right = 530.0
-margin_bottom = 285.0
+margin_bottom = 293.0
 size_flags_vertical = 6
 custom_constants/separation = 40
 
 [node name="Down" type="Label" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_DOWN"]
 margin_right = 300.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 2 )
 text = "Move Down"
@@ -307,7 +307,7 @@ text = "Move Down"
 [node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/MOVE_DOWN"]
 margin_left = 340.0
 margin_right = 530.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 190, 0 )
 focus_mode = 0
 custom_styles/hover = SubResource( 10 )
@@ -318,15 +318,15 @@ enabled_focus_mode = 0
 text = "LEFT ARROW"
 
 [node name="BUILD" type="HBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox"]
-margin_top = 300.0
+margin_top = 308.0
 margin_right = 530.0
-margin_bottom = 360.0
+margin_bottom = 370.0
 size_flags_vertical = 6
 custom_constants/separation = 40
 
 [node name="Build" type="Label" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/BUILD"]
 margin_right = 300.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 2 )
 text = "Build"
@@ -334,7 +334,7 @@ text = "Build"
 [node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/BUILD"]
 margin_left = 340.0
 margin_right = 530.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 190, 0 )
 focus_mode = 0
 custom_styles/hover = SubResource( 10 )
@@ -345,15 +345,15 @@ enabled_focus_mode = 0
 text = "LEFT ARROW"
 
 [node name="E_ATTACKER" type="HBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox"]
-margin_top = 375.0
+margin_top = 385.0
 margin_right = 530.0
-margin_bottom = 435.0
+margin_bottom = 447.0
 size_flags_vertical = 6
 custom_constants/separation = 40
 
 [node name="Attack" type="Label" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/E_ATTACKER"]
 margin_right = 300.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 2 )
 text = "E_Attacker"
@@ -361,7 +361,7 @@ text = "E_Attacker"
 [node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/E_ATTACKER"]
 margin_left = 340.0
 margin_right = 530.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 190, 0 )
 focus_mode = 0
 custom_styles/hover = SubResource( 10 )
@@ -372,15 +372,15 @@ enabled_focus_mode = 0
 text = "LEFT ARROW"
 
 [node name="E_DEFENDER" type="HBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox"]
-margin_top = 450.0
+margin_top = 462.0
 margin_right = 530.0
-margin_bottom = 510.0
+margin_bottom = 524.0
 size_flags_vertical = 6
 custom_constants/separation = 40
 
 [node name="Defend" type="Label" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/E_DEFENDER"]
 margin_right = 300.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 2 )
 text = "E_Defense"
@@ -388,7 +388,7 @@ text = "E_Defense"
 [node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/E_DEFENDER"]
 margin_left = 340.0
 margin_right = 530.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 190, 0 )
 focus_mode = 0
 custom_styles/hover = SubResource( 10 )
@@ -399,15 +399,15 @@ enabled_focus_mode = 0
 text = "LEFT ARROW"
 
 [node name="E_BOMB" type="HBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox"]
-margin_top = 525.0
+margin_top = 539.0
 margin_right = 530.0
-margin_bottom = 585.0
+margin_bottom = 601.0
 size_flags_vertical = 6
 custom_constants/separation = 40
 
 [node name="Bomb" type="Label" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/E_BOMB"]
 margin_right = 300.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 2 )
 text = "E_Bomb"
@@ -415,7 +415,7 @@ text = "E_Bomb"
 [node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/E_BOMB"]
 margin_left = 340.0
 margin_right = 530.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 190, 0 )
 focus_mode = 0
 custom_styles/hover = SubResource( 10 )
@@ -426,15 +426,15 @@ enabled_focus_mode = 0
 text = "LEFT ARROW"
 
 [node name="ATTACK" type="HBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox"]
-margin_top = 600.0
+margin_top = 616.0
 margin_right = 530.0
-margin_bottom = 660.0
+margin_bottom = 678.0
 size_flags_vertical = 6
 custom_constants/separation = 40
 
 [node name="Attack" type="Label" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/ATTACK"]
 margin_right = 300.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 2 )
 text = "Attack"
@@ -442,7 +442,7 @@ text = "Attack"
 [node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/ATTACK"]
 margin_left = 340.0
 margin_right = 530.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 190, 0 )
 focus_mode = 0
 custom_styles/hover = SubResource( 10 )
@@ -453,15 +453,15 @@ enabled_focus_mode = 0
 text = "LEFT ARROW"
 
 [node name="EXPLODE" type="HBoxContainer" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox"]
-margin_top = 675.0
+margin_top = 693.0
 margin_right = 530.0
-margin_bottom = 735.0
+margin_bottom = 755.0
 size_flags_vertical = 6
 custom_constants/separation = 40
 
 [node name="Explode" type="Label" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/EXPLODE"]
 margin_right = 300.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 2 )
 text = "Explode"
@@ -469,7 +469,7 @@ text = "Explode"
 [node name="Button" type="Button" parent="MarginContainer/Control/TabContainer/Control/Scroll/VBox/EXPLODE"]
 margin_left = 340.0
 margin_right = 530.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 190, 0 )
 focus_mode = 0
 custom_styles/hover = SubResource( 10 )
@@ -478,6 +478,55 @@ custom_styles/normal = SubResource( 11 )
 toggle_mode = true
 enabled_focus_mode = 0
 text = "LEFT ARROW"
+
+[node name="Other" type="MarginContainer" parent="MarginContainer/Control/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 41.0
+custom_constants/margin_right = 0
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="Scroll" type="ScrollContainer" parent="MarginContainer/Control/TabContainer/Other"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 564.0
+margin_bottom = 356.0
+scroll_horizontal_enabled = false
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/Control/TabContainer/Other/Scroll"]
+margin_right = 530.0
+margin_bottom = 62.0
+custom_constants/separation = 15
+
+[node name="Lang" type="HBoxContainer" parent="MarginContainer/Control/TabContainer/Other/Scroll/VBox"]
+margin_right = 530.0
+margin_bottom = 62.0
+size_flags_horizontal = 2
+size_flags_vertical = 6
+custom_constants/separation = 40
+
+[node name="Label" type="Label" parent="MarginContainer/Control/TabContainer/Other/Scroll/VBox/Lang"]
+margin_right = 300.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 300, 0 )
+theme = ExtResource( 2 )
+text = "K_LANG"
+
+[node name="Option" type="OptionButton" parent="MarginContainer/Control/TabContainer/Other/Scroll/VBox/Lang"]
+margin_left = 340.0
+margin_right = 530.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 190, 0 )
+focus_mode = 0
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/normal = SubResource( 11 )
+enabled_focus_mode = 0
+text = "English"
+align = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 anchor_top = 1.0
@@ -492,8 +541,8 @@ custom_constants/margin_bottom = 20
 [node name="Back" type="Button" parent="MarginContainer2" groups=["ui_buttons"]]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 168.0
-margin_bottom = 80.0
+margin_right = 216.0
+margin_bottom = 82.0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
@@ -502,7 +551,7 @@ custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-text = "Back"
+text = "K_BACK"
 
 [connection signal="value_changed" from="MarginContainer/Control/TabContainer/Audio/Control/AudiSlider" to="." method="_on_AudiSlider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/Control/TabContainer/Audio/Control2/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
@@ -516,4 +565,5 @@ text = "Back"
 [connection signal="pressed" from="MarginContainer/Control/TabContainer/Control/Scroll/VBox/E_BOMB/Button" to="." method="_on_bind_key" binds= [ "E_BOMB" ]]
 [connection signal="pressed" from="MarginContainer/Control/TabContainer/Control/Scroll/VBox/ATTACK/Button" to="." method="_on_bind_key" binds= [ "ATTACK" ]]
 [connection signal="pressed" from="MarginContainer/Control/TabContainer/Control/Scroll/VBox/EXPLODE/Button" to="." method="_on_bind_key" binds= [ "EXPLODE" ]]
+[connection signal="item_selected" from="MarginContainer/Control/TabContainer/Other/Scroll/VBox/Lang/Option" to="." method="_on_locale_selected"]
 [connection signal="pressed" from="MarginContainer2/Back" to="." method="_on_Back_pressed"]

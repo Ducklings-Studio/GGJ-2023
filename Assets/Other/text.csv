@@ -1,0 +1,88 @@
+keys,en,uk
+K_PLAY,Play,Грати
+K_TUTOR,Tutorial,Посібник
+K_SETTING,Settings,Налаштування
+K_EXIT,Exit,Вийти
+K_BACK,Back,Назад
+K_MENU,Menu,Меню
+K_LANG,Language,Мова
+K_OTHER,Other,Інше
+K_MUSIC,Music,Музика
+K_SFX,Sound FX,Звукові ефекти
+K_AUDIO,Audio,Аудіо
+K_CONTR,Control,Керування
+K_EASY,Easy,Легкий
+K_NORM,Normal,Середній
+K_HARD,Hard,Складний
+K_CS,Create a standard: %d minerals,Створити звичайний: %d мінералів
+K_EA,Evolve into a strike mushroom: %d minerals,Створити атакуючий: %d мінералів
+K_EB,Evolve into a bomb: %d minerals,Створити вибуховий: %d мінералів
+K_ED,Evolve into a protective mushroom: %d minerals,Створити захищаючий: %d мінералів
+K_A,Attack: %d minerals,Атакувати: %d мінералів
+K_E,BOOM,БУМ!
+K_NOT_M,Not Enough Minerals,Недостатньо мінералів
+K_FAR,Too far,Далеко
+K_IBD,Impossible to break through the defense,Неможливо прорвати оборону
+K_NOT_A,Cannot attack this tile,Неможливо атакувати цю територію
+K_RELOAD,Reloading,Перезарядження
+K_LOST,Your mycelium \nwas defeated,Ваш міцелій переможений
+K_WIN,All enemy mycelium \nwas defeated,Міцелій ворогів переможено
+K_MODE,Mode:,Режим:
+K_TIME,Match time: ,Час:
+K_BUILT,Mushrooms built:,Побудовано:
+K_M_LOST,Mushrooms lost:,Втрачено:
+K_M_GOT,Minerals got:,Мінералів отримано:
+K_M_SPENT,Minerals spent:,Мінералів витрачено:
+K_PAB,Press any button,Натисніть будь-яку кнопку
+K_T_BAS_1,"Controls:  
+ - Left click on a mushroom to
+select it or an ability to use it
+ - Right click to cancel the 
+selection
+ - Use arrow keys to look
+around
+ - Scroll to resize the map","Керування:
+  - Натисніть лівою кнопкою миші по грибу, щоб
+вибрати його або можливість використовувати його
+  - Натисніть правою кнопкою миші, щоб скасувати
+вибір
+  - Для перегляду використовуйте клавіші зі стрілками
+навколо
+  - Прокрутіть колесо миші, щоб змінити розмір карти"
+K_T_BAS_2,"Goal: destroy enemy bases
+ and defend your own base 
+using various mushrooms
+
+
+Anvanced:
+A mushroom can only
+survive if there is a root
+leading to it, so, for example,
+one could destroy several
+mushrooms at a time with
+the striking mushroom by
+aiming at a root leading to
+them. Conversely, if you
+have a cluster of
+mushrooms, you have to 
+be extra careful not to let
+an enemy mushroom
+infiltrate and destroy the
+root.","Мета: знищити ворожі бази
+  і захистити власну базу
+з використанням різних грибів
+
+
+Додаток:
+Гриб може жити, якщо є корінь
+що з'єднаний з ним, тому, наприклад,
+можна знищити кілька
+грибів водночас 
+вражаючим грибом,
+спрямованим до коріння, що веде до
+них. І навпаки, якщо ви
+маєте сукупність
+грибів, ви повинні
+бути особливо обережним, щоб не допустити
+проникнути ворожому грибу та знищити
+коріння."

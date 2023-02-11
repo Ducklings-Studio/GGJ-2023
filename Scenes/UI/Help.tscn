@@ -43,9 +43,9 @@ custom_constants/separation = 30
 alignment = 1
 
 [node name="BasicRules" type="Button" parent="HBoxContainer/VBoxContainer" groups=["ui_buttons"]]
-margin_top = 50.0
+margin_top = 45.0
 margin_right = 377.0
-margin_bottom = 110.0
+margin_bottom = 107.0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
@@ -57,9 +57,9 @@ custom_styles/normal = ExtResource( 3 )
 text = "Basic rules"
 
 [node name="Building" type="Button" parent="HBoxContainer/VBoxContainer" groups=["ui_buttons"]]
-margin_top = 140.0
+margin_top = 137.0
 margin_right = 377.0
-margin_bottom = 200.0
+margin_bottom = 199.0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
@@ -71,9 +71,9 @@ custom_styles/normal = ExtResource( 3 )
 text = "Building"
 
 [node name="StrikingMushroom" type="Button" parent="HBoxContainer/VBoxContainer" groups=["ui_buttons"]]
-margin_top = 230.0
+margin_top = 229.0
 margin_right = 377.0
-margin_bottom = 290.0
+margin_bottom = 291.0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
@@ -85,9 +85,9 @@ custom_styles/normal = ExtResource( 3 )
 text = "Attack"
 
 [node name="ProtectiveMushroom" type="Button" parent="HBoxContainer/VBoxContainer" groups=["ui_buttons"]]
-margin_top = 320.0
+margin_top = 321.0
 margin_right = 377.0
-margin_bottom = 380.0
+margin_bottom = 383.0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
@@ -99,9 +99,9 @@ custom_styles/normal = ExtResource( 3 )
 text = "Defence"
 
 [node name="UnstableMushroom2" type="Button" parent="HBoxContainer/VBoxContainer" groups=["ui_buttons"]]
-margin_top = 410.0
+margin_top = 413.0
 margin_right = 377.0
-margin_bottom = 470.0
+margin_bottom = 475.0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
@@ -125,8 +125,8 @@ custom_constants/margin_bottom = 20
 [node name="Back" type="Button" parent="MarginContainer2" groups=["ui_buttons"]]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 168.0
-margin_bottom = 80.0
+margin_right = 216.0
+margin_bottom = 82.0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0.752941, 0.607843, 0.768627, 1 )
@@ -135,7 +135,7 @@ custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-text = "Back"
+text = "K_BACK"
 
 [node name="BasicRulesHelp" parent="." instance=ExtResource( 4 )]
 visible = false
