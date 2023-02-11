@@ -79,7 +79,8 @@ an amazing mushroom blast"
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -100.0
-margin_right = 188.0
+margin_right = 236.0
+margin_bottom = 2.0
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
