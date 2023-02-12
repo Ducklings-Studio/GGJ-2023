@@ -275,9 +275,9 @@ func process_action(action_id):
 	else:
 		return
 
-	#if mushroom != null and mushroom.has_method("_on_Miner_timeout"):
-	#	mushroom.connect("res_mined", self, "add_gems")
-	#	add_gems(-mushroom.cost)
+	if mushroom != null and mushroom.has_method("_on_Miner_timeout"):
+		mushroom.connect("res_mined", self, "add_gems")
+	add_gems(-mushroom.cost)
 	if selected != null:
 		_tips.set_cellv(selected, -1)
 	clean_action()
