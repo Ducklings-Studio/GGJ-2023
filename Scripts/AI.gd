@@ -53,10 +53,10 @@ func bombs_attack(mushs, positions):
 			"type": "bomb"
 		}
 		targets.append({"killer": newBomb, "victim": nearestEnemy.base})
-	if !newBomb && !evolves.has(nearestEnemy.enemy) && !waitForBomb && nearestEnemy.dist < 3:
-		evolves[nearestEnemy.enemy] = {
-			"type": "bomb"
-		}
+#	if !newBomb && !evolves.has(nearestEnemy.enemy) && !waitForBomb && nearestEnemy.dist < 3:
+#		evolves[nearestEnemy.enemy] = {
+#			"type": "bomb"
+#		}
 
 
 func attacker_go(mushs, positions):

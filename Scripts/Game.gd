@@ -139,6 +139,8 @@ func evolve(coords: Vector2, class_id: int):
 	if is_not_ready(coords): return null
 
 	var old = objs[coords]
+	
+	if not old.obj is Standart: return null
 		
 	ruin(coords)
 	var mushroom = build(coords, class_id, old.user_id)

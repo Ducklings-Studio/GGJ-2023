@@ -256,29 +256,30 @@ func process_action(action_id):
 			select(null)
 		return
 
-	if action == Global.E_ATTACK and mushroom is Standart:
+	if action == Global.E_ATTACK:
 		if get_parent().is_enough_gems(4, gems, Global.E_ATTACK):
 			mushroom = get_parent().evolve(selected, 4)
-			new_endgame_parameter.Mushrooms += 1
-			add_gems(-mushroom.cost)
 		else:
 			emit_signal("error", 1)
-	elif action == Global.E_BOMB and mushroom is Standart:
+			return
+	elif action == Global.E_BOMB:
 		if get_parent().is_enough_gems(2, gems, Global.E_BOMB):
 			mushroom = get_parent().evolve(selected, 2)
-			new_endgame_parameter.Mushrooms += 1
-			add_gems(-mushroom.cost)
 		else:
 			emit_signal("error", 1)
-	elif action == Global.E_DEFENDER and mushroom is Standart:
+			return
+	elif action == Global.E_DEFENDER:
 		if get_parent().is_enough_gems(3, gems, Global.E_DEFENDER):
 			mushroom = get_parent().evolve(selected, 3)
-			new_endgame_parameter.Mushrooms += 1
-			add_gems(-mushroom.cost)
 		else:
 			emit_signal("error", 1)
+			return
 	else:
 		return
+	
+	if mushroom != null and action in [Global.E_ATTACK, Global.E_BOMB, Global.E_DEFENDER]:
+		new_endgame_parameter.Mushrooms += 1
+		add_gems(-mushroom.cost)
 
 	if selected != null:
 		_tips.set_cellv(selected, -1)
