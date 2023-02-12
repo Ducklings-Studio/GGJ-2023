@@ -258,26 +258,26 @@ func process_action(action_id):
 		if get_parent().is_enough_gems(4, gems, Global.E_ATTACK):
 			mushroom = get_parent().evolve(selected, 4)
 			new_endgame_parameter.Mushrooms += 1
+			add_gems(-mushroom.cost)
 		else:
 			emit_signal("error", 1)
 	elif action == Global.E_BOMB and mushroom is Standart:
 		if get_parent().is_enough_gems(2, gems, Global.E_BOMB):
 			mushroom = get_parent().evolve(selected, 2)
 			new_endgame_parameter.Mushrooms += 1
+			add_gems(-mushroom.cost)
 		else:
 			emit_signal("error", 1)
 	elif action == Global.E_DEFENDER and mushroom is Standart:
 		if get_parent().is_enough_gems(3, gems, Global.E_DEFENDER):
 			mushroom = get_parent().evolve(selected, 3)
 			new_endgame_parameter.Mushrooms += 1
+			add_gems(-mushroom.cost)
 		else:
 			emit_signal("error", 1)
 	else:
 		return
 
-	if mushroom != null and mushroom.has_method("_on_Miner_timeout"):
-		mushroom.connect("res_mined", self, "add_gems")
-	add_gems(-mushroom.cost)
 	if selected != null:
 		_tips.set_cellv(selected, -1)
 	clean_action()
