@@ -128,7 +128,10 @@ func ruin(coords: Vector2):
 	objs.erase(coords)
 
 	$figures.set_cellv(coords, -1)
-	$figures.remove_child(mushroom)
+	for n in $figures.get_children():
+		if n == mushroom:
+			$figures.remove_child(mushroom)
+			break
 	emit_signal("mushroom_destroyed", coords)
 
 

@@ -237,6 +237,8 @@ func select(coords):
 func process_action(action_id):
 	var mushroom = get_parent().get_mushroom(selected)
 	if mushroom == null: return
+	if not get_parent().objs.has(selected) or get_parent().objs[selected].user_id != user_id:
+		return
 	
 	action = action_id
 	
