@@ -192,6 +192,7 @@ func clear_roots(s: Vector2, f: Vector2):
 		roots_dict.erase(r)
 		$floor.set_cellv(r, 0)
 
+
 func find_closest(s: Vector2, user_id):
 	for k in objs.keys():
 		if abs(s.x - k.x) <= 7 and abs(s.y - k.y) <= 7:

@@ -99,13 +99,10 @@ func plant_bomb(mush: Vector2, base: Vector2):
 			if Vector2(i, j).distance_to(mush) < 2:
 				continue;
 			if get_parent().can_be_built(mush, Vector2(i, j), gems, user_id):
-				if bestPosition == null:
+				if bestPosition == null or \
+				Vector2(i, j).distance_to(base) < bestDistance:
 					bestPosition = Vector2(i, j)
 					bestDistance = Vector2(i, j).distance_to(base)
-				else:
-					if Vector2(i, j).distance_to(base) < bestDistance:
-						bestPosition = Vector2(i, j)
-						bestDistance = Vector2(i, j).distance_to(base)
 	if bestPosition != null:
 		put_mushroom(mush, bestPosition)
 		putPoint = false
